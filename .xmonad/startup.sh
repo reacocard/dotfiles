@@ -1,5 +1,11 @@
 #!/bin/bash
 
+dbuslaunch="`which dbus-launch 2>/dev/null`"
+if [ -n "$dbuslaunch" ] && [ -x "$dbuslaunch" ] && [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+    eval `$dbuslaunch --sh-syntax --exit-with-session`
+fi
+
+
 xmodmap -e "remove Lock = Caps_Lock"
 xmodmap -e "clear mod3"
 xmodmap -e "add Mod3 = Caps_Lock"
