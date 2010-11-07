@@ -1,0 +1,9 @@
+include "/usr/share/themes/Clearlooks/gtk-2.0/gtkrc"
+gtk-menu-popup-delay = 0
+gtk-toolbar-style = GTK_TOOLBAR_ICONS
+gtk-icon-theme-name = "Tango"
+gtk-font-name="Deja Vu Sans 7"
+
+
+style "vimfix" { bg[NORMAL] = "#000000" }
+widget "vim-main-window.*GtkForm" style "vimfix"

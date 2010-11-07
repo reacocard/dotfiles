@@ -1,0 +1,33 @@
+
+Terminal = urxvt
+
+TermExec = ${Terminal} -e
+
+AlwaysInTerm = ssh elinks alsamixer newsbeuter htop saga torrent netcfg-menu mc top
+
+Width = 500
+Top = 480
+#Top = 1700
+#Left = 600
+Left = 2200
+
+History = 256
+
+ShowLast = 1
+
+TabTimeout = 0
+
+
+# URL Handlers
+# %u - whole url - eg http://www.google.com
+# %s - w/o procotcol - eg //www.google.com
+
+URL_http = chromium %u
+
+URL_man = ${TermExec} 'man %s'
+
+URL_file = thunar %u
+
+URL_sh = sh -c '%s'
+
+

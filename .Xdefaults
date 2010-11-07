@@ -1,0 +1,26 @@
+
+urxvt*urgentOnBell:         true
+urxvt*secondaryScroll:      true
+urxvt*depth:                32
+urxvt*buffered:             true
+urxvt*background:           black
+#urxvt*background:           rgba:0000/0000/0000/f000
+urxvt*foreground:           white
+urxvt*scrollBar:            false
+urxvt*skipBuiltinGlyphs:    true
+#urxvt*font:                -*-terminus-*-*-*-*-12-*-*-*-*-*-*-u
+urxvt*font:                 xft:Dejavu Sans Mono:pixelsize=11.5
+urxvt*fontBold:             xft:Dejavu Sans Mono:bold:pixelsize=11.5
+urxvt*perl-lib:             /usr/lib/urxvt/perl/
+urxvt*perl-ext-common:      default,matcher
+#urxvt*urlLauncher:          firefox
+urxvt*urlLauncher:          chromium
+urxvt*matcher.button:       3
+#urxvt*matcher.pattern.1:    \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
+
+Xft.dpi:                    137
+Xft.antialias:              true
+Xft.rgba:                   rgb
+Xft.hinting:                true
+Xft.hintstyle:              hintslight
+
