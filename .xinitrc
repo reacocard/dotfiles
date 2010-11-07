@@ -11,13 +11,6 @@
 
 # xrdb -merge .Xresources
 
-# Autorun systemwide xinit scripts. Needed on some distros.
-if [ -d /etc/X11/xinit/xinitrc.d/ ]; then
-    for f in /etc/X11/xinit/xinitrc.d/* ; do
-        [ -x "$f" ] && . "$f"
-    done
-    unset f
-fi
 
 DISPLAY="" dropboxd &
 
@@ -31,19 +24,24 @@ if [ -z $SESSION ]; then
     SESSION=xmonad
 fi
 
-BIN=""
-WRAP=ck-launch-session
+command=""
 
 case $SESSION in
     openbox)
-        BIN=openbox-session
+        command=openbox-session
         ;;
     xmonad)
-        BIN=~/.xmonad/startup.sh
+        command=~/.xmonad/startup.sh
         ;;
     *)
-        BIN=$SESSION
+        command=$SESSION
         ;;
 esac
 
-exec $WRAP $BIN
+if [ -d ~/.xinitrc.d/ ]; then
+    for f in ~/.xinitrc.d/* ; do
+        [ -x "$f" ] && . "$f"
+    done
+    unset f
+fi
+exec $command
