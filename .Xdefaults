@@ -1,3 +1,7 @@
+xlock*mode:                 image
+xlock*bitmap:               /home/reacocard/media/wallpaper/KITTY.xpm
+xlock*erasedelay:           0
+xlock*count:                1
 
 urxvt*urgentOnBell:         true
 urxvt*secondaryScroll:      true

@@ -45,7 +45,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0, 0x1008ff11), spawn "volcontrol.sh d") 
     , ((0, 0x1008ff13), spawn "volcontrol.sh i") 
     , ((0, 0x1008ff2f), spawn "lockandsleep.sh")
-    , ((modm, xK_x), spawn "xlock -mode blank")
+    , ((modm, xK_x), spawn "xlock")
     ]
     ++
     [((m .|. modm, k), windows $ f i)
