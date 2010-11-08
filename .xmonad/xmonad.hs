@@ -15,6 +15,13 @@ import XMonad.Actions.PhysicalScreens
 import XMonad.Util.Run(spawnPipe)
 import System.IO
 
+-- define keysyms not supplied by xmonad
+xK_XF86VolumeUp = 0x1008ff13
+xK_XF86VolumeDown = 0x1008ff11
+xK_XF86VolumeMute = 0x1008ff12
+xK_XF86ScreenSaver = 0x1008ff2d
+xK_XF86Sleep = 0x1998ff2f
+
 main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ withUrgencyHook NoUrgencyHook
@@ -39,12 +46,13 @@ main = do
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-    -- these hex vals can be found via xev. can't use anything 
-    -- friendlier as xmonad doesn't have keysyms for XF86*
-    [ ((0, 0x1008ff12), spawn "volcontrol.sh m")
-    , ((0, 0x1008ff11), spawn "volcontrol.sh d") 
-    , ((0, 0x1008ff13), spawn "volcontrol.sh i") 
-    , ((0, 0x1008ff2f), spawn "lockandsleep.sh")
+    -- TODO: make the actions like xlock, volume, sleep be defined
+    -- elsewhere for easier maintenance
+    [ ((0, xK_XF86VolumeUp), spawn "volcontrol.sh i") 
+    , ((0, xK_XF86VolumeDown), spawn "volcontrol.sh d") 
+    , ((0, xK_XF86VolumeMute), spawn "volcontrol.sh m")
+    , ((0, xK_XF86Sleep), spawn "lockandsleep.sh")
+    , ((0, xK_XF86ScreenSaver), spawn "xlock")
     , ((modm, xK_x), spawn "xlock")
     ]
     ++
