@@ -20,7 +20,7 @@ xK_XF86VolumeUp = 0x1008ff13
 xK_XF86VolumeDown = 0x1008ff11
 xK_XF86VolumeMute = 0x1008ff12
 xK_XF86ScreenSaver = 0x1008ff2d
-xK_XF86Sleep = 0x1998ff2f
+xK_XF86Sleep = 0x1008ff2f
 
 main = do
     xmproc <- spawnPipe "xmobar"
