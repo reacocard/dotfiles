@@ -107,6 +107,8 @@ myLayoutHook = tiled ||| Mirror tiled ||| Full
 myManageHooks = composeAll
     [ className =? "MPlayer"    --> doFullFloat -- mplayer is always floated, fullscreen
     --, resource =? "file_properties" --> doFloat
+    , resource =? "Wine" --> doFloat
+    , className =? "Wine" --> doFloat
     , title =? "Chromium Preferences" --> doCenterFloat
     , isDialog --> doCenterFloat
     , isFullscreen              --> (doF W.focusDown <+> doFullFloat) -- fix flash fullscreen
