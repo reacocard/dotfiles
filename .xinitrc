@@ -12,7 +12,7 @@
 # xrdb -merge .Xresources
 
 
-DISPLAY="" dropboxd &
+dropboxd &
 
 nitrogen --restore &
 
