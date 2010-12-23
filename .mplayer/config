@@ -1,37 +1,35 @@
 [default]
+# video
 fixed-vo=yes
 vo=xv,
-#dr=yes # direct render, had warning about subtitle correuption
 fs=yes
-# standard monitor size, with square pixels
-#monitoraspect=4:3
-# Use this for a widescreen monitor, non-square pixels.
-#monitoraspect=16:10
 nocolorkey=yes
+framedrop=no
+
+# audio
 ao=alsa
-#ao=pulse,alsa:device=pulse,alsa,
-#ac=vorbis,mad,
 softvol=yes
 softvol-max=400
-#autosync=1
-framedrop=no
-#noslices=yes
-cache=16484
-cache-min=3.0
+
+# subtitles 
 slang=en,eng
 alang=jn,jpn,en,eng
-#stop-xscreensaver=yes
 subfont-osd-scale=3
 subfont-text-scale=3
 embeddedfonts=yes
 ass=yes
+ass-hinting=0
 spuaa=3
 spugauss=3.0
 subfont-blur=4
 ffactor=1 
+
+# misc
+cache=8192
+cache-min=3.0
 joystick=no
 use-filedir-conf=yes
 
 # tweaks for slow cpu
 vfm=ffmpeg
-lavdopts=fast=true:skiploopfilter=all:threads=4
+lavdopts=fast=true:skiploopfilter=all:threads=8
