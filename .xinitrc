@@ -11,6 +11,7 @@
 
 # xrdb -merge .Xresources
 
+PATH="$HOME/bin:$PATH"
 
 dropboxd &
 

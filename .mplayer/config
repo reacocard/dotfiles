@@ -1,7 +1,7 @@
 [default]
 # video
 fixed-vo=yes
-vo=xv,
+vo=gl:swapbuffers=1,xv,
 fs=yes
 nocolorkey=yes
 framedrop=no

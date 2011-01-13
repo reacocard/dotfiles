@@ -3,7 +3,7 @@ Terminal = urxvt
 
 TermExec = ${Terminal} -e
 
-AlwaysInTerm = ssh elinks alsamixer newsbeuter htop saga torrent netcfg-menu mc top
+AlwaysInTerm = ssh elinks htop top
 
 Width = 500
 Top = 480

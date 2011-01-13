@@ -15,6 +15,8 @@ SAVEHIST=10000
 setopt appendhistory autocd
 unsetopt beep
 
+# syntax hilight
+source ~/bin/live-command-coloring.sh
 
 ### COMPLETION ###
 
@@ -190,3 +192,5 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+
+alias :q='exit'

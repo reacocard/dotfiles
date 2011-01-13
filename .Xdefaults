@@ -5,7 +5,7 @@ xlock*count:                1
 
 urxvt*urgentOnBell:         true
 urxvt*secondaryScroll:      true
-urxvt*depth:                24
+#urxvt*depth:                24
 urxvt*buffered:             true
 urxvt*background:           black
 #urxvt*background:           rgba:0000/0000/0000/f000
