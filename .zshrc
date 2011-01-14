@@ -16,7 +16,7 @@ setopt appendhistory autocd
 unsetopt beep
 
 # syntax hilight
-source ~/bin/live-command-coloring.sh
+source ~/.zsh-syntax-hilighter
 
 ### COMPLETION ###
 
