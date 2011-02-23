@@ -1,0 +1,3 @@
+[default]
+vfm=ffmpeg
+lavdopts=fast=true:skiploopfilter=all:threads=8

@@ -1,8 +1,10 @@
 [default]
 # video
 fixed-vo=yes
-vo=gl:swapbuffers=1,xv,
+vo=gl_nosw,xv,
 fs=yes
+#fstype=fullscreen
+#xineramascreen=10 # bad hack - always display on secondary monitor
 nocolorkey=yes
 framedrop=no
 
@@ -30,6 +32,5 @@ cache-min=3.0
 joystick=no
 use-filedir-conf=yes
 
-# tweaks for slow cpu
-vfm=ffmpeg
-lavdopts=fast=true:skiploopfilter=all:threads=8
+# include system-specific options
+include=/home/reacocard/.mplayer/config-local

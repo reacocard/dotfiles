@@ -1,0 +1,4 @@
+[default]
+# config options for machines with lots of CPU
+vfm=ffmpeg
+lavdopts=threads=8
