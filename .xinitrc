@@ -11,7 +11,7 @@
 
 # xrdb -merge .Xresources
 
-PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.cabal/bin:$HOME/bin:$PATH"
 
 dropboxd &
 
