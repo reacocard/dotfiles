@@ -3,7 +3,7 @@
 fixed-vo=yes
 vo=gl_nosw,xv,
 fs=yes
-#fstype=fullscreen
+fstype=fullscreen
 #xineramascreen=10 # bad hack - always display on secondary monitor
 nocolorkey=yes
 framedrop=no
