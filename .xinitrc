@@ -17,8 +17,6 @@ dropboxd &
 
 nitrogen --restore &
 
-volcontrold.py &
-
 SESSION=$1
 
 if [ -z $SESSION ]; then
