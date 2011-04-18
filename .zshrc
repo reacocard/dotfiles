@@ -15,9 +15,6 @@ SAVEHIST=10000
 setopt appendhistory autocd
 unsetopt beep
 
-# syntax hilight
-source ~/.zsh-syntax-hilighter
-
 ### COMPLETION ###
 
 zstyle :compinstall filename '/home/reacocard/.zshrc'

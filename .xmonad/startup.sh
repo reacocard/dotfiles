@@ -6,9 +6,9 @@ if [ -n "$dbuslaunch" ] && [ -x "$dbuslaunch" ] && [ -z "$DBUS_SESSION_BUS_ADDRE
 fi
 
 
-xmodmap -e "remove Lock = Caps_Lock"
-xmodmap -e "keysym Caps_Lock = ISO_Level5_Shift"
-xmodmap -e "add mod3 = ISO_Level5_Shift"
+#xmodmap -e "remove Lock = Caps_Lock"
+#xmodmap -e "keysym Caps_Lock = ISO_Level5_Shift"
+#xmodmap -e "add mod3 = ISO_Level5_Shift"
 
 # these don't work as of xkeyboard-config 2.1
 #xmodmap -e "remove Lock = Caps_Lock"
