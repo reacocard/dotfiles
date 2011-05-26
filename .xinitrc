@@ -37,10 +37,10 @@ case $SESSION in
         ;;
 esac
 
-if [ -d ~/.xinitrc.d/ ]; then
-    for f in ~/.xinitrc.d/* ; do
-        [ -x "$f" ] && . "$f"
-    done
-    unset f
-fi
+#   if [ -d ~/.xinitrc.d/ ]; then
+#       for f in ~/.xinitrc.d/* ; do
+#           [ -x "$f" ] && . "$f"
+#       done
+#       unset f
+#   fi
 exec $command
