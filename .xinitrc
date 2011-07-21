@@ -12,6 +12,7 @@
 # xrdb -merge .Xresources
 
 export PATH="$HOME/.cabal/bin:$HOME/bin:$PATH"
+export DESKTOP_SESSION=gnome # trick xdg-open into using gvfs-open by default
 
 dropboxd &
 
