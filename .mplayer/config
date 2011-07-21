@@ -25,8 +25,8 @@ subfont-blur=4
 ffactor=1 
 
 # misc
-cache=8192
-cache-min=3.0
+cache=1024
+cache-min=80
 joystick=no
 use-filedir-conf=yes
 
