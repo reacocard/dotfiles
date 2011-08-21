@@ -1,7 +1,8 @@
 [default]
 # video
 fixed-vo=yes
-vo=gl_nosw,xv,
+# with opengl, doing the YUV in software is faster on intel
+vo=gl_nosw:yuv=0,xv,
 fs=yes
 nocolorkey=yes
 framedrop=no
