@@ -1,57 +1,119 @@
 
+" Pathogen
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+" Don't bother being compatible with Vi. It sucks.
 set nocompatible
 
-" allow backspacing over everything in insert mode
+" Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-set backup		" keep a backup file
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+" Don't format middle-click pastes
+map <MouseMiddle> <Esc>"*p
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-    syntax on
-    set hlsearch
+" Move backup files elsewhere - good for slow media and avoiding clutter
+set backupdir=~/.vim/sessions/
+set dir=~/.vim/sessions/
+
+" swapper no swapping!
+set noswapfile
+
+" persistent undo
+set undofile
+set undodir=~/.vim/undos/
+
+" pretty colors!
+syntax on
+colorscheme relaxedgreen
+
+" The PC is fast enough, do syntax highlight syncing from start
+autocmd BufEnter * :syntax sync fromstart
+
+set hidden
+
+" Enable filetype plugins and indention
+filetype on
+filetype plugin on
+filetype indent on
+
+" show position always
+set ruler
+
+" improve drawing speed
+set ttyfast
+
+" try to be smart about indenting
+set autoindent  smartindent
+
+" Better Search
+set hlsearch
+set incsearch
+set showmatch
+
+" show incomplete commands
+set showcmd
+
+" utf-8 default encoding
+set enc=utf-8
+
+" Prefer unix over windows over os9 formats
+set fileformats=unix,dos,mac
+
+" Don't bell or blink(Courtesy: Cream Editor).
+if has('autocmd')
+  autocmd GUIEnter * set vb t_vb=
 endif
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-    " load python awesome
-    if !exists("autocommands_loaded")
-        let autocommands_loaded = 1
-        autocmd BufRead,BufNewFile,FileReadPost *.py source ~/.vim/perlangconfs/python
-    endif
+" hide some files and remove stupid help
+let g:netrw_list_hide='^\.,.\(pyc\|pyo\|o\)$'
 
+" make command-mode completion more useful
+set wildmenu
+set wildmode=list:longest
 
-    " Enable file type detection.
-    " Use the default filetype settings, so that mail gets 'tw' set 
-    " to 72, 'cindent' is on in C files, etc.
-    " Also load indent files, to automatically do language-dependent 
-    " indenting.
-    filetype plugin indent on
+" scroll before hitting the edge of the window - moar context!
+set scrolloff=3
 
-    " Put these in an autocmd group, so that we can delete them easily.
-    augroup vimrcEx
-    au!
+" UI-specific options
+if has("gui_running")
+    " disable blinking cursor
+    set gcr=a:blinkon0 
+    
+    " make it big enough
+    set columns=80
+    set lines=40
 
-    " For all text files set 'textwidth' to 78 characters.
-    autocmd FileType text setlocal textwidth=78
+    " nicer font
+    set guifont=Deja\ Vu\ Sans\ Mono\ 10
 
-    augroup END
+    " remove toolbar, menubar, scrollbar
+    set guioptions-=T
+    set guioptions-=m
+    set guioptions-=r
+
+    " Hide pointer while typing
+    set mousehide
+    set mousemodel=popup
 else
-    set autoindent		" always set autoindenting on
+    " Set the terminal's title
+    set title
 endif
 
 
 
-set et sts=4 sw=4 "set tab defaults
-color relaxedgreen "set colorscheme
-set hidden "allow switching buffers without saving
-let &guicursor = &guicursor . ",a:blinkon0"
-set backupdir=~/.vimswaps//
-set directory=~/.vimswaps//
 
-set undofile "allow undo accross close/open
+" Python file options
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with colorcolumn=79 formatoptions+=croq 
+let python_highlight_all=1
+let python_highlight_exceptions=0
+let python_highlight_builtins=0
+autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+
+
+
+" vim file options
+autocmd FileType vim setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
+
+
+
