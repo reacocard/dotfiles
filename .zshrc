@@ -4,7 +4,7 @@
 ### BASICS ###
 source ~/.profile
 
-export TZ=America/Chicago
+export TZ=America/Los_Angeles
 
 autoload -U colors
 colors

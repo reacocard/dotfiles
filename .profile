@@ -18,7 +18,7 @@ export EXAILE_NO_OPTIMIZE=1
 export EDITOR=vim
 export LANG=en_US.utf-8
 export OOO_FORCE_DESKTOP=gnome
-export TZ=America/Chicago
+export TZ=America/Los_Angeles
 
 # less colors for manpages
 
