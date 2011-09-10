@@ -4,6 +4,7 @@ fixed-vo=yes
 # with opengl, doing the YUV in software is faster on intel
 vo=gl_nosw:yuv=0,xv,
 fs=yes
+fstype=none,fullscreen
 nocolorkey=yes
 framedrop=no
 
