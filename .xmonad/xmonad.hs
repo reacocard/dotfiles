@@ -109,6 +109,7 @@ myManageHooks = composeAll
     --, resource =? "file_properties" --> doFloat
     , resource =? "Wine" --> doFloat
     , className =? "Wine" --> doFloat
+    , title =? "Pandora" --> doFloat -- Pandora desktop app - doesn't deal with resizing right
     , title =? "Chromium Preferences" --> doCenterFloat
     , isDialog --> doCenterFloat
     , isFullscreen              --> (doF W.focusDown <+> doFullFloat) -- fix flash fullscreen
