@@ -26,10 +26,10 @@ subfont-blur=4
 ffactor=1 
 
 # misc
-cache=1024
-cache-min=80
+#cache=4000
+#cache-min=80
 joystick=no
 use-filedir-conf=yes
 
 # include system-specific options
-include=/home/reacocard/.mplayer/config-local
+#include=/home/reacocard/.mplayer/config-local
