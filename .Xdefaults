@@ -13,8 +13,8 @@ urxvt*foreground:           white
 urxvt*scrollBar:            false
 urxvt*skipBuiltinGlyphs:    true
 #urxvt*font:                -*-terminus-*-*-*-*-12-*-*-*-*-*-*-u
-urxvt*font:                 xft:Dejavu Sans Mono:size=10
-urxvt*fontBold:             xft:Dejavu Sans Mono:bold:size=10
+urxvt*font:                 xft:Dejavu Sans Mono:book:size=9
+urxvt*fontBold:             xft:Dejavu Sans Mono:bold:size=9
 urxvt*perl-lib:             /usr/lib/urxvt/perl/
 urxvt*perl-ext-common:      default,matcher
 #urxvt*urlLauncher:          firefox

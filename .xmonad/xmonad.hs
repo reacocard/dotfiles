@@ -45,15 +45,18 @@ main = do
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
 
+lockCmd = "gnome-screensaver-command -l"
+sleepCmd = "~/bin/lockandsleep.sh"
+
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- TODO: make the actions like xlock, volume, sleep be defined
     -- elsewhere for easier maintenance
     [ ((0, xK_XF86VolumeUp),    spawn "amixer set Master 3%+") 
     , ((0, xK_XF86VolumeDown),  spawn "amixer set Master 3%-") 
     , ((0, xK_XF86VolumeMute),  spawn "amixer set Master toggle")
-    , ((0, xK_XF86Sleep),       spawn "~/bin/lockandsleep.sh")
-    , ((0, xK_XF86ScreenSaver), spawn "xlock")
-    , ((modm, xK_x),            spawn "xlock")
+    , ((0, xK_XF86Sleep),       spawn sleepCmd)
+    , ((0, xK_XF86ScreenSaver), spawn lockCmd)
+    , ((modm, xK_x),            spawn lockCmd)
     ]
     ++
     [((m .|. modm, k), windows $ f i)

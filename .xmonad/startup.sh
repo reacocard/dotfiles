@@ -17,8 +17,6 @@ fi
 
 xsetroot -cursor_name left_ptr
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --tint 0x000000 --height 12 &
-wicd-client &
-#blueman-applet &
 
 
 # TODO: This is ugly, use a loop.
@@ -31,5 +29,7 @@ else
         $POLKIT_BIN &
     fi
 fi
+
+run-parts ~/.autostart &
 
 exec xmonad

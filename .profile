@@ -14,10 +14,19 @@ if [ -d "$HOME/bin" ] ; then
     export PATH="$HOME/bin:$PATH"
 fi
 
+if [ -d "$HOME/.cabal/bin" ] ; then
+    export PATH="$HOME/.cabal/bin:$PATH"
+fi
+
+if [ -d "$HOME/local/bin" ] ; then
+    export PATH="$HOME/local/bin:$PATH"
+fi
+
 export EXAILE_NO_OPTIMIZE=1
 export EDITOR=vim
 export LANG=en_US.utf-8
 export OOO_FORCE_DESKTOP=gnome
+export DESKTOP_SESSION=gnome
 export TZ=America/Los_Angeles
 
 # less colors for manpages
