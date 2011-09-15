@@ -42,3 +42,9 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 mkdir -p ~/.tmp/chromium-cache
 mkdir -p ~/.tmp/thumbnails
 mkdir -p ~/.tmp/vimswaps
+
+
+if [ -f "$HOME/.profile.local" ] ; then
+    . $HOME/.profile.local
+fi
+
