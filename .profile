@@ -22,6 +22,10 @@ if [ -d "$HOME/local/bin" ] ; then
     export PATH="$HOME/local/bin:$PATH"
 fi
 
+if [ -f "$HOME/.opt/paths-include" ] ; then
+    . $HOME/.opt/paths-include
+fi
+
 export EXAILE_NO_OPTIMIZE=1
 export EDITOR=vim
 export LANG=en_US.utf-8
