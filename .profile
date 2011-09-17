@@ -22,6 +22,10 @@ if [ -d "$HOME/local/bin" ] ; then
     export PATH="$HOME/local/bin:$PATH"
 fi
 
+if [ -d "/usr/games/" ] ; then
+	export PATH="$PATH:/usr/games"
+fi
+
 if [ -f "$HOME/.opt/paths-include" ] ; then
     . $HOME/.opt/paths-include
 fi
