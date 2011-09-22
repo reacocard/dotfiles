@@ -9,11 +9,6 @@
 #umask 022
 
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    export PATH="$HOME/bin:$PATH"
-fi
-
 if [ -d "$HOME/.cabal/bin" ] ; then
     export PATH="$HOME/.cabal/bin:$PATH"
 fi
@@ -25,6 +20,12 @@ fi
 if [ -f "$HOME/.opt/paths-include" ] ; then
     . $HOME/.opt/paths-include
 fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    export PATH="$HOME/bin:$PATH"
+fi
+
 
 export EXAILE_NO_OPTIMIZE=1
 export EDITOR=vim
