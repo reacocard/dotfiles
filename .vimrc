@@ -1,4 +1,6 @@
 
+source ~/.vimrc.local
+
 " Pathogen
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
@@ -20,8 +22,10 @@ set dir=~/.vim/sessions/
 set noswapfile
 
 " persistent undo
-set undofile
-set undodir=~/.vim/undos/
+if has('persistent_undo')
+    set undofile
+    set undodir=~/.vim/undos/
+endif
 
 " pretty colors!
 syntax on
@@ -114,6 +118,5 @@ autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 s
 
 " vim file options
 autocmd FileType vim setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
-
 
 
