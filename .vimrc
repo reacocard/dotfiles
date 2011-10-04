@@ -1,5 +1,4 @@
 
-source ~/.vimrc.local
 
 " Pathogen
 call pathogen#runtime_append_all_bundles()
@@ -120,3 +119,4 @@ autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 s
 autocmd FileType vim setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
 
 
+source ~/.vimrc.local
