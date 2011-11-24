@@ -5,6 +5,7 @@ import System.Exit
 import Graphics.X11.Xlib
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
@@ -41,6 +42,7 @@ main = do
         , mouseBindings = myMouseBindings
         , workspaces = myWorkspaces
         , focusFollowsMouse = False
+        , handleEventHook = fullscreenEventHook
         }
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
