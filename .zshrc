@@ -32,26 +32,20 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 ### KEYMAP ###
 
 autoload zkbd
-#if [[ ! -f ${ZDOTDIR:-$HOME}/.zkbd/$TERM-:0.0 ]]; then
-#    echo "Could not load keymap, falling back to default. Run zkbd to correct."
-#else
-    if [[ -f ${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE ]]; then
-        source ${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE
-    else
-        source ${ZDOTDIR:-$HOME}/.zkbd/$TERM-:0.0
-    fi
-    [[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
-    [[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
-    [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-    [[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
-    [[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-    [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-    [[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
-    [[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
-    [[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
-    [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
-    [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
-#fi
+[[ -f ${ZDOTDIR:-$HOME}/.zkbd/$TERM ]] && source ${ZDOTDIR:-$HOME}/.zkbd/$TERM
+[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
+[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
+[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
+[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
+[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
+#[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
+[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" history-search-backward
+[[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
+#[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
+[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" history-search-forward
+[[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 
 
 ### PROMPT ###
