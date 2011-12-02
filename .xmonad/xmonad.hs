@@ -22,6 +22,7 @@ xK_XF86VolumeDown = 0x1008ff11
 xK_XF86VolumeMute = 0x1008ff12
 xK_XF86ScreenSaver = 0x1008ff2d
 xK_XF86Sleep = 0x1008ff2f
+xK_XF86TouchpadToggle = 0x1008ffa9
 
 main = do
     xmproc <- spawnPipe "xmobar"
@@ -52,12 +53,14 @@ voldownCmd = "~/bin/pulsevolume down"
 volmuteCmd = "~/bin/pulsevolume mute"
 lockCmd = "gnome-screensaver-command -l"
 sleepCmd = "~/bin/lockandsleep.sh"
+touchpadCmd = "~/bin/toggle_touchpad.sh"
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((0, xK_XF86VolumeUp),    spawn volupCmd) 
     , ((0, xK_XF86VolumeDown),  spawn voldownCmd) 
     , ((0, xK_XF86VolumeMute),  spawn volmuteCmd)
     , ((0, xK_XF86Sleep),       spawn sleepCmd)
+    , ((0, xK_XF86TouchpadToggle), spawn touchpadCmd)
     , ((0, xK_XF86ScreenSaver), spawn lockCmd)
     , ((modm, xK_x),            spawn lockCmd)
     ]
