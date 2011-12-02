@@ -1,0 +1,22 @@
+#!/bin/sh
+
+PULSESINK="0"
+VOLUMEINCREMENT="2%"
+
+case $1 in
+	"up")
+		pactl -- set-sink-volume $PULSESINK +$VOLUMEINCREMENT
+		;;
+	"down")
+		pactl -- set-sink-volume $PULSESINK -$VOLUMEINCREMENT
+		;;
+	"mute")
+		# TODO: this doesn't work if the sink isn't the first one...
+		pactl set-sink-mute $PULSESINK  $([[ $(pactl list sinks | grep -m1 Mute: | awk '{print $2}') == 'no' ]] && echo '1' || echo '0')
+		;;
+	*)
+		echo "Unrecognized option"
+		exit 1
+		;;
+esac
+
