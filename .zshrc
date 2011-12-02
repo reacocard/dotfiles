@@ -4,7 +4,7 @@
 ### BASICS ###
 source ~/.profile
 
-export TZ=America/Los_Angeles
+autoload -U zmv
 
 autoload -U colors
 colors
@@ -16,6 +16,8 @@ setopt appendhistory autocd
 unsetopt beep
 
 ### COMPLETION ###
+
+setopt extended_glob
 
 zstyle :compinstall filename '/home/reacocard/.zshrc'
 autoload -Uz compinit
