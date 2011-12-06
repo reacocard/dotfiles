@@ -9,6 +9,8 @@ autoload -U zmv
 autoload -U colors
 colors
 
+setopt correct
+
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
@@ -22,6 +24,9 @@ setopt extended_glob
 zstyle :compinstall filename '/home/reacocard/.zshrc'
 autoload -Uz compinit
 compinit
+
+zstyle ':completion:*' menu select
+setopt completealiases
 
 local knownhosts
 knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
@@ -42,10 +47,8 @@ autoload zkbd
 [[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
 [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
 [[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
-#[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-search
 [[ -n ${key[Up]} ]] && bindkey "${key[Up]}" history-search-backward
 [[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
-#[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-search
 [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" history-search-forward
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 
@@ -78,7 +81,6 @@ function precmd {
 }
 
 
-setopt extended_glob
 preexec () {
     if [[ "$TERM" == "screen" ]]; then
 	local CMD=${1[(wr)^(*=*|sudo|-*)]}
@@ -94,13 +96,6 @@ setprompt () {
     setopt prompt_subst
 
 
-    ###
-    # See if we can use colors.
-
-    autoload colors zsh/terminfo
-    if [[ "$terminfo[colors]" -ge 8 ]]; then
-	colors
-    fi
     for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
 	eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
 	eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
