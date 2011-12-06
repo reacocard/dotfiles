@@ -5,20 +5,15 @@ xlock*count:                1
 
 urxvt*urgentOnBell:         true
 urxvt*secondaryScroll:      true
-#urxvt*depth:                24
 urxvt*buffered:             true
 urxvt*background:           black
-#urxvt*background:           rgba:0000/0000/0000/f000
 urxvt*foreground:           white
 urxvt*scrollBar:            false
 urxvt*skipBuiltinGlyphs:    true
-#urxvt*font:                -*-terminus-*-*-*-*-12-*-*-*-*-*-*-u
 urxvt*font:                 xft:Dejavu Sans Mono:book:size=9
 urxvt*fontBold:             xft:Dejavu Sans Mono:bold:size=9
 urxvt*perl-lib:             /usr/lib/urxvt/perl/
 urxvt*perl-ext-common:      default,matcher
-#urxvt*urlLauncher:          firefox
 urxvt*urlLauncher:          xdg-open
 urxvt*matcher.button:       3
-#urxvt*matcher.pattern.1:    \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
 urxvt*searchable-scrollback: CM-s
