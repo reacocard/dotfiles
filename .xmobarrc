@@ -2,9 +2,9 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
        , bgColor = "black"
        , fgColor = "grey"
        , position = TopW L 90
-       , commands = [ Run Cpu ["-L","20","-H","80","--normal","gray","--high","red","-t","<total>%","-p","3", "-w", "3"] 10
-                    , Run Memory ["-t","<used>M","-w","4"] 10
-                    , Run Date "%H:%M" "date" 10
+       , commands = [ Run Cpu ["-L","20","-H","80","--normal","gray","--high","red","-t","<total>%","-p","3", "-w", "3"] 20
+                    , Run Memory ["-t","<used>M","-w","4"] 20
+                    , Run Date "%H:%M" "date" 50
                     , Run Battery ["-t", "<timeleft> <left>%", "-m","3"] 50
                     , Run Volume "default" "Master" ["-t", "<volume><status>", "-w", "3", "--", "-O", "+", "-o", "-", "-C", "gray", "-c", "gray"] 10
                     , Run StdinReader
