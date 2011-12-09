@@ -53,6 +53,17 @@ autoload zkbd
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 
 
+### HISTORY ###
+
+# Don't add lines that start with a space to the history
+zshaddhistory() {
+	if [[ `echo "$1" | cut -c 1-1` == " " ]]; then
+		return 1
+	else
+		return 0
+	fi
+}
+
 ### PROMPT ###
 
 
