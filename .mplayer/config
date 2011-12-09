@@ -2,7 +2,7 @@
 # video
 fixed-vo=yes
 # with opengl, doing the YUV in software is faster on intel
-vo=gl_nosw:yuv=0,xv,
+vo=gl_nosw:yuv=0:swapinterval=1,xv,
 fs=yes
 #fstype=none,fullscreen
 nocolorkey=yes
@@ -27,8 +27,8 @@ subfont-blur=4
 ffactor=1 
 
 # misc
-#cache=4000
-#cache-min=80
+cache=4096
+cache-min=2
 joystick=no
 use-filedir-conf=yes
 
