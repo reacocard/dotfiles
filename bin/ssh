@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[[ -z `ssh-add -l | grep $HOME/.ssh/id_rsa` ]] && ssh-add
+name=$(basename $0)
+exec /usr/bin/$name "$@"
