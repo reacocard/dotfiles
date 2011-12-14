@@ -1,2 +1,0 @@
-
-export PATH="$HOME/.opt/dmenu/bin:$HOME/.opt/ghc/bin:$PATH"
