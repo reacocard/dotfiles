@@ -1,31 +1,39 @@
 # zsh configuration file
 # Aren Olson <reacocard@gmail.com>
+# vim: et sts=4 ts=4
 
 ### BASICS ###
+
+# Load lots of variables and stuff
 source ~/.profile
 
+# Enabel zmv - powerful alt to mv
 autoload -U zmv
 
+# Make it pretty
 autoload -U colors
 colors
 
-setopt correct
-
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
-setopt appendhistory autocd
+# Kill the stupid beeping
 unsetopt beep
 
 ### COMPLETION ###
 
+# Attempt to correct typos
+setopt correct
+
+# Cd into a dir that is entered directly on the prompt
+setopt autocd
+
+# Moar globbing power
 setopt extended_glob
+
+setopt autolist
 
 zstyle :compinstall filename '/home/reacocard/.zshrc'
 autoload -Uz compinit
 compinit
 
-zstyle ':completion:*' menu select
 setopt completealiases
 
 local knownhosts
@@ -38,34 +46,64 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 ### KEYMAP ###
 
-autoload zkbd
-[[ -f ${ZDOTDIR:-$HOME}/.zkbd/$TERM ]] && source ${ZDOTDIR:-$HOME}/.zkbd/$TERM
-[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
-[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
+# Load escape sequences for keys from terminfo
+
+typeset -A key
+key[Home]=${terminfo[khome]}
+key[End]=${terminfo[kend]}
+key[Insert]=${terminfo[kich1]}
+key[Up]=${terminfo[kcuu1]}
+key[Down]=${terminfo[kcud1]}
+key[Left]=${terminfo[kcub1]}
+key[Right]=${terminfo[kcuf1]}
+key[PageUp]=${terminfo[kpp]}
+key[PageDown]=${terminfo[knp]}
+key[Backspace]=${terminfo[kbs]}
+key[Delete]=${terminfo[kdch1]}
+
+for k in ${(k)key} ; do
+    # $terminfo[] entries are weird in ncurses application mode...
+    [[ ${key[$k]} == $'\eO'* ]] && key[$k]=${key[$k]/O/[}
+done
+unset k
+
 [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
-[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
-[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
 [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
-[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
+[[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
 [[ -n ${key[Up]} ]] && bindkey "${key[Up]}" history-search-backward
-[[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
 [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" history-search-forward
+[[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
+[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
+[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
+[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
+[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
 
 
 ### HISTORY ###
 
+# Set history file location and size
+HISTFILE=~/.zshhist
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Use better locking
+setopt histfcntllock
+
+# Skip duplicates
+setopt histfindnodups
+
+# Append to histfile instead of overwriting it
+setopt appendhistory 
+
+# Add items to the histfile as they are entered instead of on exit
+setopt incappendhistory
+
 # Don't add lines that start with a space to the history
-zshaddhistory() {
-	if [[ `echo "$1" | cut -c 1-1` == " " ]]; then
-		return 1
-	else
-		return 0
-	fi
-}
+setopt histignorespace
+
 
 ### PROMPT ###
-
 
 # parts of the following adapted from http://aperiodic.net/phil/prompt/
 
