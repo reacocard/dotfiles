@@ -51,7 +51,7 @@ myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "A", "B", "C",
 volupCmd = "~/bin/pulsevolume up"
 voldownCmd = "~/bin/pulsevolume down"
 volmuteCmd = "~/bin/pulsevolume mute"
-lockCmd = "gnome-screensaver-command -l"
+lockCmd = "xautolock -locknow"
 sleepCmd = "~/bin/lockandsleep.sh"
 touchpadCmd = "~/bin/toggle_touchpad.sh"
 

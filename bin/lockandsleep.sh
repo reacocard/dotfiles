@@ -1,4 +1,4 @@
 #!/bin/sh
 
-gnome-screensaver-command -l || xlock &
+xautolock -locknow
 upower_suspend.sh
