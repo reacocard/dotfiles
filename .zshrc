@@ -31,8 +31,10 @@ setopt extended_glob
 setopt autolist
 
 zstyle :compinstall filename '/home/reacocard/.zshrc'
-autoload -Uz compinit
+autoload -U compinit
 compinit
+setopt complete_in_word
+
 
 setopt completealiases
 
