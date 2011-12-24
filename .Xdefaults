@@ -4,9 +4,11 @@ xautolock*notifier:         xset dpms off
 xautolock*time:             11
 
 xlock*mode:                 image
-xlock*bitmap:               /home/reacocard/media/wallpaper/KITTY.xpm
+xlock*bitmap:               ~/media/wallpaper/KITTY.xpm
 xlock*erasedelay:           0
 xlock*count:                1
+xlock*background:           black
+xlock*foreground:           white
 
 urxvt*urgentOnBell:         true
 urxvt*secondaryScroll:      true
