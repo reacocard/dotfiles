@@ -1,8 +1,7 @@
 [default]
 # video
 fixed-vo=yes
-# with opengl, doing the YUV in software is faster on intel
-vo=gl_nosw:yuv=0:swapinterval=1,xv,
+vo=gl_nosw:swapinterval=1,xv,
 fs=yes
 #fstype=none,fullscreen
 nocolorkey=yes
@@ -31,6 +30,7 @@ cache=4096
 cache-min=2
 joystick=no
 use-filedir-conf=yes
+stop-xscreensaver=yes
 
 # include system-specific options
 #include=/home/reacocard/.mplayer/config-local

@@ -8,6 +8,7 @@
 # "run-parts ~/.autostart &" to their script.
 
 xset -b # Disable the nasty beeping
+xrdb $HOME/.Xdefaults
 
 source $HOME/.profile
 
