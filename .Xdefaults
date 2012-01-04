@@ -1,10 +1,8 @@
 xautolock*detectsleep:      true
-xautolock*notify:           60
-xautolock*notifier:         xset dpms off
-xautolock*time:             11
+xautolock*time:             30
 
 xlock*mode:                 image
-xlock*bitmap:               ~/media/wallpaper/KITTY.xpm
+xlock*bitmap:               media/wallpaper/KITTY.xpm
 xlock*erasedelay:           0
 xlock*count:                1
 xlock*background:           black
