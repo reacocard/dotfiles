@@ -17,6 +17,11 @@ colors
 # Kill the stupid beeping
 unsetopt beep
 
+# Unset $DISPLAY in screen, since it doesn't work well
+if [[ "$TERM" == "screen" ]]; then
+        DISPLAY=""
+fi
+
 ### COMPLETION ###
 
 # Attempt to correct typos
