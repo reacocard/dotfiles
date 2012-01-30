@@ -1,18 +1,20 @@
 [default]
-# video
+### Video ###
 fixed-vo=yes
-vo=gl_nosw:swapinterval=1,xv,
+# swapinterval=1  -- turn on VSync
+# yuv=0           -- Do YUV conversion in software - works around 
+#                    intel not handling 10bit correctly
+vo=gl_nosw:swapinterval=1:yuv=0,xv,
 fs=yes
-#fstype=none,fullscreen
 nocolorkey=yes
 framedrop=no
 
-# audio
+### Audio ###
 ao=alsa
 softvol=yes
 softvol-max=400
 
-# subtitles 
+### Subtitles ###
 slang=en,eng
 alang=jn,jpn,en,eng
 subfont-osd-scale=3
@@ -25,7 +27,7 @@ spugauss=3.0
 subfont-blur=4
 ffactor=1 
 
-# misc
+### Misc ###
 cache=4096
 cache-min=2
 joystick=no
