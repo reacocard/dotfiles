@@ -114,8 +114,7 @@ myLayoutHook = tiled ||| Mirror tiled ||| Full
 
 
 myManageHooks = composeAll
-    [ className =? "MPlayer"    --> (doF W.focusUp <+> doFullFloat) -- mplayer is always floated, fullscreen
-    --, resource =? "file_properties" --> doFloat
+    [ className =? "MPlayer"    --> doFloat -- mplayer is always floated
     , resource =? "Wine" --> doFloat
     , className =? "Wine" --> doFloat
     , title =? "Pandora" --> doFloat -- Pandora desktop app - doesn't deal with resizing right
