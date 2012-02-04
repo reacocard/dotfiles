@@ -6,6 +6,7 @@ fixed-vo=yes
 #                    intel not handling 10bit correctly
 vo=gl_nosw:swapinterval=1:yuv=0,xv,
 fs=yes
+fstype=fullscreen
 nocolorkey=yes
 framedrop=no
 

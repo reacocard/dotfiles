@@ -114,7 +114,7 @@ myLayoutHook = tiled ||| Mirror tiled ||| Full
 
 
 myManageHooks = composeAll
-    [ className =? "MPlayer"    --> doFullFloat -- mplayer is always floated, fullscreen
+    [ className =? "MPlayer"    --> (doF W.focusUp <+> doFullFloat) -- mplayer is always floated, fullscreen
     --, resource =? "file_properties" --> doFloat
     , resource =? "Wine" --> doFloat
     , className =? "Wine" --> doFloat
