@@ -124,12 +124,12 @@ myLayoutHook = tiled ||| Mirror tiled ||| Full
 
 
 myManageHooks = composeAll
-    [ className =? "MPlayer" --> doFloat -- mplayer is always floated
-    , resource =? "Wine" --> doFloat
+    [ resource =? "Wine" --> doFloat
     , className =? "Wine" --> doFloat
     , title =? "Pandora" --> doFloat -- Pandora desktop app - doesn't deal with resizing right
     , title =? "Chromium Preferences" --> doCenterFloat
     , isDialog --> doCenterFloat
+    , ((not `fmap` isFullscreen) <&&> className =? "MPlayer") --> doFloat
     , isFullscreen --> (doF W.focusDown <+> doFullFloat) -- fix flash fullscreen
     ]
 
