@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 [[ -z `ssh-add -l | grep $HOME/.ssh/id_rsa` ]] && ssh-add
 name=$(basename $0)
