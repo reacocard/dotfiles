@@ -47,7 +47,9 @@ local knownhosts
 knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
 zstyle ':completion:*:(ssh|scp|sftp|rsync):*' hosts $knownhosts
 
-eval $(dircolors) 
+if [[ -x `which dircolors` ]]; then
+    eval $(dircolors)
+fi
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 
@@ -232,7 +234,10 @@ setprompt
 
 ### ALIASES ###
 
-alias ls='ls --color=auto'
+# FreeBSD's ls doesn't support --color :( :( :(
+if `/bin/ls --color > /dev/null 2>&1`; then
+        alias ls='ls --color=auto'
+fi
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
