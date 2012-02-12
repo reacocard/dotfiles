@@ -22,6 +22,7 @@ export LANG=en_US.utf-8
 export OOO_FORCE_DESKTOP=gnome
 export DESKTOP_SESSION=gnome
 export TZ=America/Los_Angeles
+export LANG=en_US.UTF-8
 
 # less colors for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
