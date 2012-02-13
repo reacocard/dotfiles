@@ -1,4 +1,7 @@
 
+# FreeBSD puts ~/bin at the end of the path by default. Ick.
+PATH=`echo $PATH | sed "s/:\/home\/$USER\/bin//"`
+
 if [[ "$SHELL" == "/bin/zsh" ]]; then
     ZSH_NULL=$(setopt | grep "nullglob")
     setopt nullglob
@@ -19,6 +22,7 @@ export LANG=en_US.utf-8
 export OOO_FORCE_DESKTOP=gnome
 export DESKTOP_SESSION=gnome
 export TZ=America/Los_Angeles
+export LANG=en_US.UTF-8
 
 # less colors for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
