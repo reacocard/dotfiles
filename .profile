@@ -18,6 +18,7 @@ fi
 
 export EXAILE_NO_OPTIMIZE=1
 export EDITOR=vim
+export PAGER=less
 export LANG=en_US.utf-8
 export OOO_FORCE_DESKTOP=gnome
 export DESKTOP_SESSION=gnome
