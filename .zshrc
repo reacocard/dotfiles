@@ -93,8 +93,8 @@ unset k
 
 # Set history file location and size
 HISTFILE=~/.zshhist
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 
 # Use better locking
 setopt histfcntllock
