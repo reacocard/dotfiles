@@ -10,11 +10,11 @@
 xset -b # Disable the nasty beeping
 xrdb $HOME/.Xdefaults
 
-source $HOME/.profile
+source $HOME/.zprofile
 
 SESSION=$1
 
-if [ -z $SESSION ]; then
+if [[ -z $SESSION || $SESSION == "custom" ]]; then
     SESSION=xmonad
 fi
 

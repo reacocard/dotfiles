@@ -2,10 +2,8 @@
 # FreeBSD puts ~/bin at the end of the path by default. Ick.
 PATH=`echo $PATH | sed "s/:\/home\/$USER\/bin//"`
 
-if [[ "$SHELL" == "/bin/zsh" ]]; then
-    ZSH_NULL=$(setopt | grep "nullglob")
-    setopt nullglob
-fi
+ZSH_NULL=$(setopt | grep "nullglob")
+setopt nullglob
 PATHS=(/usr/games $HOME/.opt/*/bin $HOME/.cabal/bin $HOME/.local/bin $HOME/bin)
 for p in $PATHS; do
     if [[ -d $p ]] && [[ $PATH != *$p* ]]; then
@@ -29,12 +27,12 @@ export LANG=en_US.UTF-8
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;35m'
 export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'                           
-export LESS_TERMCAP_so=$'\E[01;44;33m'                                 
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-if [ -f "$HOME/.profile.local" ] ; then
-    . $HOME/.profile.local
+if [ -f "$HOME/.zprofile.local" ] ; then
+    . $HOME/.zprofile.local
 fi
 

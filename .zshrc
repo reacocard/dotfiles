@@ -4,9 +4,6 @@
 
 ### BASICS ###
 
-# Load lots of variables and stuff
-source ~/.profile
-
 # Enabel zmv - powerful alt to mv
 autoload -U zmv
 
@@ -243,3 +240,9 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias :q='exit'
+
+
+### LOCAL CONFIG ###
+if [ -f ~/.zshrc-local ]; then
+    source ~/.zshrc-local
+fi
