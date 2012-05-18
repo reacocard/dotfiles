@@ -31,7 +31,7 @@ syntax on
 colorscheme relaxedgreen
 
 " The PC is fast enough, do syntax highlight syncing from start
-autocmd BufEnter * :syntax sync fromstart
+syntax sync fromstart
 
 set hidden
 
