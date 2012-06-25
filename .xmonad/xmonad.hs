@@ -128,6 +128,7 @@ myManageHooks = composeAll
     , className =? "Wine" --> doFloat
     , title =? "Pandora" --> doFloat -- Pandora desktop app - doesn't deal with resizing right
     , title =? "Chromium Preferences" --> doCenterFloat
+    , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
     , isDialog --> doCenterFloat
     , isFullscreen -->  doFullFloat
     ]
