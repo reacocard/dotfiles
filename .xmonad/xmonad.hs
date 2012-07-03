@@ -7,11 +7,11 @@ import Data.Maybe
 import Data.Monoid
 import Data.Traversable(traverse)
 import Graphics.X11.Xinerama
-import Graphics.X11.Xlib
+import Graphics.X11.Xlib(openDisplay, closeDisplay)
 import System.Exit
 import System.IO
 
-import XMonad
+import XMonad hiding (openDisplay, closeDisplay)
 import XMonad.Actions.PhysicalScreens
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
