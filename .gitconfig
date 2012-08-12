@@ -1,0 +1,5 @@
+[user]
+	email = reacocard@reacocard.com
+	name = Aren Olson
+[core]
+	excludesfile = /home/reacocard/.gitignore_global
