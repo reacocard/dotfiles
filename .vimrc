@@ -108,7 +108,10 @@ if has("gui_running")
     " remove toolbar, menubar, scrollbar
     set guioptions-=T
     set guioptions-=m
+    set guioptions-=L
+    set guioptions-=l
     set guioptions-=r
+    set guioptions-=b
 
     " Hide pointer while typing
     set mousehide
