@@ -3,3 +3,5 @@
 	name = Aren Olson
 [core]
 	excludesfile = /home/reacocard/.gitignore_global
+[color]
+	ui = auto
