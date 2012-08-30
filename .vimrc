@@ -13,6 +13,21 @@ set backspace=indent,eol,start
 " Don't format middle-click pastes
 map <MouseMiddle> <Esc>"*p
 
+" Make sure some directories we need later exist
+function! EnsureDirExists (dir)
+  if !isdirectory(a:dir)
+    if exists("*mkdir")
+      call mkdir(a:dir,'p')
+      echo "Created directory: " . a:dir
+    else
+      echo "Please create directory: " . a:dir
+    endif
+  endif
+endfunction
+
+call EnsureDirExists($HOME . '/.vim/sessions')
+call EnsureDirExists($HOME . '/.vim/undos')
+
 " Move backup files elsewhere - good for slow media and avoiding clutter
 set backupdir=~/.vim/sessions/
 set dir=~/.vim/sessions/
@@ -103,8 +118,8 @@ else
     set title
 endif
 
-
-
+" Use w!! to write as root
+cmap w!! %!sudo tee > /dev/null %
 
 " Python file options
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with colorcolumn=79 formatoptions+=croq 
