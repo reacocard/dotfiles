@@ -76,8 +76,10 @@ unset k
 [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
 [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
 [[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
-[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" history-search-backward
-[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" history-search-forward
+#[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" history-search-backward
+#[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" history-search-forward
+[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" history-beginning-search-backward
+[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" history-beginning-search-forward
 [[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 [[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
