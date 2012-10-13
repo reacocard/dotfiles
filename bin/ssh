@@ -3,11 +3,14 @@
 # TODO: automatically pull $stems from $PATH, removing the directory
 # of this script if included.
 stems=(/usr/bin /usr/local/bin)
-[[ -z `ssh-add -l | grep $HOME/.ssh/id_rsa` ]] && ssh-add
+if [[ ! -z $SSH_AGENT_PID ]]; then
+	[[ -z `ssh-add -l | grep $HOME/.ssh/id_rsa` ]] && ssh-add
+fi
 name=$(basename $0)
 for stem in ${stems[@]}; do
 	if [ -x $stem/$name ]; then
 		exec $stem/$name "$@"
+		break
 	fi
 done
 echo "Could not find an executable for $name in ${stems[@]}."
