@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # TODO: automatically pull $stems from $PATH, removing the directory
 # of this script if included.
 stems=(/usr/bin /usr/local/bin)
-if [[ ! -z $PS1 ]]; then
+if [[ $_ != $0 ]]; then # Only if interactive terminal
 	if [[ ! -z $SSH_AGENT_PID ]]; then
 		[[ -z `ssh-add -l | grep $HOME/.ssh/id_rsa` ]] && ssh-add
 	fi
