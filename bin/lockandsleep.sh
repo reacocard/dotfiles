@@ -1,4 +1,6 @@
 #!/bin/sh
 
 xautolock -locknow
-upower_suspend.sh
+
+systemctl suspend || upower_suspend.sh
+
