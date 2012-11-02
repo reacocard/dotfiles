@@ -5,3 +5,5 @@
 [user]
 	email = reacocard@reacocard.com
 	name = Aren Olson
+[push]
+	default = simple
