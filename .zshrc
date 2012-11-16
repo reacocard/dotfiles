@@ -243,6 +243,9 @@ alias egrep='egrep --color=auto'
 
 alias :q='exit'
 
+alias udiskie-umount='udiskie-umount -s'
+alias udiskie='udiskie -s'
+
 
 ### LOCAL CONFIG ###
 if [ -f ~/.zshrc-local ]; then
