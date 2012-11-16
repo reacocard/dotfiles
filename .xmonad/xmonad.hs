@@ -69,10 +69,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((0, xK_XF86VolumeUp),    spawn volupCmd) 
     , ((0, xK_XF86VolumeDown),  spawn voldownCmd) 
     , ((0, xK_XF86VolumeMute),  spawn volmuteCmd)
-    , ((0, xK_XF86Sleep),       spawn sleepCmd)
     , ((0, xK_XF86TouchpadToggle), spawn touchpadCmd)
     , ((0, xK_XF86ScreenSaver), spawn lockCmd)
     , ((modm, xK_x),            spawn lockCmd)
+    , ((modm, xK_s),            spawn sleepCmd)
     ]
     ++
     [((m .|. modm, k), windows $ f i)
