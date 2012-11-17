@@ -2,7 +2,7 @@ xautolock*detectsleep:      true
 xautolock*time:             30
 
 xlock*mode:                 image
-xlock*bitmap:               media/wallpaper/KITTY.xpm
+xlock*bitmap:               .xlock.xpm
 xlock*erasedelay:           0
 xlock*count:                1
 xlock*background:           black
