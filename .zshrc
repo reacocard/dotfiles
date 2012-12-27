@@ -173,6 +173,10 @@ alias :q='exit'
 alias udiskie-umount='udiskie-umount -s'
 alias udiskie='udiskie -s'
 
+# Launch, background, disown, and ignore output of a command
+# TODO: Add zsh completion
+l() { $* >&! /dev/null &! }
+
 
 ### LOCAL CONFIG ###
 if [ -f ~/.zshrc-local ]; then
