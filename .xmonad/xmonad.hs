@@ -126,6 +126,7 @@ myLayoutHook = tiled ||| Mirror tiled ||| Full
 myManageHooks = composeAll
     [ resource =? "Wine" --> doFloat
     , className =? "Wine" --> doFloat
+    , className =? "Steam" --> doFloat
     , title =? "Pandora" --> doFloat -- Pandora desktop app - doesn't deal with resizing right
     , title =? "Chromium Preferences" --> doCenterFloat
     , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
