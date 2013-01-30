@@ -20,6 +20,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
 import XMonad.Layout.LayoutHints
+import XMonad.Layout.ResizableTile
 import qualified XMonad.StackSet as W
 import XMonad.Util.Run(spawnPipe)
 
@@ -99,6 +100,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp)
     , ((modm,               xK_h     ), sendMessage Shrink)
     , ((modm,               xK_l     ), sendMessage Expand)
+    , ((modm .|. shiftMask, xK_h     ), sendMessage MirrorExpand)
+    , ((modm .|. shiftMask, xK_l     ), sendMessage MirrorShrink)
     , ((modm,               xK_t     ), withFocused $ windows . W.sink)
     , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
@@ -118,6 +121,9 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayoutHook = tiled ||| Mirror tiled ||| Full
     where
         tiled = Tall nmaster delta ratio
+        -- resizableTiled is unused as there isn't a way to reset
+        -- sizing yet. Left in place for future reference.
+        resizableTiled = ResizableTall nmaster delta ratio []
         nmaster = 1 -- number of windows in master pane
         ratio = 1/2 -- ratio of space allocated to to master/slave panes
         delta = 3/100 -- increment for resizing panes
