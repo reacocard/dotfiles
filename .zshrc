@@ -182,3 +182,15 @@ l() { $* >&! /dev/null &! }
 if [ -f ~/.zshrc-local ]; then
     source ~/.zshrc-local
 fi
+
+
+### NEW SHELL MESSAGES ###
+
+# Print count of updates available in pacman.
+# Requires package-query and a cronjob running pacman -Sy (or -Syuw)
+if which package-query >/dev/null; then
+    UPDATABLE_PACKAGES=`package-query -Qu | wc -l`
+    if [[ $UPDATABLE_PACKAGES > 0 ]]; then
+        echo "$UPDATABLE_PACKAGES package updates are available."
+    fi
+fi
