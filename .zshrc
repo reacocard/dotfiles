@@ -186,11 +186,14 @@ fi
 
 ### NEW SHELL MESSAGES ###
 
-# Print count of updates available in pacman.
-# Requires package-query and a cronjob running pacman -Sy (or -Syuw)
+# Print count of available updates.
+# Does not update package lists - use a cronjob for that.
 if which package-query >/dev/null; then
     UPDATABLE_PACKAGES=`package-query -Qu | wc -l`
-    if [[ $UPDATABLE_PACKAGES > 0 ]]; then
-        echo "$UPDATABLE_PACKAGES package updates are available."
-    fi
+elif which apt-get >/dev/null; then
+    UPDATABLE_PACKAGES=`apt-get --just-print upgrade | grep -c "^Inst"`
+fi
+
+if [[ ! -z $UPDATABLE_PACKAGES && $UPDATABLE_PACKAGES > 0 ]]; then
+    echo "$UPDATABLE_PACKAGES package updates are available."
 fi
