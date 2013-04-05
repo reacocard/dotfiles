@@ -177,6 +177,7 @@ alias udiskie='udiskie -s'
 # TODO: Add zsh completion
 l() { $* >&! /dev/null &! }
 
+hist() { grep $* ~/.zshhist }
 
 ### LOCAL CONFIG ###
 if [ -f ~/.zshrc-local ]; then
