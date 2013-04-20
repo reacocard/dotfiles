@@ -30,6 +30,9 @@ setopt autocd
 # Moar globbing power
 setopt extended_glob
 
+# If a match fails, just pass the raw string through instead of failing
+unsetopt nomatch
+
 setopt autolist
 
 zstyle :compinstall filename '/home/reacocard/.zshrc'
