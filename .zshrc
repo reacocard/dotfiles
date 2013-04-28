@@ -125,15 +125,22 @@ setprompt () {
     done
     PR_NO_COLOUR="%{$terminfo[sgr0]%}"
 
+    # Get the name of the machine we're sshed in from.
+    PR_REMOTE_CLIENTNAME=`who -m | grep \( | cut -d\( -f 2 | cut -d\) -f 1`
+    if [ -n $PR_REMOTE_CLIENTNAME ]; then
+        PR_REMOTE_CLIENTNAME_COLOURED="$PR_NO_COLOUR|$PR_BLUE${PR_REMOTE_CLIENTNAME}"
+        PR_REMOTE_CLIENTNAME="|${PR_REMOTE_CLIENTNAME}"
+    fi
+
 
     ###
     # Decide if we need to set titlebar text.
     case $TERM in
 	    xterm*|rxvt*)
-	        PR_TITLEBAR=$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\a%}'
+	        PR_TITLEBAR=$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m${PR_REMOTE_CLIENTNAME}:%~ | ${COLUMNS}x${LINES} | %y\a%}'
 	        ;;
 	    screen)
-	        PR_TITLEBAR=$'%{\e_screen \005 (\005t) | %(!.-=[ROOT]=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\e\\%}'
+	        PR_TITLEBAR=$'%{\e_screen \005 (\005t) | %(!.-=[ROOT]=- | .)%n@%m${PR_REMOTE_CLIENTNAME}:%~ | ${COLUMNS}x${LINES} | %y\e\\%}'
 	        ;;
 	    *)
 	        PR_TITLEBAR=''
@@ -153,7 +160,7 @@ setprompt () {
     ###
     # Finally, the prompt.
 
-    PROMPT='$PR_STITLE${(e)PR_TITLEBAR}%(!.$PR_RED.$PR_GREEN)%n$PR_NO_COLOUR@$PR_MAGENTA%m$PR_NO_COLOUR:$PR_CYAN%~$PR_NO_COLOUR\
+    PROMPT='$PR_STITLE${(e)PR_TITLEBAR}%(!.$PR_RED.$PR_GREEN)%n$PR_NO_COLOUR@$PR_MAGENTA%m$PR_REMOTE_CLIENTNAME_COLOURED$PR_NO_COLOUR:$PR_CYAN%~$PR_NO_COLOUR\
 
 %(?.$PR_LIGHT_GREEN.$PR_LIGHT_RED)%?$PR_NO_COLOUR%# '
 }
