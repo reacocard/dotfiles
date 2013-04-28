@@ -127,7 +127,7 @@ setprompt () {
 
     # Get the name of the machine we're sshed in from.
     PR_REMOTE_CLIENTNAME=`who -m | grep \( | cut -d\( -f 2 | cut -d\) -f 1`
-    if [ -n $PR_REMOTE_CLIENTNAME ]; then
+    if [ -n "$PR_REMOTE_CLIENTNAME" ]; then
         PR_REMOTE_CLIENTNAME_COLOURED="$PR_NO_COLOUR|$PR_BLUE${PR_REMOTE_CLIENTNAME}"
         PR_REMOTE_CLIENTNAME="|${PR_REMOTE_CLIENTNAME}"
     fi
