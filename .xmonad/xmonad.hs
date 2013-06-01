@@ -245,6 +245,9 @@ myLayoutHook = tiled ||| Mirror tiled ||| Full
         ratio = 1/2 -- ratio of space allocated to to master/slave panes
         delta = 3/100 -- increment for resizing panes
 
+-- Like =?, but tests for substring instead of equality.
+(=??) :: Eq a => Query [a] -> [a] -> Query Bool
+q =?? x = fmap (isInfixOf x) q
 
 myManageHooks = manageDocks <+> manageEWMHWindows <+> composeAll
     [ resource =? "Wine" --> doFloat
@@ -255,6 +258,7 @@ myManageHooks = manageDocks <+> manageEWMHWindows <+> composeAll
     , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
     , isDialog --> doCenterFloat
     , isFullscreen -->  doFullFloat
+    , stringProperty "WM_COMMAND" =?? "xev" --> doFloat
 --    , fmap not (stringProperty "WM_WINDOW_ROLE" =? "browser") <&&> className =? "Google-chrome" --> doFloat
 --    , isSticky --> doIgnore
 -- This works, but suddenly EVERY desktop shows up as having windows. Reenable once that is fixed.
