@@ -1,10 +1,11 @@
 # zsh configuration file
-# Aren Olson <reacocard@gmail.com>
+# Aren Olson <reacocard@reacocard.com>
 # vim: et sts=4 ts=4
+
 
 ### BASICS ###
 
-# Enabel zmv - powerful alt to mv
+# Enable zmv - powerful alt to mv
 autoload -U zmv
 
 # Make it pretty
@@ -14,10 +15,6 @@ colors
 # Kill the stupid beeping
 unsetopt beep
 
-# Unset $DISPLAY in screen, since it doesn't work well
-if [[ "$TERM" == "screen" ]]; then
-        DISPLAY=""
-fi
 
 ### COMPLETION ###
 
@@ -189,7 +186,9 @@ l() { $* >&! /dev/null &! }
 
 hist() { grep $* ~/.zshhist }
 
+
 ### LOCAL CONFIG ###
+
 if [ -f ~/.zshrc-local ]; then
     source ~/.zshrc-local
 fi
