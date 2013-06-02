@@ -17,6 +17,7 @@ fi
 
 export EDITOR=vim
 export PAGER=less
+export LANG=en_US.UTF-8
 
 # less colors for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
