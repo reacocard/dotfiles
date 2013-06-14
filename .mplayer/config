@@ -11,7 +11,7 @@ nocolorkey=yes
 framedrop=no
 
 ### Audio ###
-ao=alsa
+ao=pulse,alsa,
 softvol=yes
 softvol-max=400
 
