@@ -117,8 +117,8 @@ setprompt () {
     setopt prompt_subst
 
     for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
-	eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
-	eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
+        eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
+        eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
     done
     PR_NO_COLOUR="%{$terminfo[sgr0]%}"
 
@@ -169,7 +169,7 @@ setprompt
 
 # FreeBSD's ls doesn't support --color :( :( :(
 if `/bin/ls --color > /dev/null 2>&1`; then
-        alias ls='ls --color=auto'
+    alias ls='ls --color=auto'
 fi
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -206,4 +206,11 @@ fi
 
 if [[ ! -z $UPDATABLE_PACKAGES && $UPDATABLE_PACKAGES > 0 ]]; then
     echo "$UPDATABLE_PACKAGES package updates are available."
+fi
+
+# Warn if ssh-agent is running but doesn't have primary key added.
+if [[ ! -z $SSH_AGENT_PID ]] &&
+   [[ -f "$HOME/.ssh/id_rsa" ]] &&
+   [[ -z `ssh-add -l | grep "$HOME/.ssh/id_rsa"` ]]; then
+    echo "SSH agent detected, but key is not loaded. Run ssh-add to fix."
 fi
