@@ -22,3 +22,7 @@ urxvt*perl-ext-common:      default,matcher
 urxvt*urlLauncher:          xdg-open
 urxvt*matcher.button:       3
 urxvt*searchable-scrollback: CM-s
+urxvt*saveLines:            65535
+urxvt*scrollTtyOutput:      false
+urxvt*scrollWithBuffer:     true
+urxvt*termName:             rxvt-unicode
