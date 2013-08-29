@@ -24,5 +24,6 @@ urxvt*matcher.button:       3
 urxvt*searchable-scrollback: CM-s
 urxvt*saveLines:            65535
 urxvt*scrollTtyOutput:      false
+urxvt*scrollTtyKeypress:    true
 urxvt*scrollWithBuffer:     true
 urxvt*termName:             rxvt-unicode
