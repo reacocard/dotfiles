@@ -2,7 +2,8 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
        , bgColor = "black"
        , fgColor = "grey"
        , position = TopW L 90
-       , commands = [ Run Cpu ["-L","20","-H","80","--normal","gray","--high","red","-t","<total>%","-p","3", "-w", "3"] 20
+       , commands = [ Run ThermalZone 0 ["-t", "<temp>C", "-H", "70", "-h", "red"] 20
+       		    , Run Cpu ["-L","20","-H","80","--normal","gray","--high","red","-t","<total>%","-p","3", "-w", "3"] 20
                     , Run Memory ["-t","<used>M","-w","4"] 20
                     , Run Date "%H:%M" "date" 50
                     , Run Battery ["-t", "<timeleft> <left>%", "-m","3", "--low", "red", "-L", "20"] 50
@@ -11,6 +12,6 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ : %cpu% : %memory% : %default:Master% : %battery% : <fc=#ee9a00>%date%</fc> :"
+       , template = "%StdinReader% }{ : %thermal0% : %cpu% : %memory% : %default:Master% : %battery% : <fc=#ee9a00>%date%</fc> :"
        }
 
