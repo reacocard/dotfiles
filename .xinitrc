@@ -12,21 +12,4 @@ xrdb $HOME/.Xdefaults
 
 source $HOME/.zprofile
 
-SESSION=$1
-
-if [[ -z $SESSION || $SESSION == "custom" ]]; then
-    SESSION=xmonad
-fi
-
-command=""
-
-case $SESSION in
-    xmonad)
-        command=~/.xmonad/startup.sh
-        ;;
-    *)
-        command=$SESSION
-        ;;
-esac
-
-exec $command
+exec ~/.xmonad/startup.sh
