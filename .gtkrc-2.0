@@ -1,7 +1,7 @@
 include "/usr/share/themes/Clearlooks/gtk-2.0/gtkrc"
 gtk-menu-popup-delay = 0
 gtk-toolbar-style = GTK_TOOLBAR_ICONS
-gtk-icon-theme-name = "Cheser"
+gtk-icon-theme-name = "Tangerine"
 gtk-font-name="Deja Vu Sans 10"
 
 
