@@ -152,6 +152,9 @@ xK_XF86VolumeMute = 0x1008ff12
 xK_XF86ScreenSaver = 0x1008ff2d
 xK_XF86Sleep = 0x1008ff2f
 xK_XF86TouchpadToggle = 0x1008ffa9
+xK_XF86MonBrightnessUp = 0x1008ff02
+xK_XF86MonBrightnessDown = 0x1008ff03
+
 
 main = do
     xmonad . urgency . myConfig
@@ -176,6 +179,8 @@ myConfig statusbarhandles = defaultConfig {
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
 
+backlightupCmd = "xbacklight -inc 5"
+backlightdownCmd = "xbacklight -dec 5"
 volupCmd = "~/bin/pulsevolume up"
 voldownCmd = "~/bin/pulsevolume down"
 volmuteCmd = "~/bin/pulsevolume mute"
@@ -187,6 +192,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((0, xK_XF86VolumeUp),    spawn volupCmd) 
     , ((0, xK_XF86VolumeDown),  spawn voldownCmd) 
     , ((0, xK_XF86VolumeMute),  spawn volmuteCmd)
+    , ((0, xK_XF86MonBrightnessUp),  spawn backlightupCmd)
+    , ((0, xK_XF86MonBrightnessDown),  spawn backlightdownCmd)
     , ((0, xK_XF86TouchpadToggle), spawn touchpadCmd)
     , ((0, xK_XF86ScreenSaver), spawn lockCmd)
     , ((modm, xK_x),            spawn lockCmd)
@@ -253,6 +260,7 @@ myManageHooks = manageDocks <+> manageEWMHWindows <+> composeAll
     [ resource =? "Wine" --> doFloat
     , className =? "Wine" --> doFloat
     , className =? "Steam" --> doFloat
+    , title =? "Ticket to Ride" --> doCenterFloat
     , title =? "Pandora" --> doFloat -- Pandora desktop app - doesn't deal with resizing right
     , title =? "Chromium Preferences" --> doCenterFloat
     , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
