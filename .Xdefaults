@@ -1,5 +1,5 @@
 xautolock*detectsleep:      true
-xautolock*time:             10
+xautolock*time:             30
 
 xlock*mode:                 image
 xlock*bitmap:               .xlock.xpm
