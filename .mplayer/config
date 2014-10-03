@@ -16,8 +16,6 @@ softvol=yes
 softvol-max=400
 
 ### Subtitles ###
-slang=en,eng
-alang=jn,jpn,en,eng
 subfont-osd-scale=3
 subfont-text-scale=3
 embeddedfonts=yes
