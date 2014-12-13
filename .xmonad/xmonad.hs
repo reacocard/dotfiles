@@ -263,6 +263,7 @@ myManageHooks = manageDocks <+> manageEWMHWindows <+> composeAll
     , title =? "Ticket to Ride" --> doCenterFloat
     , title =? "Pandora" --> doFloat -- Pandora desktop app - doesn't deal with resizing right
     , title =? "Chromium Preferences" --> doCenterFloat
+    , title =? "Page(s) Unresponsive" --> doCenterFloat
     , stringProperty "WM_WINDOW_ROLE" =? "pop-up" --> doFloat
     , isDialog --> doCenterFloat
     , isFullscreen -->  doFullFloat
