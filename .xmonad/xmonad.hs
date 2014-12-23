@@ -179,8 +179,8 @@ myConfig statusbarhandles = defaultConfig {
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
 
-backlightupCmd = "xbacklight -inc 5"
-backlightdownCmd = "xbacklight -dec 5"
+backlightupCmd = "xbacklight -inc 3.125"
+backlightdownCmd = "xbacklight -dec 3.125"
 volupCmd = "~/bin/pulsevolume up"
 voldownCmd = "~/bin/pulsevolume down"
 volmuteCmd = "~/bin/pulsevolume mute"
