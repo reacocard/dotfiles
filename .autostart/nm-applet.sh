@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
-(sleep 2 && nm-applet) &
+#!/bin/zsh
+sleep 2 && exec nm-applet

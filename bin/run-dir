@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/zsh
 
 for script in `ls $1`; do 
 	$1/$script &

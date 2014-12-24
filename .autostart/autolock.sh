@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 # Disable X default screensaver
 xset s off
