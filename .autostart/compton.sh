@@ -1,2 +1,2 @@
 #!/bin/sh
-exec compton --vsync drm
+exec compton --backend glx
