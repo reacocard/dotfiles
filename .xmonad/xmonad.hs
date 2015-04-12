@@ -189,6 +189,7 @@ sleepCmd = "~/bin/lockandsleep.sh"
 touchpadCmd = "~/bin/toggle_touchpad.sh"
 browserCmd = "google-chrome-stable"
 privateBrowserCmd = "google-chrome-stable --incognito"
+displayConfigCmd =  "autorandr --change --default laptop; pkill '^xiccd$'; xmonad --restart; "
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((0, xK_XF86VolumeUp),    spawn volupCmd) 
@@ -216,6 +217,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_p         ), spawn "dmenu_run")
     , ((modm .|. shiftMask, xK_p         ), spawn "gmrun")
     , ((modm .|. shiftMask, xK_c         ), kill)
+    , ((modm,               xK_d         ), spawn displayConfigCmd)
     , ((modm,               xK_space     ), sendMessage NextLayout)
     , ((modm .|. shiftMask, xK_space     ), setLayout $ XMonad.layoutHook conf)
     , ((modm,               xK_n         ), refresh)
