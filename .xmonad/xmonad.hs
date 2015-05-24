@@ -262,7 +262,7 @@ myLayoutHook = tiled ||| Mirror tiled ||| Full
 (=??) :: Eq a => Query [a] -> [a] -> Query Bool
 q =?? x = fmap (isInfixOf x) q
 
-myManageHooks = manageDocks <+> manageEWMHWindows <+> composeAll
+myManageHooks = manageEWMHWindows <+> composeAll
     [ resource =? "Wine" --> doFloat
     , className =? "Wine" --> doFloat
     , className =? "Steam" --> doFloat
