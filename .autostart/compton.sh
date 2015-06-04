@@ -1,2 +1,2 @@
 #!/bin/sh
-exec compton --backend glx
+exec compton --vsync opengl
