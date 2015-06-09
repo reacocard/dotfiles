@@ -163,7 +163,7 @@ main = do
 
 urgency = withUrgencyHook NoUrgencyHook
 	
-myConfig statusbarhandles = defaultConfig { 
+myConfig statusbarhandles = ewmh $ defaultConfig { 
 	  terminal      = "urxvt"
         -- Mod3 was unused, so i remapped capslock to it for my modkey
         , modMask       = mod4Mask
@@ -175,7 +175,7 @@ myConfig statusbarhandles = defaultConfig {
         , mouseBindings = myMouseBindings
         , workspaces = myWorkspaces
         , focusFollowsMouse = False
-        , handleEventHook = fullscreenEventHook
+        , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
         } 
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
