@@ -166,7 +166,7 @@ urgency = withUrgencyHook NoUrgencyHook
 myConfig statusbarhandles = ewmh $ defaultConfig { 
 	  terminal      = "urxvt"
         -- Mod3 was unused, so i remapped capslock to it for my modkey
-        , modMask       = mod4Mask
+        , modMask       = mod3Mask
         , borderWidth   = 1
 	, logHook = myLogHook statusbarhandles
 	, layoutHook = avoidStruts $ smartBorders (myLayoutHook)
