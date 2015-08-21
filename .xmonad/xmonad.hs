@@ -190,7 +190,7 @@ sleepCmd = "~/bin/lockandsleep.sh"
 touchpadCmd = "~/bin/toggle_touchpad.sh"
 browserCmd = "google-chrome-stable"
 privateBrowserCmd = "google-chrome-stable --incognito"
-displayConfigCmd =  "autorandr --change --default laptop; pkill '^xiccd$'; xmonad --restart; nitrogen --restore "
+displayConfigCmd =  "autorandr --change --default laptop --force"
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((0, xK_XF86VolumeUp),    spawn volupCmd) 
