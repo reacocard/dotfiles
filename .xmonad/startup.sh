@@ -12,7 +12,7 @@ fi
 
 setxkbmap -option caps:hyper
 xsetroot -cursor_name left_ptr
-trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype request --transparent true --tint 0x000000 --height 18 &
+trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --widthtype request --transparent true --tint 0x000000 --height 26 &
 
 run-dir ~/.autostart &
 

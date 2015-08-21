@@ -1,3 +1,5 @@
+Xft*dpi: 144
+
 xautolock*detectsleep:      true
 xautolock*time:             30
 
@@ -15,8 +17,8 @@ urxvt*background:           black
 urxvt*foreground:           white
 urxvt*scrollBar:            false
 urxvt*skipBuiltinGlyphs:    true
-urxvt*font:                 xft:Dejavu Sans Mono:book:size=9
-urxvt*fontBold:             xft:Dejavu Sans Mono:bold:size=9
+urxvt*font:                 xft:Dejavu Sans Mono:book:size=10
+urxvt*fontBold:             xft:Dejavu Sans Mono:bold:size=10
 urxvt*perl-lib:             /usr/lib/urxvt/perl/
 urxvt*perl-ext-common:      default,matcher
 urxvt*urlLauncher:          xdg-open
