@@ -1,6 +1,8 @@
 #!/bin/sh
 
-while true; do
-	xiccd || true
-done
+if which xiccd >/dev/null; then
+  while true; do
+    xiccd || true
+  done
+fi
 
