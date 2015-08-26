@@ -217,6 +217,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     ++
     [ ((modm,               xK_Return    ), spawn $ XMonad.terminal conf)
+    , ((modm,               xK_z         ), spawn $ XMonad.terminal conf)
     , ((modm,               xK_apostrophe), spawn browserCmd)
     , ((modm .|. shiftMask, xK_apostrophe), spawn privateBrowserCmd)
     , ((modm,               xK_p         ), spawn "dmenu_run")
