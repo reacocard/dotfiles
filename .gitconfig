@@ -1,0 +1,6 @@
+[user]
+	name = Aren Olson
+	email = reacocard@reacocard.com
+
+[merge]
+	conflictstyle = diff3
