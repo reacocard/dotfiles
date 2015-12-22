@@ -196,18 +196,6 @@ fi
 
 ### NEW SHELL MESSAGES ###
 
-# Print count of available updates.
-# Does not update package lists - use a cronjob for that.
-if which package-query >/dev/null; then
-    UPDATABLE_PACKAGES=`package-query -Qu | wc -l`
-elif which apt-get >/dev/null; then
-    UPDATABLE_PACKAGES=`apt-get --just-print upgrade | grep -c "^Inst"`
-fi
-
-if [[ ! -z $UPDATABLE_PACKAGES && $UPDATABLE_PACKAGES > 0 ]]; then
-    echo "$UPDATABLE_PACKAGES package updates are available."
-fi
-
 # Warn if ssh-agent is running but doesn't have primary key added.
 if [[ ! -z $SSH_AGENT_PID ]] &&
    [[ -f "$HOME/.ssh/id_rsa" ]] &&
