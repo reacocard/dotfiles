@@ -14,7 +14,7 @@ import System.IO
 import XMonad hiding (openDisplay, closeDisplay)
 import XMonad.Actions.CopyWindow
 import XMonad.Actions.PhysicalScreens
-import XMonad.Actions.UpdatePointer
+import XMonad.Actions.UpdatePointer(updatePointer)
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ManageDocks hiding (manageDocks)
@@ -205,7 +205,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, xK_x),            spawn lockCmd)
     , ((modm, xK_s),            spawn sleepCmd)
     -- Move cursor to middle of focused window.
-    , ((modm, xK_f), updatePointer (Relative 0.5 0.5)) 
+    , ((modm, xK_f), updatePointer (0.5, 0.5) (1, 1))
     ]
     ++
     [((m .|. modm, k), windows $ f i)
