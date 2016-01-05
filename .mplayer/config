@@ -12,6 +12,8 @@ framedrop=no
 
 ### Audio ###
 ao=pulse,alsa,
+# scaletempo -- Keep pitch correct when changing playback speed.
+af=scaletempo
 softvol=yes
 softvol-max=400
 
