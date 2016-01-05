@@ -192,13 +192,3 @@ hist() { grep $* ~/.zshhist }
 if [ -f ~/.zshrc-local ]; then
     source ~/.zshrc-local
 fi
-
-
-### NEW SHELL MESSAGES ###
-
-# Warn if ssh-agent is running but doesn't have primary key added.
-if [[ ! -z $SSH_AGENT_PID ]] &&
-   [[ -f "$HOME/.ssh/id_rsa" ]] &&
-   [[ -z `ssh-add -l | grep "$HOME/.ssh/id_rsa"` ]]; then
-    echo "SSH agent detected, but key is not loaded. Run ssh-add to fix."
-fi
