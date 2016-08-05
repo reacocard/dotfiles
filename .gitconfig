@@ -4,3 +4,5 @@
 
 [merge]
 	conflictstyle = diff3
+[core]
+	excludesFile = /home/reacocard/.config/git/ignore
