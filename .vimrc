@@ -41,7 +41,10 @@ set ruler
 set ttyfast
 
 " try to be smart about indenting
-set autoindent  smartindent
+set autoindent smartindent
+
+" use multiple of shiftwidth when indenting with '<' and '>'
+set shiftround
 
 " Better Search
 set hlsearch
