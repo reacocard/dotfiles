@@ -26,6 +26,7 @@ colorscheme relaxedgreen
 " The PC is fast enough, do syntax highlight syncing from start
 syntax sync fromstart
 
+" Allow buffers to go into the background
 set hidden
 
 " Enable filetype plugins and indention
