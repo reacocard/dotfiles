@@ -13,33 +13,11 @@ set backspace=indent,eol,start
 " Don't format middle-click pastes
 map <MouseMiddle> <Esc>"*p
 
-" Make sure some directories we need later exist
-function! EnsureDirExists (dir)
-  if !isdirectory(a:dir)
-    if exists("*mkdir")
-      call mkdir(a:dir,'p')
-      echo "Created directory: " . a:dir
-    else
-      echo "Please create directory: " . a:dir
-    endif
-  endif
-endfunction
-
-call EnsureDirExists($HOME . '/.vim/sessions')
-call EnsureDirExists($HOME . '/.vim/undos')
-
-" Move backup files elsewhere - good for slow media and avoiding clutter
-set backupdir=~/.vim/sessions/
-set dir=~/.vim/sessions/
-
-" swapper no swapping!
+" disable all state files, so that data doesn't hang around after the original
+" files are gone.
+set nobackup
+set noundofile
 set noswapfile
-
-" persistent undo
-if has('persistent_undo')
-    set undofile
-    set undodir=~/.vim/undos/
-endif
 
 " pretty colors!
 syntax on
