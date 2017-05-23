@@ -13,33 +13,11 @@ set backspace=indent,eol,start
 " Don't format middle-click pastes
 map <MouseMiddle> <Esc>"*p
 
-" Make sure some directories we need later exist
-function! EnsureDirExists (dir)
-  if !isdirectory(a:dir)
-    if exists("*mkdir")
-      call mkdir(a:dir,'p')
-      echo "Created directory: " . a:dir
-    else
-      echo "Please create directory: " . a:dir
-    endif
-  endif
-endfunction
-
-call EnsureDirExists($HOME . '/.vim/sessions')
-call EnsureDirExists($HOME . '/.vim/undos')
-
-" Move backup files elsewhere - good for slow media and avoiding clutter
-set backupdir=~/.vim/sessions/
-set dir=~/.vim/sessions/
-
-" swapper no swapping!
+" disable all state files, so that data doesn't hang around after the original
+" files are gone.
+set nobackup
+set noundofile
 set noswapfile
-
-" persistent undo
-if has('persistent_undo')
-    set undofile
-    set undodir=~/.vim/undos/
-endif
 
 " pretty colors!
 syntax on
@@ -48,6 +26,7 @@ colorscheme relaxedgreen
 " The PC is fast enough, do syntax highlight syncing from start
 syntax sync fromstart
 
+" Allow buffers to go into the background
 set hidden
 
 " Enable filetype plugins and indention
@@ -62,7 +41,10 @@ set ruler
 set ttyfast
 
 " try to be smart about indenting
-set autoindent  smartindent
+set autoindent smartindent
+
+" use multiple of shiftwidth when indenting with '<' and '>'
+set shiftround
 
 " Better Search
 set hlsearch
@@ -125,7 +107,7 @@ endif
 cmap w!! %!sudo tee > /dev/null %
 
 " Python file options
-autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with colorcolumn=79 formatoptions+=croq textwidth=0
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with formatoptions+=croq textwidth=0
 let python_highlight_all=1
 let python_highlight_exceptions=0
 let python_highlight_builtins=0

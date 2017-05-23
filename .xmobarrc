@@ -1,5 +1,4 @@
-Config { -- font = "-xos4-terminus-bold-r-*-*-20-*"
-	 font = "xft:Dejavu Sans Mono:size=9:"
+Config { font = "xft:Dejavu Sans Mono:size=9:"
        , bgColor = "black"
        , fgColor = "grey"
        , position = TopW L 90
