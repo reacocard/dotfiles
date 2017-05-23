@@ -106,15 +106,19 @@ endif
 " Use w!! to write as root
 cmap w!! %!sudo tee > /dev/null %
 
+" Recognize included ssh configs
+autocmd BufReadPost,BufNewFile .ssh/config.d/* set filetype=sshconfig
+
 " Python file options
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with formatoptions+=croq textwidth=0
 let python_highlight_all=1
 let python_highlight_exceptions=0
 let python_highlight_builtins=0
 
-
 " vim file options
 autocmd FileType vim setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
 
 
-source ~/.vimrc.local
+if filereadable("~/.vimrc.local")
+    source ~/.vimrc.local
+endif
