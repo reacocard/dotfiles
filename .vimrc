@@ -119,6 +119,7 @@ let python_highlight_builtins=0
 autocmd FileType vim setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
 
 
-if filereadable("~/.vimrc.local")
+let file = expand("~/.vimrc.local")
+if filereadable(file)
     source ~/.vimrc.local
 endif
