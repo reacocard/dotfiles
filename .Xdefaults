@@ -15,8 +15,7 @@ urxvt*secondaryScroll:      true
 urxvt*buffered:             true
 urxvt*background:           black
 urxvt*foreground:           white
-urxvt*color4:               #3050ff
-urxvt*color12:              #3050ff
+urxvt*color12:              rgb:5c/5c/ff
 urxvt*scrollBar:            false
 urxvt*skipBuiltinGlyphs:    true
 urxvt*font:                 xft:Dejavu Sans Mono:book:size=10
