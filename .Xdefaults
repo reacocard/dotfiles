@@ -29,4 +29,3 @@ urxvt*saveLines:            65535
 urxvt*scrollTtyOutput:      false
 urxvt*scrollTtyKeypress:    true
 urxvt*scrollWithBuffer:     true
-urxvt*termName:             rxvt-unicode
