@@ -1,5 +1,3 @@
-
-
 " Pathogen
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
@@ -39,7 +37,7 @@ set ruler
 
 " hilight current line
 set cursorline
-hi CursorLine term=NONE cterm=NONE ctermbg=237 guibg=Grey20
+hi CursorLine term=NONE cterm=NONE ctermbg=236 guibg=Grey20
 
 " improve drawing speed
 set ttyfast
@@ -82,8 +80,8 @@ set scrolloff=3
 " UI-specific options
 if has("gui_running")
     " disable blinking cursor
-    set gcr=a:blinkon0 
-    
+    set gcr=a:blinkon0
+
     " make it big enough
     set columns=80
     set lines=40
