@@ -1,0 +1,11 @@
+# Nice colors
+term screen-256color
+
+# Erase background with current bg color
+defbce on
+
+# utf8 always
+defutf8 on
+
+# Don't use visual bell
+vbell off
