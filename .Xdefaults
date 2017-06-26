@@ -1,4 +1,4 @@
-Xft*dpi:                    144
+Xft*dpi:                    96
 
 xautolock*detectsleep:      true
 xautolock*time:             30
