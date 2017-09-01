@@ -79,6 +79,9 @@ set wildmode=list:longest
 " scroll before hitting the edge of the window - moar context!
 set scrolloff=3
 
+" Enable mouse
+set mouse=a
+
 " UI-specific options
 if has("gui_running")
     " disable blinking cursor
