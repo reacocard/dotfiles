@@ -35,9 +35,11 @@ filetype indent on
 " show position always
 set ruler
 
-" hilight current line
+" hilight current line/column
 set cursorline
 hi CursorLine term=NONE cterm=NONE ctermbg=236 guibg=Grey20
+set cursorcolumn
+hi CursorColumn term=NONE cterm=NONE ctermbg=236 guibg=Grey20
 
 " improve drawing speed
 set ttyfast
