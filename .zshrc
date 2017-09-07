@@ -181,9 +181,6 @@ alias egrep='egrep --color=auto'
 
 alias :q='exit'
 
-alias udiskie-umount='udiskie-umount -s'
-alias udiskie='udiskie -s'
-
 # Launch, background, disown, and ignore output of a command
 # TODO: Add zsh completion
 l() { $* >&! /dev/null &! }
