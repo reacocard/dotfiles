@@ -169,6 +169,25 @@ setprompt () {
 setprompt
 
 
+preexec () {
+    _CUSTOM_TIME_START=$SECONDS
+}
+
+precmd () {
+    # Print runtime of long-running commands.
+    if [ -n "$_CUSTOM_TIME_START" ]; then
+        local elapsed=$(($SECONDS - $_CUSTOM_TIME_START));
+        _CUSTOM_TIME_START='';
+        if [ $elapsed -ge 30 ]; then
+            local seconds=$(($elapsed % 60));
+            local minutes=$((($elapsed / 60) % 60));
+            local hours=$(($elapsed / 3600));
+            printf "[zsh] Elapsed time %02i:%02i:%02i.\n" $hours $minutes $seconds;
+        fi;
+    fi;
+} 
+
+
 ### ALIASES ###
 
 # FreeBSD's ls doesn't support --color :( :( :(
