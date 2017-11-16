@@ -1,0 +1,17 @@
+#!/bin/bash
+# Prints all 256 terminal colors and their codes.
+
+set -o errexit
+
+WRAP=${1:-16}
+for i in {0..255}; do
+  COLOR=0
+  [[ $i -eq 0 ]] && COLOR=255
+  [[ $i -eq 8 ]] && COLOR=255
+  [[ $i -le 31 && $i -ge 16 ]] && COLOR=255
+  [[ $i -le 63 && $i -ge 52 ]] && COLOR=255
+  [[ $i -le 99 && $i -ge 88 ]] && COLOR=255
+  [[ $i -le 243 && $i -ge 232 ]] && COLOR=255
+  printf '\e[38;5;%dm\e[48;5;%dm %3s ' $COLOR $i $i
+  [[ $((i % WRAP)) -eq $((WRAP - 1)) ]] && printf '\e[0m\n'
+done
