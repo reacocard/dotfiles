@@ -17,7 +17,7 @@ import XMonad.Actions.PhysicalScreens
 import XMonad.Actions.UpdatePointer(updatePointer)
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.ManageDocks hiding (manageDocks)
+import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
@@ -26,125 +26,6 @@ import XMonad.Layout.ResizableTile
 import qualified XMonad.StackSet as W
 import XMonad.Util.Run(spawnPipe)
 
--- *** MoreManageHelpers (http://hpaste.org/83047) ***
-
--- some additional operators suggested by ManageHelpers
-(/->)   :: Monoid m => Query Bool -> Query m -> Query m
-p /-> f =  p >>= \b -> if b then idHook else f
-infix 0 /->
-
-(?->)   :: Monoid m => Query (Maybe a) -> Query m -> Query m
-p ?-> f =  p >>= maybe idHook (const f)
-infix 0 ?->
-
-(?=>)   :: Monoid m => Query (Maybe a) -> (a -> Query m) -> Query m
-p ?=> f =  p >>= maybe idHook f
-infix 0 ?=>
-
-(^=?)   :: Query String -> String -> Query Bool
-q ^=? p =  (p `isPrefixOf`) `fmap` q
-
-($=?)   :: Query String -> String -> Query Bool
-q $=? p =  (p `isSuffixOf`) `fmap` q
-
--- conditional fun:  predicate --? ifTrue --> ifFalse
-(--?)   :: Monad m => m Bool -> m a -> m Bool
-q --? f =  q >>= \b -> if b then f >> return False else return True
-infixl 0 --?
-
--- foo-p --? iftrue --: bar-p --? iftrue --! ifotherwise
-(--:)   :: Monad m => m Bool -> m Bool -> m Bool
-p --: q =  p >>= \b -> if b then q else return False
-infixl 0 --:
-
--- only reason for this is that --> is infix, not infixl... and that's a good
--- thing because it helps catch config errors
-(--!)   :: (Monad m, Monoid a) => m Bool -> m a -> m a
-(--!)   =  (-->)
-infixl 0 --!
-
--- @@@ better name
-notq    :: Query Bool -> Query Bool
-notq    =  (not `fmap`)
-
--- doShift + switch to that workspace
-doShiftView    :: WorkspaceId -> ManageHook
-doShiftView ws =  doF (W.view ws) <+> doShift ws
-
--- a Query that produces the current workspace ID
-curWorkspace :: Query WorkspaceId
-curWorkspace =  liftX $ withWindowSet $ fmap return W.currentTag
-
--- additional EWMH (and KDE4 special) window types/states
-isDesktop, isDock, isUtility, isAbove, isMenu, isToolbar, isSplash, isModal,
-  isSticky :: Query Bool
-isDesktop = isInProperty "_NET_WM_WINDOW_TYPE"     "_NET_WM_WINDOW_TYPE_DESKTOP"
-isDock    = isInProperty "_NET_WM_WINDOW_TYPE"     "_NET_WM_WINDOW_TYPE_DOCK"
-isUtility = isInProperty "_NET_WM_WINDOW_TYPE"     "_NET_WM_WINDOW_TYPE_UTILITY"
-isAbove   = isInProperty "_NET_WM_STATE"           "_NET_WM_STATE_ABOVE"
-isBelow   = isInProperty "_NET_WM_STATE"           "_NET_WM_STATE_BELOW"
--- @@@ the KDE thing doesn't appear to be documented or explained anywhere
---     There is a bug report saying that it should be replaced by TYPE_UTILITY,
---     but the main use I see of it is the launcher menu
-isMenu    = isInProperty "_NET_WM_WINDOW_TYPE"     "_NET_WM_WINDOW_TYPE_MENU"         <||>
-            isInProperty "_KDE_NET_WM_WINDOW_TYPE" "_KDE_NET_WM_WINDOW_TYPE_OVERRIDE"
-isToolbar = isInProperty "_NET_WM_WINDOW_TYPE"     "_NET_WM_WINDOW_TYPE_TOOLBAR"
-isSplash  = isInProperty "_NET_WM_WINDOW_TYPE"     "_NET_WM_WINDOW_TYPE_SPLASH"
-isModal   = isInProperty "_NET_WM_STATE"           "_NET_WM_STATE_MODAL"
-isSticky  = isInProperty "_NET_WM_STATE"           "_NET_WM_STATE_STICKY"
-
--- this replaces manageDocks
-manageDesktop  :: ManageHook
-manageDesktop  =  ask >>=
-                  \win -> liftX (withDisplay $ \dpy -> io $ lowerWindow dpy win) >>
-                  doIgnore
-
--- this replaces manageDocks
-manageDock     :: ManageHook
-manageDock     =  ask >>=
-                  \win -> liftX (withDisplay $ \dpy -> io $ raiseWindow dpy win) >>
-                  doIgnore
-
--- this enhances manageDocks
-manageUtility  :: ManageHook
-manageUtility  =  ask >>=
-                  \win -> liftX (withDisplay $ \dpy -> io $ raiseWindow dpy win) >>
-                  doFloat
-
--- ditto
-manageSticky   :: ManageHook
-manageSticky   =  doF copyToAll
--- NB. also want event hook for this and STATE_ABOVE
-
--- ManageHelpers' transient manager rephrased as a normal (extended) ManageHook
-transientToParent :: ManageHook
-transientToParent =  transientTo ?=> doF . transientToParent'
-
-transientToParent'      :: Window -> WindowSet -> WindowSet
-transientToParent' w ws =  maybe ws (flip W.shift ws) $ W.findTag w ws
-
--- this is an enhanced version of the one from ManageDocks
-manageDocks :: ManageHook
-manageDocks =  composeAll [isDesktop --> manageDesktop
-                          ,isDock    --> manageDock
-                          ]
-
--- and this one manages more EWMH window types.  Not included above because there
--- are valid arguments for handling some of these differently.
-manageEWMHWindows :: ManageHook
-manageEWMHWindows =  composeAll [              manageDocks
-                                ,isDialog  --> doFloat
-                                ,isMenu    --> manageUtility
-                                ,isUtility --> manageUtility
-                                ,isToolbar --> manageUtility
-                                ,isAbove   --> manageUtility
-                                ,isSplash  --> manageDock
-                                 -- @@@ these could compose with the above...
-                                ,isModal   --> manageUtility
--- Disabled until I figure out how to make xmobar ignore stickied windows.
---                                ,isSticky  --> manageSticky
-                                ]
--- *** End MoreManageHelpers ***
 
 -- define keysyms not supplied by xmonad
 xK_XF86VolumeUp = 0x1008ff13
@@ -163,7 +44,7 @@ main = do
 
 urgency = withUrgencyHook NoUrgencyHook
 	
-myConfig statusbarhandles = ewmh $ defaultConfig { 
+myConfig statusbarhandles = docks $ ewmh $ defaultConfig {
 	  terminal      = "urxvt"
         -- Mod3 was unused, so i remapped capslock to it for my modkey
         , modMask       = mod3Mask
@@ -268,7 +149,7 @@ myLayoutHook = tiled ||| Mirror tiled ||| Full
 (=??) :: Eq a => Query [a] -> [a] -> Query Bool
 q =?? x = fmap (isInfixOf x) q
 
-myManageHooks = manageEWMHWindows <+> composeAll
+myManageHooks = composeAll
     [ resource =? "Wine" --> doFloat
     , className =? "Wine" --> doFloat
     , className =? "Steam" --> doFloat
@@ -328,7 +209,7 @@ onlyTitle pp = defaultPP { ppCurrent = const ""
 -- | Requires a recent addition to xmobar (>0.9.2), otherwise you have to use
 -- multiple configuration files, which gets messy
 xmobarScreen :: Int -> IO Handle
-xmobarScreen = spawnPipe . ("~/.cabal/bin/xmobar -x " ++) . show
+xmobarScreen = spawnPipe . ("xmobar -x " ++) . show
 
 
 myLogHook statusbarhandles = do
