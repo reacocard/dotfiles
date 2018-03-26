@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PULSESINK=`pactl info | grep 'Default Sink' | cut -c 15-`
+PULSESINK="@DEFAULT_SINK@"
 VOLUMEINCREMENT="2%"
 
 case $1 in
@@ -11,7 +11,7 @@ case $1 in
 		pactl -- set-sink-volume $PULSESINK -$VOLUMEINCREMENT
 		;;
 	"mute")
-		pactl set-sink-mute $PULSESINK  $([[ $(pactl list sinks | grep -A 10 "Name: $PULSESINK" | grep -m1 Mute: | awk '{print $2}') == 'no' ]] && echo '1' || echo '0')
+		pactl set-sink-mute $PULSESINK toggle
 		;;
 	*)
 		echo "Unrecognized option"
