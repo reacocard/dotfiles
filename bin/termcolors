@@ -4,14 +4,40 @@
 set -o errexit
 
 WRAP=${1:-16}
+
+
+
+printf 'Text:\n'
 for i in {0..255}; do
-  COLOR=0
-  [[ $i -eq 0 ]] && COLOR=255
-  [[ $i -eq 8 ]] && COLOR=255
-  [[ $i -le 31 && $i -ge 16 ]] && COLOR=255
-  [[ $i -le 63 && $i -ge 52 ]] && COLOR=255
-  [[ $i -le 99 && $i -ge 88 ]] && COLOR=255
-  [[ $i -le 243 && $i -ge 232 ]] && COLOR=255
-  printf '\e[38;5;%dm\e[48;5;%dm %3s ' $COLOR $i $i
+  BGCOLOR=0
+  [[ $i -eq 0 ]] && BGCOLOR=15
+  [[ $i -eq 8 ]] && BGCOLOR=15
+  [[ $i -eq 16 ]] && BGCOLOR=15
+  [[ $i -le 239 && $i -ge 232 ]] && BGCOLOR=15
+  printf '\e[38;5;%dm\e[48;5;%dm %3s ' $i $BGCOLOR $i
+  [[ $((i % WRAP)) -eq $((WRAP - 1)) ]] && printf '\e[0m\n'
+done
+
+printf '\nBold Text:\n'
+for i in {0..255}; do
+  BGCOLOR=0
+  [[ $i -eq 0 ]] && BGCOLOR=15
+  [[ $i -eq 8 ]] && BGCOLOR=15
+  [[ $i -eq 16 ]] && BGCOLOR=15
+  [[ $i -le 239 && $i -ge 232 ]] && BGCOLOR=15
+  printf '\e[1;38;5;%dm\e[48;5;%dm %3s ' $i $BGCOLOR $i
+  [[ $((i % WRAP)) -eq $((WRAP - 1)) ]] && printf '\e[0m\n'
+done
+
+printf '\nBackgrounds:\n'
+for i in {0..255}; do
+  TEXTCOLOR=0
+  [[ $i -eq 0 ]] && TEXTCOLOR=255
+  [[ $i -eq 8 ]] && TEXTCOLOR=255
+  [[ $i -le 31 && $i -ge 16 ]] && TEXTCOLOR=255
+  [[ $i -le 63 && $i -ge 52 ]] && TEXTCOLOR=255
+  [[ $i -le 99 && $i -ge 88 ]] && TEXTCOLOR=255
+  [[ $i -le 243 && $i -ge 232 ]] && TEXTCOLOR=255
+  printf '\e[38;5;%dm\e[48;5;%dm %3s ' $TEXTCOLOR $i $i
   [[ $((i % WRAP)) -eq $((WRAP - 1)) ]] && printf '\e[0m\n'
 done
