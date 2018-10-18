@@ -1,6 +1,7 @@
 #!/bin/sh
 
-xautolock -locknow
+xset s activate
+#xautolock -locknow
 
 systemctl suspend || upower_suspend.sh
 

@@ -1,9 +1,12 @@
 #!/bin/zsh
 
-# Disable X default screensaver
-xset s off
+LOCK_TIME="${REACOCARD_SCREEN_LOCK_TIME:-1800}"
+LOCK_CMD="${REACOCARD_SCREEN_LOCK_COMMAND:-xsecurelock}"
+DIMMER="/usr/lib/x86_64-linux-gnu/xsecurelock/dimmer"
 
-# 31 minute dpms blank - lock is at 30.25 minutes.
-xset dpms 0 0 1860
+xset s ${LOCK_TIME}
 
-exec xautolock -locker "xlock -lockdelay 15" -nowlocker "xlock"
+# X11 blank after lock.
+XSECURELOCK_BLANK_TIMEOUT=5
+
+exec xss-lock --notifier=${DIMMER} --transfer-sleep-lock -- ${LOCK_CMD}
