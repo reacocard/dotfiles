@@ -45,7 +45,7 @@ main = do
 urgency = withUrgencyHook NoUrgencyHook
 	
 myConfig statusbarhandles = docks $ ewmh $ defaultConfig {
-	  terminal      = "urxvt"
+	  terminal      = "exec urxvt"
         -- Mod3 was unused, so i remapped capslock to it for my modkey
         , modMask       = mod3Mask
         , borderWidth   = 1
@@ -69,8 +69,8 @@ volmuteCmd = "~/bin/pulsevolume mute"
 lockCmd = "xset s activate"
 sleepCmd = "~/bin/lockandsleep.sh"
 touchpadCmd = "~/bin/toggle_touchpad.sh"
-browserCmd = "google-chrome-stable"
-privateBrowserCmd = "google-chrome-stable --incognito"
+browserCmd = "exec google-chrome-stable"
+privateBrowserCmd = "exec google-chrome-stable --incognito"
 displayConfigCmd =  "autorandr --change --default laptop --force"
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -209,7 +209,7 @@ onlyTitle pp = defaultPP { ppCurrent = const ""
 -- | Requires a recent addition to xmobar (>0.9.2), otherwise you have to use
 -- multiple configuration files, which gets messy
 xmobarScreen :: Int -> IO Handle
-xmobarScreen = spawnPipe . ("xmobar -x " ++) . show
+xmobarScreen = spawnPipe . ("exec xmobar -x " ++) . show
 
 
 myLogHook statusbarhandles = do
