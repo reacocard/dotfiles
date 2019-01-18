@@ -8,7 +8,11 @@
 # "run-parts ~/.autostart &" to their script.
 
 xset -b # Disable the nasty beeping
+
 xrdb $HOME/.Xdefaults
+
+$HOME/bin/dpichooser.sh > $HOME/.cache/reacocard-dpi
+xrdb -merge <(echo "Xft*dpi: $(cat $HOME/.cache/reacocard-dpi)")
 
 source $HOME/.zprofile
 
