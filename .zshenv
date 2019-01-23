@@ -33,3 +33,4 @@ if [[ "$TERM" == "screen" ]]; then
     DISPLAY=""
 fi
 
+export KR_SKIP_SSH_CONFIG=1
