@@ -1,0 +1,32 @@
+[global]
+    follow = none
+    geometry = 500x3-15+40
+    padding = 5
+    horizontal_padding = 8
+    frame_width = 2
+    indicate_hidden = yes
+    font = xft:Dejavu Sans Mono:book:size=12
+    markup = full
+    format = "<b>%s</b>\n(%a) %p %b"
+    show_age_threshold = -1
+    word_wrap = yes
+    ellipsize = middle
+    ignore_newline = yes
+    show_indicators = no
+    browser = /usr/bin/google-chrome
+
+[urgency_low]
+    background = "#222222"
+    foreground = "#888888"
+    timeout = 15
+
+[urgency_normal]
+    background = "#285577"
+    foreground = "#ffffff"
+    timeout = 20
+
+[urgency_critical]
+    background = "#900000"
+    foreground = "#ffffff"
+    frame_color = "#ff0000"
+    timeout = 0
