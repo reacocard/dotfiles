@@ -1,5 +1,4 @@
 # zsh configuration file
-# Aren Olson <reacocard@reacocard.com>
 # vim: et sts=4 ts=4
 
 
