@@ -37,9 +37,11 @@ setopt complete_in_word
 
 setopt completealiases
 
-local knownhosts
-knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
-zstyle ':completion:*:(ssh|scp|sftp|rsync):*' hosts $knownhosts
+if [ -f $HOME/.ssh/known_hosts ]; then
+    local knownhosts
+    knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
+    zstyle ':completion:*:(ssh|scp|sftp|rsync):*' hosts $knownhosts
+fi
 
 if [[ -x `which dircolors` ]]; then
     eval $(dircolors)
