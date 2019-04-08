@@ -121,19 +121,35 @@ setopt histignorespace
 setprompt () {
     setopt prompt_subst
 
+    PR_PREFIX=""
+    ###
+    # Decide whether to set a screen title
+    if [[ $TERM == screen* ]]; then
+        PR_STITLE=$'%{\ekzsh %~\e\\%}'
+        if [[ -n "$TMUX" ]]; then
+            PR_PREFIX="${PR_PREFIX}[tmux] "
+        else
+            PR_PREFIX="${PR_PREFIX}[screen] "
+        fi
+    else
+	    PR_STITLE=''
+    fi
+
+
     for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
         eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
         eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
     done
     PR_NO_COLOUR="%{$terminfo[sgr0]%}"
 
+    PR_REMOTE_CLIENTNAME=""
     # Get the name of the machine we're sshed in from.
-    PR_REMOTE_CLIENTNAME=`who -m | grep \( | cut -d\( -f 2 | cut -d\) -f 1`
-    if [ -n "$PR_REMOTE_CLIENTNAME" ]; then
+    if [ -n "$SSH_CLIENT" ]; then
+        PR_REMOTE_CLIENTNAME="$(echo ${SSH_CLIENT} | cut -d\  -f 1)"
         PR_REMOTE_CLIENTNAME_COLOURED="$PR_NO_COLOUR|$PR_BLUE${PR_REMOTE_CLIENTNAME}"
         PR_REMOTE_CLIENTNAME="|${PR_REMOTE_CLIENTNAME}"
+        PR_PREFIX="${PR_PREFIX}[ssh] "
     fi
-
 
     ###
     # Decide if we need to set titlebar text.
@@ -149,20 +165,10 @@ setprompt () {
 	        ;;
     esac
     
-    
-    ###
-    # Decide whether to set a screen title
-    if [[ "$TERM" == "screen" ]]; then
-        PR_STITLE=$'%{\ekzsh %~\e\\%}'
-    else
-	    PR_STITLE=''
-    fi
-    
-    
     ###
     # Finally, the prompt.
 
-    PROMPT='$PR_STITLE${(e)PR_TITLEBAR}%(!.$PR_RED.$PR_GREEN)%n$PR_NO_COLOUR@$PR_MAGENTA%m$PR_REMOTE_CLIENTNAME_COLOURED$PR_NO_COLOUR:$PR_CYAN%~$PR_NO_COLOUR\
+    PROMPT='$PR_STITLE${(e)PR_TITLEBAR}$PR_PREFIX%(!.$PR_RED.$PR_GREEN)%n$PR_NO_COLOUR@$PR_MAGENTA%m$PR_REMOTE_CLIENTNAME_COLOURED$PR_NO_COLOUR:$PR_CYAN%~$PR_NO_COLOUR\
 
 %(?.$PR_LIGHT_GREEN.$PR_LIGHT_RED)%?$PR_NO_COLOUR%# '
 }
