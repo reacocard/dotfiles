@@ -197,6 +197,11 @@ precmd () {
 
 ### ALIASES ###
 
+# These options are newish but make copies nicer.
+if `/bin/cp --reflink=auto --sparse=always 2>&1 | head -n1 | grep -v '\-\-' > /dev/null 2>&1`; then
+    alias cp='cp --reflink=auto --sparse=always'
+fi
+
 # FreeBSD's ls doesn't support --color :( :( :(
 if `/bin/ls --color > /dev/null 2>&1`; then
     alias ls='ls --color=auto'
