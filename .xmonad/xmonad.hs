@@ -69,8 +69,10 @@ volmuteCmd = "~/bin/pulsevolume mute"
 lockCmd = "xset s activate"
 sleepCmd = "~/bin/lockandsleep.sh"
 touchpadCmd = "~/bin/toggle_touchpad.sh"
-browserCmd = "exec google-chrome-stable"
-privateBrowserCmd = "exec google-chrome-stable --incognito"
+firefoxCmd = "exec firefox"
+privateFirefoxCmd = "exec firefox --private-window"
+chromeCmd = "exec google-chrome-stable"
+privateChromeCmd = "exec google-chrome-stable --incognito"
 displayConfigCmd =  "autorandr --change --default laptop --force"
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -99,8 +101,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
     [ ((modm,               xK_Return    ), spawn $ XMonad.terminal conf)
     , ((modm,               xK_z         ), spawn $ XMonad.terminal conf)
-    , ((modm,               xK_apostrophe), spawn browserCmd)
-    , ((modm .|. shiftMask, xK_apostrophe), spawn privateBrowserCmd)
+    , ((modm,               xK_apostrophe), spawn firefoxCmd)
+    , ((modm .|. shiftMask, xK_apostrophe), spawn privateFirefoxCmd)
+    , ((modm,               xK_semicolon ), spawn chromeCmd)
+    , ((modm .|. shiftMask, xK_semicolon ), spawn privateChromeCmd)
     , ((modm,               xK_p         ), spawn "dmenu_run")
     , ((modm .|. shiftMask, xK_p         ), spawn "gmrun")
     , ((modm .|. shiftMask, xK_c         ), kill)
