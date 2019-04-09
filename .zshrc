@@ -210,6 +210,8 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+alias mtr='mtr -t'  # NO GUI
+
 alias :q='exit'
 
 # Launch, background, disown, and ignore output of a command
