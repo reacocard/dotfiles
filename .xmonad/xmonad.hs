@@ -157,6 +157,7 @@ myManageHooks = composeAll
     [ resource =? "Wine" --> doFloat
     , className =? "Wine" --> doFloat
     , className =? "Steam" --> doFloat
+    , className =? "nm-connection-editor" --> doFloat
     , title =? "Ticket to Ride" --> doCenterFloat
     , title =? "Pandora" --> doFloat -- Pandora desktop app - doesn't deal with resizing right
     , title =? "Chromium Preferences" --> doCenterFloat
