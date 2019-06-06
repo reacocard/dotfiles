@@ -221,6 +221,13 @@ l() { $* >&! /dev/null &! }
 hist() { grep $* ~/.zshhist }
 
 
+### INFO ###
+
+if (cd $HOME && git status | grep "Your branch is behind" > /dev/null); then
+  echo "There are dotfiles updates to apply."
+fi
+
+
 ### LOCAL CONFIG ###
 
 if [ -f ~/.zshrc-local ]; then
