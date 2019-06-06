@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# Make sure xdg-open doesn't misdetect.
+export XDG_CURRENT_DESKTOP=X-Generic
+
 dbuslaunch="`which dbus-launch 2>/dev/null`"
 if [ -n "$dbuslaunch" ] && [ -x "$dbuslaunch" ] && [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
     eval `$dbuslaunch --sh-syntax --exit-with-session`
