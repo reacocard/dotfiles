@@ -118,6 +118,8 @@ setopt histignorespace
 
 # parts of the following adapted from http://aperiodic.net/phil/prompt/
 
+_PR_IP_HOST="unset"
+
 setprompt () {
     setopt prompt_subst
 
@@ -146,6 +148,16 @@ setprompt () {
     # Get the name of the machine we're sshed in from.
     if [ -n "$SSH_CLIENT" ]; then
         PR_REMOTE_CLIENTNAME="$(echo ${SSH_CLIENT} | cut -d\  -f 1)"
+        if [ x$_PR_IP_HOST = x"unset" ]; then
+            if which dig > /dev/null; then
+                _PR_IP_HOST=`dig -x "$PR_REMOTE_CLIENTNAME" +short | sed s/\.$//`
+            else
+                _PR_IP_HOST=""
+            fi
+        fi
+        if [ x$_PR_IP_HOST != x"" ]; then
+            PR_REMOTE_CLIENTNAME="$_PR_IP_HOST($PR_REMOTE_CLIENTNAME)"
+        fi
         PR_REMOTE_CLIENTNAME_COLOURED="$PR_NO_COLOUR|$PR_BLUE${PR_REMOTE_CLIENTNAME}"
         PR_REMOTE_CLIENTNAME="|${PR_REMOTE_CLIENTNAME}"
         PR_PREFIX="${PR_PREFIX}[ssh] "
