@@ -150,7 +150,7 @@ setprompt () {
         PR_REMOTE_CLIENTNAME="$(echo ${SSH_CLIENT} | cut -d\  -f 1)"
         if [ x$_PR_IP_HOST = x"unset" ]; then
             if which dig > /dev/null; then
-                _PR_IP_HOST=`dig -x "$PR_REMOTE_CLIENTNAME" +short | sed s/\.$//`
+                _PR_IP_HOST=`dig -x "$PR_REMOTE_CLIENTNAME" +short +timeout=1 | sed s/\.$//`
             else
                 _PR_IP_HOST=""
             fi
