@@ -11,8 +11,13 @@ xset -b # Disable the nasty beeping
 
 xrdb $HOME/.Xdefaults
 
-$HOME/bin/dpichooser.sh > $HOME/.cache/reacocard-dpi
-xrdb -merge <(echo "Xft*dpi: $(cat $HOME/.cache/reacocard-dpi)")
+DPIFILE=$HOME/.cache/reacocard-dpi
+if [[ -f ${DPIFILE}-override ]]; then
+    DPIFILE=${DPIFILE}-override
+else
+    $HOME/bin/dpichooser.sh > $DPIFILE
+fi
+xrdb -merge <(echo "Xft*dpi: $(cat $DPIFILE)")
 
 source $HOME/.zprofile
 
