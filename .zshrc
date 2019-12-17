@@ -1,6 +1,11 @@
 # zsh configuration file
 # vim: et sts=4 ts=4
 
+### IMPORTS ###
+
+if [ -f $HOME/.cargo/env ]; then
+    source $HOME/.cargo/env
+fi
 
 ### BASICS ###
 
