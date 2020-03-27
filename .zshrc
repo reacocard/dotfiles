@@ -206,7 +206,7 @@ precmd () {
             local seconds=$(($elapsed % 60));
             local minutes=$((($elapsed / 60) % 60));
             local hours=$(($elapsed / 3600));
-            printf "[zsh] Elapsed time %02i:%02i:%02i.\n" $hours $minutes $seconds;
+            printf "[zsh] Elapsed time %02i:%02i:%02i.\n\a" $hours $minutes $seconds;
         fi;
     fi;
 } 
