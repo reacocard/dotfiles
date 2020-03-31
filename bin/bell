@@ -1,2 +1,2 @@
 #!/bin/sh
-exec echo '\a'
+exec echo -e '\a'
