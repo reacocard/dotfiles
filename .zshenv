@@ -2,7 +2,7 @@
 
 ZSH_NULL=$(setopt | grep "nullglob")
 setopt nullglob
-PATHS=(/sbin /usr/sbin /usr/local/sbin /usr/games $HOME/.opt/*/bin $HOME/.cabal/bin $HOME/.gem/ruby/*/bin $HOME/.local/bin $HOME/bin)
+PATHS=(/sbin /usr/sbin /usr/local/sbin /usr/games $HOME/.opt/*/bin $HOME/.cabal/bin $HOME/.gem/ruby/*/bin $HOME/bin/flatpak $HOME/.local/bin $HOME/bin)
 for p in $PATHS; do
     if [[ -d $p ]] && [[ $PATH != *$p* ]]; then
         export PATH="$p:$PATH"
