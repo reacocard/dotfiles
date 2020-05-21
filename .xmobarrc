@@ -7,11 +7,11 @@ Config { font = "xft:Dejavu Sans Mono:size=9:"
                     , Run Memory ["-t","<used>M","-w","5"] 20
                     , Run Date "%H:%M" "date" 50
                     , Run Battery ["-t", "<timeleft> <left>%", "-m","3", "--low", "red", "-L", "20"] 50
-                    , Run Volume "default" "Master" ["-t", "<volume><status>", "-w", "3", "--", "-O", "+", "-o", "-", "-C", "gray", "-c", "gray"] 10
+                    , Run Alsa "default" "Master" ["-t", "<volume><status>", "-w", "3", "--", "-O", "+", "-o", "-", "-C", "gray", "-c", "gray"]
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ : %thermal0% : %cpu% : %memory% : %default:Master% : %battery% : <fc=#ee9a00>%date%</fc> :"
+       , template = "%StdinReader% }{ : %thermal0% : %cpu% : %memory% : %alsa:default:Master% : %battery% : <fc=#ee9a00>%date%</fc> :"
        }
 
