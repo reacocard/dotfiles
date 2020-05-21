@@ -107,7 +107,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_apostrophe), spawn privateFirefoxCmd)
     , ((modm,               xK_semicolon ), spawn chromeCmd)
     , ((modm .|. shiftMask, xK_semicolon ), spawn privateChromeCmd)
-    , ((modm,               xK_p         ), spawn "dmenu_run")
+    , ((modm,               xK_p         ), spawn "dmenu_run -i")
     , ((modm .|. shiftMask, xK_p         ), spawn "gmrun")
     , ((modm .|. shiftMask, xK_c         ), kill)
     , ((modm,               xK_d         ), spawn displayConfigCmd)
