@@ -1,4 +1,2 @@
-[status]
-	showUntrackedFiles = no
 [rebase]
 	autoStash = true
