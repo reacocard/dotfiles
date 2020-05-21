@@ -162,6 +162,7 @@ myManageHooks = composeAll
     , className =? "nm-connection-editor" --> doFloat
     , className =? "Meld" --> doFloat
     , title =? "Ticket to Ride" --> doCenterFloat
+    , title =? "Cherry Kisses" --> doCenterFloat
     , title =? "Pandora" --> doFloat -- Pandora desktop app - doesn't deal with resizing right
     , title =? "Chromium Preferences" --> doCenterFloat
     , title =? "Page(s) Unresponsive" --> doCenterFloat
