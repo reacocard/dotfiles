@@ -71,7 +71,8 @@ main () {
 	cd "$HOME"
 	setup_git_config_include
 	setup_git_split_origin
-	setup_git_fetch_crontab
+	# replaced by systemd timer
+	#setup_git_fetch_crontab
 }
 
 main "$@"

@@ -1,0 +1,9 @@
+[Unit]
+Description=Fetch dotfile updates.
+
+[Timer]
+OnBootSec=15min
+OnUnitInactiveSec=60min
+
+[Install]
+WantedBy=timers.target

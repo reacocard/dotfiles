@@ -1,0 +1,19 @@
+[Unit]
+Description=fetch dotfiles updates
+
+[Service]
+Type=oneshot
+
+# Lower CPU and I/O priority.
+Nice=19
+CPUSchedulingPolicy=batch
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+
+Restart=no
+LogRateLimitIntervalSec=0
+
+WorkingDirectory=~
+ExecCondition=%h/bin/test-internet.sh
+TimeoutStartSec=10m
+ExecStart=git fetch -v
