@@ -1,2 +1,2 @@
 #!/bin/sh
-exec compton
+exec compton 2>/dev/null
