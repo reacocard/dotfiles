@@ -1,5 +1,5 @@
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesFile = ~/.config/git/ignore
 [color]
 	ui = auto
 [user]
@@ -7,3 +7,7 @@
 	name = Ayla Ounce
 [push]
 	default = simple
+[merge]
+	conflictstyle = diff3
+[init]
+	templateDir = ~/.config/git/templates/default

@@ -1,8 +1,0 @@
-[user]
-	name = Ayla Ounce
-	email = reacocard@gmail.com
-
-[merge]
-	conflictstyle = diff3
-[core]
-	excludesFile = /home/reacocard/.config/git/ignore
