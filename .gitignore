@@ -17,6 +17,7 @@
 !/.config/dunst
 !/.config/git
 !/.config/gtk-3.0
+/.config/gtk-3.0/bookmarks
 !/.config/systemd
 !/.config/Trolltech.conf
 !/.config/compton.conf
@@ -31,6 +32,7 @@
 /.gnome/
 /.gnupg/
 /.ipython/
+/.itch/
 /.kr/
 /.lesshst
 /.local/
@@ -39,6 +41,7 @@
 /.python_history
 /.renpy/
 /.rustup/
+/.sqlite_history
 /.ssh/*
 !/.ssh/config*
 /.ssh/config.d/*-local
