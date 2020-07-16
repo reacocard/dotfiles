@@ -18,6 +18,7 @@ dconf write /org/gnome/desktop/interface/clock-show-weekday true
 dconf write /org/gnome/desktop/interface/locate-pointer true
 dconf write /org/gnome/desktop/interface/show-battery-percentage true
 
+dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita-dark'"
 dconf write /org/gnome/desktop/interface/gtk-enable-primary-paste false
 
 dconf write /org/gnome/desktop/interface/text-scaling-factor 1.1
