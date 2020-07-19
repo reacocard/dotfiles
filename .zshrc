@@ -19,6 +19,13 @@ colors
 # Kill the stupid beeping
 unsetopt beep
 
+# log out idle login shells. this helps mitigate the case where i opened a VT
+# to fix something and forgot to come back to logout.
+if [[ -o login ]]; then
+    export TMOUT=300  # five minutes
+else
+    export TMOUT=0
+fi
 
 ### COMPLETION ###
 
