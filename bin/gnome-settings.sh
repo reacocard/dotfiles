@@ -29,7 +29,7 @@ dconf write /org/gnome/mutter/experimental-features "['scale-monitor-framebuffer
 
 
 dconf write /org/gnome/desktop/session/idle-delay 600
-dconf write /org/gnome/desktop/screensaver/lock-delay 30
+dconf write /org/gnome/desktop/screensaver/lock-delay 30 || true
 # TODO: put bg image in git so we can set it automatically
 # This needs to happen in both screensaver and background schemas
 
