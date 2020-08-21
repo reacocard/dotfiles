@@ -21,7 +21,8 @@ dconf write /org/gnome/desktop/interface/show-battery-percentage true
 dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita-dark'"
 dconf write /org/gnome/desktop/interface/gtk-enable-primary-paste false
 
-dconf write /org/gnome/desktop/interface/text-scaling-factor 1.1
+# TODO: figure out how to calculate this for each system
+#dconf write /org/gnome/desktop/interface/text-scaling-factor 1.1
 
 # Enable fractional scaling and screen sharing.
 dconf write /org/gnome/mutter/experimental-features "['scale-monitor-framebuffer', 'screen-cast', 'remote-desktop']"
