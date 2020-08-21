@@ -1,1 +1,2 @@
-flatpak/org.mozilla.firefox
+#!/bin/sh
+exec gtk-launch org.mozilla.firefox "$@"
