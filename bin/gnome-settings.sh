@@ -57,6 +57,7 @@ dconf write /org/gnome/shell/app-switcher/current-workspace-only true
 
 dconf write /org/gtk/settings/file-chooser/sort-directories-first true
 
+dconf write /org/gnome/shell/favorite-apps "['org.mozilla.firefox.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop']"
 
 ### KEYBINDINGS ###
 for i in {1..$NR_WORKSPACES}; do
