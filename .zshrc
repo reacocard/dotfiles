@@ -77,19 +77,6 @@ key[PageDown]=${terminfo[knp]}
 key[Backspace]=${terminfo[kbs]}
 key[Delete]=${terminfo[kdch1]}
 
-if
-    # These terms are only sometimes linked against ncurses. If they aren't,
-    # applying this hack will break them, so we need to detect the linkage.
-    ([[ $TERM == screen* ]] && ldd `which screen` | grep ncurses > /dev/null) ||
-    ([[ $TERM == tmux* ]] && ldd `which tmux` | grep ncurses > /dev/null)
-then
-    # $terminfo[] entries are weird in ncurses application mode...
-    for k in ${(k)key} ; do
-        [[ ${key[$k]} == $'\eO'* ]] && key[$k]=${key[$k]/O/[}
-    done
-    unset k
-fi
-
 [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
 [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
 [[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
@@ -101,7 +88,6 @@ fi
 [[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
 [[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
 [[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
-
 
 # make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
