@@ -247,7 +247,7 @@ hist() { grep $* ~/.zshhist }
 
 ### INFO ###
 
-if (cd $HOME && git status | grep "Your branch is behind" > /dev/null); then
+if (cd $HOME && [ -e .git/HEAD ] && git status | grep "Your branch is behind" > /dev/null); then
   echo "There are dotfiles updates to apply."
 fi
 
