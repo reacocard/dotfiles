@@ -236,6 +236,9 @@ alias egrep='egrep --color=auto'
 
 alias mtr='mtr -t'  # NO GUI
 
+# allow root shell to detect ssh
+alias sudo='sudo --preserve-env=SSH_CLIENT'
+
 alias :q='exit'
 
 # Launch, background, disown, and ignore output of a command
