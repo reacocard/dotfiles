@@ -27,10 +27,14 @@ always () {
 		org.mozilla.firefox \
 		org.gnome.Logs
 
+	flatpak override --user com.spotify.Client \
+			 --socket wayland
 	flatpak override --user org.glimpse_editor.Glimpse \
 			 --socket wayland 
 	flatpak override --user org.mozilla.firefox \
 		         --socket wayland \
+			 --own-name=org.mpris.MediaPlayer2.firefox.'*' \
+			 --own-name=org.mpris.MediaPlayer2.firefox \
 			 --filesystem=~/downloads:rw \
 			 --filesystem=~/media:ro \
 			 --filesystem=~/syncthing/Media:ro
