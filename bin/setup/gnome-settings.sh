@@ -61,7 +61,7 @@ dconf write /org/gtk/settings/file-chooser/sort-directories-first true
 dconf write /org/gnome/shell/favorite-apps "['org.mozilla.firefox.desktop', 'google-chrome.desktop', 'org.gnome.Terminal.desktop', 'org.gnome.Nautilus.desktop']"
 
 ### KEYBINDINGS ###
-for i in {1..$NR_WORKSPACES}; do
+for i in `seq 1 $NR_WORKSPACES`; do
 	dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-${i} "['<Super>F${i}']";
 	dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-${i} "['<Shift><Super>F${i}']";
 done
