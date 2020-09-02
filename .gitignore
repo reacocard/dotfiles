@@ -36,7 +36,12 @@
 /.itch/
 /.kr/
 /.lesshst
-/.local/
+/.local/*
+!/.local/share/
+/.local/share/*
+!/.local/share/gnome-shell/
+/.local/share/gnome-shell/*
+!/.local/share/gnome-shell/extensions
 /.mozilla/
 /.pki/
 /.python_history
