@@ -55,7 +55,8 @@ if [ -f $HOME/.ssh/known_hosts ]; then
 fi
 
 if [[ -x `which dircolors` ]]; then
-    eval $(dircolors)
+    # Make ls have pretty colors, but skip the file-extension-specific ones.
+    eval $(dircolors <(dircolors --print-database | egrep -v '^\.[^ ]+'))
 fi
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
