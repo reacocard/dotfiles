@@ -28,9 +28,22 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-# Unset $DISPLAY in screen, since it doesn't work well
-if [[ "$TERM" == "screen" ]]; then
-    DISPLAY=""
+# Unset GUI vars in multiplexers since they don't stay attached to the session.
+if [[ $TERM == screen* ]] || [[ $TERM == tmux* ]]; then
+    unset DESKTOP_SESSION
+    unset DISPLAY
+    unset MOZ_ENABLE_WAYLAND
+    unset SESSION_MANAGER
+    unset WAYLAND_DISPLAY
+    unset XAUTHORITY
+    unset XDG_CURRENT_DESKTOP
+    unset XDG_MENU_PREFIX
+    unset XMODIFIERS
+    unset -m 'GDM*'
+    unset -m 'GNOME*'
+    unset -m 'GTK*'
+    unset -m 'QT*'
+    unset -m 'XDG_SESSION_*'
 fi
 
 export KR_SKIP_SSH_CONFIG=1
