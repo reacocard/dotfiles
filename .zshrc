@@ -7,6 +7,8 @@ if [ -f $HOME/.cargo/env ]; then
     source $HOME/.cargo/env
 fi
 
+source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+
 ### BASICS ###
 
 # Enable zmv - powerful alt to mv
@@ -77,12 +79,12 @@ key[PageUp]=${terminfo[kpp]}
 key[PageDown]=${terminfo[knp]}
 key[Backspace]=${terminfo[kbs]}
 key[Delete]=${terminfo[kdch1]}
-
+key[Shift]=
 [[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
 [[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
 [[ -n ${key[Insert]} ]] && bindkey "${key[Insert]}" overwrite-mode
-[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" history-beginning-search-backward
-[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" history-beginning-search-forward
+[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" history-substring-search-up
+[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" history-substring-search-down
 [[ -n ${key[Left]} ]] && bindkey "${key[Left]}" backward-char
 [[ -n ${key[Right]} ]] && bindkey "${key[Right]}" forward-char
 [[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
@@ -124,6 +126,9 @@ setopt incappendhistory
 
 # Don't add lines that start with a space to the history
 setopt histignorespace
+
+# Verify history substitutions before executing
+setopt histverify
 
 
 ### PROMPT ###
