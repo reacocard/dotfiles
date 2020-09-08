@@ -38,7 +38,16 @@ dconf write /org/gnome/desktop/peripherals/mouse/speed 0.2
 
 dconf write /org/gnome/desktop/media-handling/autorun-never true
 
-dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:super']"
+# capslock is super/windows key
+xkb_opts="'caps:super'"
+# right alt activates the 3rd level
+xkb_opts="$xkb_opts, 'lv3:ralt_switch_multikey'"
+# spacebar enters a non-breaking space at 3rd level
+xkb_opts="$xkb_opts, 'nbsp:level3'"
+# prtscr is another super/windows key
+# on recent thinkpads prtscr is in the right super/windows spot
+xkb_opts="$xkb_opts, 'altwin:prtsc_rwin'"
+dconf write /org/gnome/desktop/input-sources/xkb-options "[$xkb_opts]"
 
 
 dconf write /org/gnome/settings-daemon/plugins/color/night-light-enabled true
