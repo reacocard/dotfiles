@@ -37,6 +37,7 @@ dconf write /org/gnome/desktop/screensaver/lock-delay 30 || true
 dconf write /org/gnome/desktop/peripherals/mouse/speed 0.2
 
 dconf write /org/gnome/desktop/media-handling/autorun-never true
+dconf write /org/gnome/desktop/sound/allow-volume-above-100-percent true
 
 # capslock is super/windows key
 xkb_opts="'caps:super'"
