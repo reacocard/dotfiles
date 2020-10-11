@@ -10,7 +10,7 @@ pkg_gui="flatpak fonts-ancient-scripts fonts-cantarell fonts-liberation fonts-mp
 
 pkg_gui_personal="cardpeek gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly mcomix plymouth plymouth-themes"
 
-pkg_gfx_intel="beignet-opencl-icd intel-gpu-tools intel-media-va-driver-non-free mesa-va-drivers mesa-vulkan-drivers"
+pkg_gfx_intel="beignet-opencl-icd intel-gpu-tools intel-media-va-driver mesa-va-drivers mesa-vulkan-drivers"
 
 pkg_gfx_amd="firmware-amd-graphics mesa-va-drivers mesa-vulkan-drivers"
 
