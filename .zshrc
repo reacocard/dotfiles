@@ -9,6 +9,8 @@ fi
 
 source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+autoload -U add-zsh-hook
+
 ### BASICS ###
 
 # Enable zmv - powerful alt to mv
@@ -205,11 +207,12 @@ setprompt () {
 setprompt
 
 
-preexec () {
+cmd_timer_preexec () {
     _CUSTOM_TIME_START=$SECONDS
 }
+add-zsh-hook preexec cmd_timer_preexec
 
-precmd () {
+cmd_timer_precmd () {
     # Print runtime of long-running commands.
     if [ -n "$_CUSTOM_TIME_START" ]; then
         local elapsed=$(($SECONDS - $_CUSTOM_TIME_START));
@@ -221,7 +224,8 @@ precmd () {
             printf "[zsh] Elapsed time %02i:%02i:%02i.\n\a" $hours $minutes $seconds;
         fi;
     fi;
-} 
+}
+add-zsh-hook precmd cmd_timer_precmd
 
 
 ### ALIASES ###
