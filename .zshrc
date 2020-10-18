@@ -137,7 +137,38 @@ setopt histverify
 
 # parts of the following adapted from http://aperiodic.net/phil/prompt/
 
+PR_REMOTE_CLIENTNAME=""
 _PR_IP_HOST="unset"
+_PR_RUNNING=0
+_PR_CUR_CMD=""
+
+running_cmd_preexec () {
+   _PR_CUR_CMD="$(echo $1 | sed -E 's/(^|.*[[:space:]])([^=[:space:]]+)([[:space:]].*|$)/\2/')"
+   _PR_RUNNING=1
+   update_titlebar
+}
+add-zsh-hook preexec running_cmd_preexec
+
+running_cmd_precmd () {
+    _PR_RUNNING=0
+    update_titlebar
+}
+add-zsh-hook precmd running_cmd_precmd
+
+update_titlebar () {
+    local _PR_CMD=""
+    if [ x$_PR_CUR_CMD != x"" ]; then
+        if [ $_PR_RUNNING -eq 1 ]; then
+            _PR_CMD="${_PR_CUR_CMD} | "
+        else
+            _PR_CMD="${_PR_CUR_CMD}* | "
+        fi
+    fi
+
+    PR_TITLEBAR=$'%{\e]0;%(!.-=*[ROOT]*=- | .)${_PR_CMD}%n@%m${PR_REMOTE_CLIENTNAME}:%~\a%}'
+
+    print -Pn "$PR_TITLEBAR"
+}
 
 setprompt () {
     setopt prompt_subst
@@ -163,7 +194,6 @@ setprompt () {
     done
     PR_NO_COLOUR="%{$terminfo[sgr0]%}"
 
-    PR_REMOTE_CLIENTNAME=""
     # Get the name of the machine we're sshed in from.
     if [ -n "$SSH_CLIENT" ]; then
         PR_REMOTE_CLIENTNAME="$(echo ${SSH_CLIENT} | cut -d\  -f 1)"
@@ -182,24 +212,12 @@ setprompt () {
         PR_PREFIX="${PR_PREFIX}[ssh] "
     fi
 
-    ###
-    # Decide if we need to set titlebar text.
-    case $TERM in
-	    xterm*|rxvt*)
-	        PR_TITLEBAR=$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m${PR_REMOTE_CLIENTNAME}:%~ | ${COLUMNS}x${LINES} | %y\a%}'
-	        ;;
-	    screen)
-	        PR_TITLEBAR=$'%{\e_screen \005 (\005t) | %(!.-=[ROOT]=- | .)%n@%m${PR_REMOTE_CLIENTNAME}:%~ | ${COLUMNS}x${LINES} | %y\e\\%}'
-	        ;;
-	    *)
-	        PR_TITLEBAR=''
-	        ;;
-    esac
+    update_titlebar
     
     ###
     # Finally, the prompt.
 
-    PROMPT='$PR_STITLE${(e)PR_TITLEBAR}$PR_PREFIX%(!.$PR_RED.$PR_GREEN)%n$PR_NO_COLOUR@$PR_MAGENTA%m$PR_REMOTE_CLIENTNAME_COLOURED$PR_NO_COLOUR:$PR_CYAN%~$PR_NO_COLOUR\
+    PROMPT='$PR_STITLE$PR_PREFIX%(!.$PR_RED.$PR_GREEN)%n$PR_NO_COLOUR@$PR_MAGENTA%m$PR_REMOTE_CLIENTNAME_COLOURED$PR_NO_COLOUR:$PR_CYAN%~$PR_NO_COLOUR\
 
 %(?.$PR_LIGHT_GREEN.$PR_LIGHT_RED)%?$PR_NO_COLOUR%# '
 }
