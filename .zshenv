@@ -28,6 +28,12 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
+if [ x"$XDG_SESSION_TYPE" = x"wayland" ]; then
+    QT_QPA_PLATFORM=wayland
+    GDK_BACKEND=wayland
+    MOZ_ENABLE_WAYLAND=1
+fi
+
 # Unset GUI vars in multiplexers since they don't stay attached to the session.
 if [[ $TERM == screen* ]] || [[ $TERM == tmux* ]]; then
     unset DESKTOP_SESSION
