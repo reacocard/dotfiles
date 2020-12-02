@@ -5,4 +5,4 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-< /proc/mounts egrep -v ' (sysfs|proc|devtmpfs|devpts|securityfs|cgroup2|cgroup|mqueue|hugetlbfs|debugfs|fusectl|binfmt+misc|pstore|bpf|efivarfs|/run|/dev/shm|/run/lock|/proc/sys/fs/binfmt_misc|/sys/fs/cgroup) '
+< /proc/mounts grep -P -v '\W(/sys|/proc|/dev|/tmp|/run(?!/user))'
