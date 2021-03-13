@@ -9,6 +9,7 @@
 /.android/
 /.audacity-data/
 /.bash_history
+/.bundle/
 /.cabal/
 /.cache/
 /.cardpeek*
@@ -25,8 +26,10 @@
 !/.config/user-dirs.dirs
 !/.config/
 /.dbus/session-bus/
+/.docker/
 /.dropbox/
 /.dropbox-dist/
+/.dvdcss/
 /.fonts/**/.uuid
 /.ghc/*-linux-*/
 /.gimp*/
@@ -42,12 +45,16 @@
 !/.local/share/gnome-shell/
 /.local/share/gnome-shell/*
 !/.local/share/gnome-shell/extensions
+/.macromedia/
 /.mozilla/
+/.openjfx/
 /.parsec/
 /.pipewire-media-session/
 /.pki/
+/.psql_history
 /.python_history
 /.renpy/
+/.rmapi
 /.rustup/
 /.sqlite_history
 /.ssh/*
@@ -55,6 +62,7 @@
 /.ssh/config.d/*-local
 /.steam*
 /.thumbnails/
+/.tvnamer.json
 /.var
 /.viminfo
 /.vimrc.local
@@ -66,6 +74,7 @@
 /.xmonad/xmonad.hi
 /.xmonad/xmonad.o
 /.xsession-errors
+/.yarnrc
 /.zcompdump
 /.zprofile.local
 /.zshhist
