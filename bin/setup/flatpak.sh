@@ -35,9 +35,7 @@ always () {
 		         --socket wayland \
 			 --own-name=org.mpris.MediaPlayer2.firefox.'*' \
 			 --own-name=org.mpris.MediaPlayer2.firefox \
-			 --filesystem=~/downloads:rw \
-			 --filesystem=~/media:ro \
-			 --filesystem=~/syncthing/Media:ro
+			 --filesystem=~/downloads:rw
 }
 
 
