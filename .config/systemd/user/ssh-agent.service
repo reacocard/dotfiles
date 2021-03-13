@@ -5,6 +5,8 @@ Description=SSH key agent
 Type=simple
 Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
 ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+ExecStartPost=/bin/sh -c '/bin/echo -e "SSH_AUTH_SOCK=$SSH_AUTH_SOCK\nGSM_SKIP_SSH_AGENT_WORKAROUND=1" > %E/environment.d/ssh-agent-systemd.conf && systemctl --user daemon-reload'
+ExecStopPost=/bin/rm %E/environment.d/ssh-agent-systemd.conf
 
 [Install]
 WantedBy=default.target
