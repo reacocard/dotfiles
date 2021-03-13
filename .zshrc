@@ -258,6 +258,12 @@ fi
 if `/bin/ls --color > /dev/null 2>&1`; then
     alias ls='ls --color=auto'
 fi
+
+# Stop GNU tar using rsh on :-containing filenames
+if `/bin/tar --force-local -c /dev/null > /dev/null 2>&1`; then
+    alias tar='tar --force-local'
+fi
+
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
