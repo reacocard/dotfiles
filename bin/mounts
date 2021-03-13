@@ -5,4 +5,4 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-< /proc/mounts grep -P -v '\W(/sys|/proc|/dev|/tmp|/run(?!/user)|/var/lib/docker)'
+< /proc/mounts grep -P -v '\W(/sys|/proc|/dev|/tmp|/run(?!/user)|/var/lib/docker|/var/lib/containers)'
