@@ -111,7 +111,10 @@ else
 endif
 
 " Use w!! to write as root
-cmap w!! %!sudo tee > /dev/null %
+cmap w!! %!sudo tee % >/dev/null
+
+" do w!! automatically (suda.vim)
+let g:suda_smart_edit = 1
 
 " Recognize included ssh configs
 autocmd BufReadPost,BufNewFile .ssh/config.d/* set filetype=sshconfig
