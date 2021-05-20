@@ -31,12 +31,15 @@
 /.dropbox-dist/
 /.dvdcss/
 /.fonts/**/.uuid
+/.gbench2/
 /.ghc/*-linux-*/
 /.gimp*/
 /.gnome/
 /.gnupg/
+/.gradle/
 /.ipython/
 /.itch/
+/.java/
 /.kr/
 /.lesshst
 /.local/*
@@ -47,6 +50,7 @@
 !/.local/share/gnome-shell/extensions
 /.macromedia/
 /.mozilla/
+/.ncbi/
 /.openjfx/
 /.parsec/
 /.pipewire-media-session/
