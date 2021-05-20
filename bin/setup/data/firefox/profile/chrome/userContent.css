@@ -1,0 +1,10 @@
+@-moz-document url("about:home"), url("about:newtab") {
+  body {
+    --newtab-background-color: #202324!important;
+    --newtab-text-primary-color: #dddddd!important;
+    --newtab-textbox-background-color: #404344!important;
+    --newtab-element-hover-color: #404344!important;
+    --newtab-contextmenu-background-color: #404344!important;
+    --newtab-icon-primary-color: #dddddd!important;
+  }
+}

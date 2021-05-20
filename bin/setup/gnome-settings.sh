@@ -39,12 +39,8 @@ dconf write /org/gnome/desktop/peripherals/mouse/speed 0.2
 dconf write /org/gnome/desktop/media-handling/autorun-never true
 dconf write /org/gnome/desktop/sound/allow-volume-above-100-percent true
 
-# capslock is super/windows key
-xkb_opts="'caps:super'"
-# right alt activates the 3rd level
-xkb_opts="$xkb_opts, 'lv3:ralt_switch_multikey'"
-# spacebar enters a non-breaking space at 3rd level
-xkb_opts="$xkb_opts, 'nbsp:level3'"
+# capslock is compose key
+xkb_opts="'compose:caps'"
 # prtscr is another super/windows key
 # on recent thinkpads prtscr is in the right super/windows spot
 xkb_opts="$xkb_opts, 'altwin:prtsc_rwin'"
