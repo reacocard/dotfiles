@@ -52,6 +52,7 @@ if [[ $TERM == screen* ]] || [[ $TERM == tmux* ]]; then
     unset -m 'GNOME*'
     unset -m 'GTK*'
     unset -m 'QT*'
+    unset -m 'VTE_*'
     unset -m 'XDG_SESSION_*'
 fi
 
