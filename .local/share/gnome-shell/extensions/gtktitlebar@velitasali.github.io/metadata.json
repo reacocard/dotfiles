@@ -6,9 +6,10 @@
   "settings-schema": "org.gnome.shell.extensions.gtktitlebar",
   "shell-version": [
     "3.34",
-    "3.32"
+    "3.32",
+    "40.0"
   ],
   "url": "https://github.com/velitasali/GTKTitleBar",
   "uuid": "gtktitlebar@velitasali.github.io",
-  "version": 5
+  "version": 6
 }

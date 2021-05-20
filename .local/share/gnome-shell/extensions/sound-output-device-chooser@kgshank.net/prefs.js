@@ -28,7 +28,7 @@ const _d = Lib._log;
 const SignalManager = Lib.SignalManager;
 
 const Gettext = imports.gettext;
-Gettext.bindtextdomain("sound-output-device-chooser", Me.path + '/locale');
+Gettext.bindtextdomain("sound-output-device-chooser", Me.path + "/locale");
 const _ = Gettext.gettext;
 
 var SETTINGS_SCHEMA = "org.gnome.shell.extensions.sound-output-device-chooser";
@@ -64,8 +64,8 @@ function getPortsFromSettings(_settings) {
     return obj.ports;
 }
 
-function setPortsSettings(ports,_settings) {
-    let settingsObj = { 'version': PORT_SETTINGS_VERSION };
+function setPortsSettings(ports, _settings) {
+    let settingsObj = { "version": PORT_SETTINGS_VERSION };
     settingsObj.ports = ports;
     //_d(JSON.stringify(settingsObj));
     _settings.set_string(PORT_SETTINGS, JSON.stringify(settingsObj));
@@ -97,46 +97,53 @@ function migratePortSettings(currVersion, currSettings, _settings) {
             }
             break;
     }
-    return setPortsSettings(ports,_settings);
+    return setPortsSettings(ports, _settings);
 }
 
-
 const SDCSettingsWidget = new GObject.Class({
-    Name: 'SDC.Prefs.Widget',
-    GTypeName: 'SDCSettingsWidget',
+    Name: "SDC.Prefs.Widget",
+    GTypeName: "SDCSettingsWidget",
     Extends: Gtk.Box,
 
     _init: function(params) {
         this.parent(params);
         this.orientation = Gtk.Orientation.VERTICAL;
         this.spacing = 0;
+        let uiFileSuffix = "";
 
+        if (Gtk.get_major_version() >= "4") {
+            uiFileSuffix = "40";
+            this.__addFn = this.append;
+            this.__showFn = this.show;
+        }
+        else {
+            this.__addFn = x => this.pack_start(x, true, true, 0);
+            this.__showFn = this.show_all;
+        }
         // creates the settings
         this._settings = Lib.getSettings(SETTINGS_SCHEMA);
 
         Lib.setLog(this._settings.get_boolean(ENABLE_LOG));
 
         // creates the ui builder and add the main resource file
-        let uiFilePath = Me.path + "/ui/prefs-dialog.gtkbuilder";
+        let uiFilePath = Me.path + "/ui/prefs-dialog" +uiFileSuffix +".glade";
         let builder = new Gtk.Builder();
-        builder.set_translation_domain('sound-output-device-chooser');
+        builder.set_translation_domain("sound-output-device-chooser");
 
         if (builder.add_from_file(uiFilePath) == 0) {
             _d("JS LOG: could not load the ui file: %s".format(uiFilePath));
-
             let label = new Gtk.Label({
                 label: _("Could not load the preferences UI file"),
                 vexpand: true
             });
-
-            this.pack_start(label, true, true, 0);
+            this.__addFn(label);            
         } else {
-            _d('JS LOG:_UI file receive and load: ' + uiFilePath);
+            _d("JS LOG:_UI file receive and load: " + uiFilePath);
 
             let mainContainer = builder.get_object("main-container");
 
-            this.pack_start(mainContainer, true, true, 0);
-
+            this.__addFn(mainContainer);
+            
             this._signalManager = new SignalManager();
 
             let showProfileSwitch = builder.get_object("show-profile");
@@ -179,9 +186,9 @@ const SDCSettingsWidget = new GObject.Class({
 
     _populatePorts: function() {
         let ports = Lib.getPorts(true);
-        for (let port of ports) {
-            this._portsStore.set(this._portsStore.append(), [0, 1, 2, 3, 4, 5, 6, 7], [port.human_name, false, false, true, port.name, 3, port.card_name, getPortDisplayName(port)]);
-        }
+        ports.sort((a, b) => (b.direction.localeCompare(a.direction)) || getPortDisplayName(a).localeCompare(getPortDisplayName(b))).forEach(port => {
+            this._portsStore.set(this._portsStore.append(), [0, 1, 2, 3, 4, 5, 6, 7, 8], [port.human_name, false, false, true, port.name, 3, port.card_name, getPortDisplayName(port), port.direction]);
+        });
     },
 
     _showAlwaysToggleRenderCallback: function(widget, path) {
@@ -207,7 +214,7 @@ const SDCSettingsWidget = new GObject.Class({
         }
         /*Dont support non-pci cards for show always*/
         let card_name = this._portsStore.get_value(iter, 6);
-        if(!/\.pci-/.exec(card_name) && activeCol == 1){
+        if (!/\.pci-/.exec(card_name) && activeCol == 1) {
             this._toggleCallback(widget, path, 3, [1, 2]);
             return;
         }
@@ -222,20 +229,21 @@ const SDCSettingsWidget = new GObject.Class({
     _commitSettings: function() {
         let ports = [];
         let [success, iter] = this._portsStore.get_iter_first();
-
         while (iter && success) {
             if (!this._portsStore.get_value(iter, 3)) {
-                ports.push({
-                    human_name: this._portsStore.get_value(iter, 0),
-                    name: this._portsStore.get_value(iter, 4),
-                    display_option: this._portsStore.get_value(iter, 5),
-                    card_name: this._portsStore.get_value(iter, 6),
-                    display_name: this._portsStore.get_value(iter, 7)
-                });
+                let display_option = this._portsStore.get_value(iter, 5);
+                if (display_option != 3) {//Dont store default value
+                    ports.push({
+                        human_name: this._portsStore.get_value(iter, 0),
+                        name: this._portsStore.get_value(iter, 4),
+                        display_option: display_option,
+                        card_name: this._portsStore.get_value(iter, 6),
+                        display_name: this._portsStore.get_value(iter, 7)
+                    });
+                }
             }
             success = this._portsStore.iter_next(iter);
         }
-
         setPortsSettings(ports, this._settings);
     },
 
@@ -268,8 +276,8 @@ const SDCSettingsWidget = new GObject.Class({
 
             if (!found) {
                 iter = this._portsStore.append();
-                this._portsStore.set(iter, [0, 1, 2, 3, 4, 5, 6, 7],
-                    [port.human_name, false, false, false, port.name, port.display_option, port.card_name, port.display_name]);
+                this._portsStore.set(iter, [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                    [port.human_name, false, false, false, port.name, port.display_option, port.card_name, port.display_name, ""]);
                 this._portsStore.set_value(iter, port.display_option, true);
             }
         }
@@ -279,7 +287,7 @@ const SDCSettingsWidget = new GObject.Class({
 
 function buildPrefsWidget() {
     let _settingsWidget = new SDCSettingsWidget();
-    _settingsWidget.show_all();
+    _settingsWidget.__showFn();
 
     return _settingsWidget;
 }
