@@ -19,6 +19,9 @@ export EDITOR=vim
 export PAGER=less
 export LANG=en_US.UTF-8
 
+# give sudo prompt matching colors to zsh prompt
+export SUDO_PROMPT=$'\e[31m[sudo]\e[0m password for \e[32m\e[1m%p\e[0m@\e[1m\e[35m%H\e[0m: '
+
 # less colors for manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;35m'
