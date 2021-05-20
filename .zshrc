@@ -3,10 +3,6 @@
 
 ### IMPORTS ###
 
-if [ -f $HOME/.cargo/env ]; then
-    source $HOME/.cargo/env
-fi
-
 source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 autoload -U add-zsh-hook
