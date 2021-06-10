@@ -24,6 +24,10 @@
 !/.config/Trolltech.conf
 !/.config/compton.conf
 !/.config/user-dirs.dirs
+!/.config/pulse/*.conf
+!/.config/pulse/*.pa
+!/.config/pulse/
+/.config/pulse/*
 !/.config/
 /.dbus/session-bus/
 /.docker/
