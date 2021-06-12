@@ -55,24 +55,10 @@ setup_git_split_origin () {
 	fi
 }
 
-# Automatically fetch updates to the repo so we can notify the user if there
-# are changes to apply. Notification logic is in ~/.zshrc.
-setup_git_fetch_crontab () {
-	GIT_FETCH_CMD='@hourly git fetch -q >/dev/null'
-	if crontab -l 2>/dev/null | grep -q "^${GIT_FETCH_CMD}\$"; then
-		debug_log "git fetch cron already set up."
-		return 0
-	fi
-	(crontab -l 2>/dev/null; echo "$GIT_FETCH_CMD") | crontab -
-	debug_log "git fetch cron added."
-}
-
 main () {
 	cd "$HOME"
 	setup_git_config_include
 	setup_git_split_origin
-	# replaced by systemd timer
-	#setup_git_fetch_crontab
 }
 
 main "$@"
