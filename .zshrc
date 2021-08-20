@@ -3,6 +3,8 @@
 
 ### IMPORTS ###
 
+source $HOME/.zsh/mouse.zsh
+
 source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 autoload -U add-zsh-hook
@@ -102,6 +104,9 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-init
     zle -N zle-line-finish
 fi
+
+bindkey -M emacs '\em' zle-toggle-mouse
+bindkey -M vicmd M zle-toggle-mouse
 
 ### HISTORY ###
 
