@@ -12,20 +12,10 @@ setup () {
 
 always () {
 	flatpak install --noninteractive flathub \
-		ca.desrt.dconf-editor \
 		com.spotify.Client \
 		org.glimpse_editor.Glimpse \
-		org.gnome.Calculator \
-		org.gnome.Cheese \
-		org.gnome.dfeet \
-		org.gnome.Evince \
-		org.gnome.Extensions \
 		org.gnome.NetworkDisplays \
-		org.gnome.PowerStats \
-		org.gnome.eog \
-		org.gnome.seahorse.Application \
-		org.mozilla.firefox \
-		org.gnome.Logs
+		org.mozilla.firefox
 
 	flatpak override --user com.spotify.Client \
 			 --socket wayland
@@ -46,22 +36,12 @@ machinetype_personal () {
 		com.bitwarden.desktop \
 		com.calibre_ebook.calibre \
 		com.discordapp.Discord \
-		com.github.micahflee.torbrowser-launcher \
-		com.github.unrud.djpdf \
 		com.makemkv.MakeMKV \
-		com.obsproject.Studio \
 		com.slack.Slack \
 		com.valvesoftware.Steam \
-		com.visualstudio.code \
 		fr.handbrake.ghb \
 		io.github.quodlibet.ExFalso \
 		org.blender.Blender \
-		org.bunkus.mkvtoolnix-gui \
-		org.gnome.Boxes \
-		org.gnome.Contacts \
-		org.gnome.Evolution \
-		org.gnome.Totem \
-		org.kde.krita \
 		org.libretro.RetroArch \
 		org.signal.Signal \
 		org.telegram.desktop \

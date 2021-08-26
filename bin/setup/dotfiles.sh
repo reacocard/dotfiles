@@ -55,10 +55,19 @@ setup_git_split_origin () {
 	fi
 }
 
+# Gnome will 'helpfully' edit our user-dirs config for us if the directories
+# don't exist.
+fix_xdg_dirs () {
+	mkdir -p $HOME/.local/xdg-{templates,public}
+	mkdir -p $HOME/media/{music,pictures,video}
+	git checkout .config/user-dirs.dirs
+}
+
 main () {
 	cd "$HOME"
 	setup_git_config_include
 	setup_git_split_origin
+	fix_xdg_dirs
 }
 
 main "$@"

@@ -21,13 +21,19 @@ dconf write /org/gnome/desktop/interface/show-battery-percentage true
 dconf write /org/gnome/desktop/interface/gtk-theme "'Adwaita-dark'"
 dconf write /org/gnome/desktop/interface/gtk-enable-primary-paste false
 
-# TODO: figure out how to calculate this for each system
-#dconf write /org/gnome/desktop/interface/text-scaling-factor 1.1
-
-# Enable fractional scaling and screen sharing.
-dconf write /org/gnome/mutter/experimental-features "['scale-monitor-framebuffer', 'screen-cast', 'remote-desktop']"
-
-
+# Enable screen sharing.
+mutter_features=`dconf read /org/gnome/mutter/experimental-features`
+if echo "$mutter_features" | grep -q "'screen-cast'"; then
+	true
+else
+	mutter_features=`echo "$mutter_features" | sed "s/]/, 'screen-cast'/"`
+fi
+if echo "$mutter_features" | grep -q "'remote-desktop'"; then
+	true
+else
+	mutter_features=`echo "$mutter_features" | sed "s/]/, 'remote-desktop'/"`
+fi
+dconf write /org/gnome/mutter/experimental-features "$mutter_features"
 
 dconf write /org/gnome/desktop/session/idle-delay 600
 dconf write /org/gnome/desktop/screensaver/lock-delay 30 || true
@@ -54,7 +60,7 @@ dconf write /org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-time
 
 
 dconf write /org/gnome/mutter/dynamic-workspaces false
-dconf write /org/gnome/mutter/workspaces-only-on-primary true
+dconf write /org/gnome/mutter/workspaces-only-on-primary false
 NR_WORKSPACES=12
 dconf write /org/gnome/desktop/wm/preferences/num-workspaces $NR_WORKSPACES
 dconf write /org/gnome/shell/app-switcher/current-workspace-only true

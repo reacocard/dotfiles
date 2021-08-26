@@ -2,17 +2,19 @@
 # install many packages i like
 
 
-pkg_core="ack ansible ansible-lint apt-file apt-listchanges arj atool build-essential bolt cifs-utils cpio curl firmware-atheros firmware-intel-sound firmware-iwlwifi firmware-linux firmware-misc-nonfree firmware-realtek git htop iftop imagemagick iotop iperf3 ipython3 jq lbzip2 lshw lsof lzip lzop mesa-opencl-icd mesa-utils net-tools netcat-traditional nmap p7zip-full pocl-opencl-icd powertop pv rar ripgrep rsync screen smartmontools smbclient sshfs strace tcpdump telnet thunderbolt-tools tmux traceroute unrar unzip virtualenv vulkan-utils vulkan-tools wget whois xdg-utils xz-utils zip zsh zstd"
+pkg_core="ack apt-file apt-listchanges arj atool build-essential bind9-dnsutils bolt cifs-utils cpio curl faketime firmware-atheros firmware-intel-sound firmware-iwlwifi firmware-linux firmware-misc-nonfree firmware-realtek firmware-sof-signed git htop iftop imagemagick info iotop iperf3 ipython3 jq lbzip2 lshw lsof lzip lzop mlocate nano net-tools netcat-traditional nfs-common nmap openssh-client p7zip-full powertop pv rar reptyr ripgrep rsync screen smartmontools smbclient sshfs strace tcpdump telnet thunderbolt-tools tmux traceroute unrar unzip usbtop virtualenv wget whois wireguard-tools xdg-utils xz-utils zip zsh zstd"
 
-pkg_personal="borgbackup borgmatic cryptsetup debdelta dnsutils ffmpeg fio fwupd gocryptfs hugo lm-sensors lvm2 mdadm magic-wormhole miniupnpc mlocate needrestart sshuttle syncthing tvnamer unattended-upgrades v4l-utils vainfo watchdog wireguard youtube-dl yubico-piv-tool yubikey-manager"
+pkg_personal="atomicparsley borgbackup borgmatic certbot cryptsetup debdelta ffmpeg fio fwupd gocryptfs hugo libpam-fprintd lm-sensors lvm2 mdadm magic-wormhole mediainfo miniupnpc mlocate mkvtoolnix needrestart openssh-server python3-certbot-dns-rfc2136 speedtest-cli squashfs-tools squashfs-tools-ng sshuttle syncthing tpm2-tools tvnamer unattended-upgrades v4l-utils watchdog youtube-dl ykcs11 yubico-piv-tool yubikey-manager"
 
-pkg_gui="flatpak fonts-ancient-scripts fonts-cantarell fonts-liberation fonts-mph-2b-damase fonts-roboto fonts-symbola fonts-ubuntu fonts-ubuntu-console gnome-backgrounds gnome-bluetooth gnome-color-manager gnome-disk-utility gnome-keyring gnome-remote-desktop gnome-screenshot gnome-shell gnome-shell-extensions gnome-software gnome-software-plugin-flatpak gnome-terminal gnome-themes-extra gnome-tweaks gstreamer1.0-pipewire gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gstreamer1.0-tools gstreamer1.0-vaapi gvfs-fuse heif-thumbnailer mplayer mpv nautilus nautilus-extension-burner nautilus-extension-gnome-terminal network-manager-config-connectivity-debian network-manager-gnome network-manager-openvpn-gnome network-manager-pptp-gnome ooo-thumbnailer pavucontrol pipewire pulseaudio-module-bluetooth pulseaudio-utils system-config-printer ttf-bitstream-vera ttf-unifont viewnior vim-gtk3 xarchiver xfonts-terminus xwayland"
+pkg_gui="argyll avahi-discover cups-daemon cups-filters-core-drivers flatpak fonts-ancient-scripts fonts-cantarell fonts-liberation fonts-mph-2b-damase fonts-sil-andika fonts-symbola fonts-terminus fonts-ubuntu fonts-ubuntu-console gnome-backgrounds gnome-bluetooth gnome-color-manager gnome-disk-utility gnome-keyring gnome-remote-desktop gnome-screenshot gnome-shell gnome-shell-extensions gnome-terminal gnome-themes-extra gnome-tweaks gstreamer1.0-pipewire gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-pulseaudio gstreamer1.0-tools gstreamer1.0-vaapi gvfs-fuse heif-thumbnailer mplayer mpv nautilus nautilus-extension-burner nautilus-extension-gnome-terminal network-manager-config-connectivity-debian network-manager-gnome ooo-thumbnailer pavucontrol pipewire pulseaudio-module-bluetooth pulseaudio-utils system-config-printer totem totem-plugins torbrowser-launcher ttf-bitstream-vera viewnior vim-gtk3 xarchiver xwayland"
 
-pkg_gui_personal="cardpeek deluge-gtk gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly mcomix picard plymouth plymouth-themes virt-manager wireshark-gtk"
+pkg_gui_personal="cardpeek deluge-gtk firejail firewall-config gnupg-pkcs11-scd gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly krita krita-gmic libdvd-pkg mcomix mp3gain obs-plugins obs-studio picard plymouth plymouth-themes remmina replaygain scdaemon seahorse seahorse-nautilus steam-devices torbrowser-launcher virt-manager vorbisgain wireshark-gtk"
 
-pkg_gfx_intel="beignet-opencl-icd i965-va-driver-shaders intel-gpu-tools intel-media-va-driver mesa-va-drivers mesa-vulkan-drivers"
+pkg_mesa="clinfo drm-info mesa-opencl-icd mesa-utils mesa-utils-extra mesa-va-drivers mesa-vulkan-drivers pocl-opencl-icd vainfo vulkan-tools"
 
-pkg_gfx_amd="firmware-amd-graphics mesa-va-drivers mesa-vulkan-drivers"
+pkg_gfx_intel="beignet-opencl-icd i965-va-driver-shaders intel-gpu-tools intel-media-va-driver $pkg_mesa"
+
+pkg_gfx_amd="firmware-amd-graphics $pkg_mesa"
 
 pkg_cpu_intel="intel-microcode"
 
@@ -66,4 +68,4 @@ while true; do
 done
 
 
-sudo apt install ${=pkg_core} ${=pkg_core_personal} ${=pkg_gui} ${=pkg_gui_personal} ${=pkg_cpu_amd} ${=pkg_cpu_intel} ${=pkg_gfx_amd} ${=pkg_gfx_intel}
+sudo apt install --no-install-recommends ${=pkg_core} ${=pkg_core_personal} ${=pkg_gui} ${=pkg_gui_personal} ${=pkg_cpu_amd} ${=pkg_cpu_intel} ${=pkg_gfx_amd} ${=pkg_gfx_intel}
