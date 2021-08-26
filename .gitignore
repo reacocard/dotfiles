@@ -1,5 +1,9 @@
 # Ignore all files not starting with .
 /[^.]*
+
+*.pyc
+__pycache__
+
 !/bin
 /bin/flatpak
 
