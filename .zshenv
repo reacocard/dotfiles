@@ -57,3 +57,5 @@ if [[ $TERM == screen* ]] || [[ $TERM == tmux* ]]; then
 fi
 
 export KR_SKIP_SSH_CONFIG=1
+
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
