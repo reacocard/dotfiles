@@ -13,13 +13,13 @@ setup () {
 always () {
 	flatpak install --noninteractive flathub \
 		com.spotify.Client \
-		org.glimpse_editor.Glimpse \
+		org.gimp.GIMP \
 		org.gnome.NetworkDisplays \
 		org.mozilla.firefox
 
 	flatpak override --user com.spotify.Client \
 			 --socket wayland
-	flatpak override --user org.glimpse_editor.Glimpse \
+	flatpak override --user org.gimp.GIMP \
 			 --socket wayland 
 	flatpak override --user org.mozilla.firefox \
 		         --socket wayland \
