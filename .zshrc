@@ -199,9 +199,9 @@ setprompt () {
     if [ -n "$SSH_CLIENT" ]; then
         PR_REMOTE_CLIENTNAME="$(echo ${SSH_CLIENT} | cut -d\  -f 1)"
         if [ x$_PR_IP_HOST = x"unset" ]; then
-            if which dig > /dev/null; then
+            if which dig > /dev/null && which timeout > /dev/null; then
                 set -o pipefail
-                _PR_IP_HOST=`dig -x "$PR_REMOTE_CLIENTNAME" +short +timeout=1 | sed s/\.$//` || _PR_IP_HOST=""
+                _PR_IP_HOST=`timeout -k 1s 2s dig -x "$PR_REMOTE_CLIENTNAME" +short +timeout=1 | sed s/\.$//` || _PR_IP_HOST=""
             else
                 _PR_IP_HOST=""
             fi
