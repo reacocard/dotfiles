@@ -26,12 +26,12 @@ mutter_features=`dconf read /org/gnome/mutter/experimental-features`
 if echo "$mutter_features" | grep -q "'screen-cast'"; then
 	true
 else
-	mutter_features=`echo "$mutter_features" | sed "s/]/, 'screen-cast'/"`
+	mutter_features=`echo "$mutter_features" | sed "s/]/, 'screen-cast']/"`
 fi
 if echo "$mutter_features" | grep -q "'remote-desktop'"; then
 	true
 else
-	mutter_features=`echo "$mutter_features" | sed "s/]/, 'remote-desktop'/"`
+	mutter_features=`echo "$mutter_features" | sed "s/]/, 'remote-desktop']/"`
 fi
 dconf write /org/gnome/mutter/experimental-features "$mutter_features"
 
