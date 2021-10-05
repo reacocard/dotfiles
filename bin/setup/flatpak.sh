@@ -55,6 +55,8 @@ machinetype_personal () {
 		         --filesystem=~/syncthing/Archives/Music:ro
 	flatpak override --user com.discordapp.Discord \
 		         --socket wayland
+	flatpak override --user com.makemkv.MakeMKV \
+		         --socket wayland
 	flatpak override --user com.slack.Slack \
 		         --socket wayland
 	flatpak override --user org.videolan.VLC \
