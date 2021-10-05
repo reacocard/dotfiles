@@ -35,6 +35,9 @@ else
 fi
 dconf write /org/gnome/mutter/experimental-features "$mutter_features"
 
+dconf write /org/gnome/mutter/wayland/xwayland-allow-grabs true
+dconf write /org/gnome/mutter/wayland/xwayland-grab-access-rules "['*']"
+
 dconf write /org/gnome/desktop/session/idle-delay 600
 dconf write /org/gnome/desktop/screensaver/lock-delay 30 || true
 # TODO: put bg image in git so we can set it automatically
