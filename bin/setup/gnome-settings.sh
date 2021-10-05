@@ -116,6 +116,21 @@ dconf write "$CUSTOM_BINDS_BASE/custom5/name" "'Launch Terminal'"
 
 dconf write "$CUSTOM_BINDS_BASE" "['$CUSTOM_BINDS_BASE/custom0/', '$CUSTOM_BINDS_BASE/custom1/', '$CUSTOM_BINDS_BASE/custom2/', '$CUSTOM_BINDS_BASE/custom3/', '$CUSTOM_BINDS_BASE/custom4/', '$CUSTOM_BINDS_BASE/custom5/']"
 
+### EXTENSIONS ###
+
+enabled_extensions=`dconf read /org/gnome/shell/enabled-extensions`
+for ext in 'sound-output-device-chooser@kgshank.net' 'launch-new-instance@gnome-shell-extensions.gcampax.github.com' 'multi-monitors-add-on@spin83' 'user-theme@gnome-shell-extensions.gcampax.github.com' 'just-perfection-desktop@just-perfection' 'miniCal3@mtharpe'; do
+	if echo "$enabled_extensions" | grep -q "'$ext'"; then
+		true
+	else
+		enabled_extensions=`echo "$enabled_extensions" | sed "s/]/, '$ext']/"`
+	fi
+done
+
+dconf write /org/gnome/shell/enabled-extensions "$enabled_extensions"
+
+dconf write /org/gnome/shell/extensions/just-perfection/dash false
+
 ### FILE BROWSER ###
 
 dconf write /org/gnome/nautilus/list-view/default-column-order "['starred', 'name', 'date_modified', 'size', 'detailed_type', 'type', 'owner', 'group', 'permissions', 'where', 'date_modified_with_time', 'date_accessed', 'recency']"
