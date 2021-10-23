@@ -25,7 +25,8 @@ always () {
 		         --socket wayland \
 			 --own-name=org.mpris.MediaPlayer2.firefox.'*' \
 			 --own-name=org.mpris.MediaPlayer2.firefox \
-			 --filesystem=~/downloads:rw
+			 --filesystem=~/downloads:rw \
+			 --env=MOZ_SANDBOX_ALLOW_SYSV=1 
 }
 
 
