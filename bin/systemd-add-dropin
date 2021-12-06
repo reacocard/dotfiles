@@ -1,0 +1,27 @@
+#!/bin/bash
+
+UNIT=$1
+DROPIN=$2
+
+if [[ ! $UNIT =~ ".*\..*" ]]; then
+	UNIT="${UNIT}.service"
+fi
+
+if [[ ! -f $DROPIN ]]; then
+	while true; do
+		for candidate in "${DROPIN}.conf" "/etc/systemd/system/dropins/$DROPIN" "/etc/systemd/system/dropins/${DROPIN}.conf"; do
+			if [[ -f "$candidate" ]]; then
+				DROPIN="$candidate"
+				break 2
+			fi
+		done
+		echo "Error: $DROPIN not found."
+		exit 1
+	done
+fi
+
+
+DROPIN_DIR="/etc/systemd/system/${UNIT}.d"
+
+mkdir -p "$DROPIN_DIR"
+ln -sfr "$DROPIN" "$DROPIN_DIR"

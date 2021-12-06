@@ -1,0 +1,15 @@
+#!/bin/bash
+
+UNIT=$1
+SLICE=$2
+
+if [[ ! $UNIT =~ ".*\..*" ]]; then
+	UNIT="${UNIT}.service"                                                                                                     
+fi
+if [[ ! $SLICE =~ ".*\.slice" ]]; then
+	SLICE="${SLICE}.slice"                                                                                                     
+fi
+
+DROPIN_DIR="/etc/systemd/system/${UNIT}.d"
+mkdir -p "$DROPIN_DIR"
+echo -e "[Service]\nSlice=${SLICE}" > "$DROPIN_DIR/slice.conf"
