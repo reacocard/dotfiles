@@ -4,10 +4,22 @@
   <schema id="org.gnome.shell.extensions.just-perfection"
     path="/org/gnome/shell/extensions/just-perfection/">
     
+    <key type="b" name="show-prefs-intro">
+      <default>true</default>
+      <summary>Show Prefs Intro</summary>
+      <description>Show Prefs Intro Status</description>
+    </key>
+    
     <key type="b" name="panel">
       <default>true</default>
       <summary>Panel</summary>
       <description>Panel Visibility Status</description>
+    </key>
+    
+    <key type="b" name="panel-in-overview">
+      <default>false</default>
+      <summary>Panel in Overview</summary>
+      <description>Panel in Overview Visibility Status</description>
     </key>
     
     <key type="b" name="background-menu">
@@ -230,8 +242,8 @@
     
     <key type="i" name="notification-banner-position">
       <default>1</default>
-      <range min="0" max="2"/>
-      <summary>0: top start, 1: top center, 2: top end</summary>
+      <range min="0" max="5"/>
+      <summary>0: top start, 1: top center, 2: top end, 3: bottom start, 4: bottom center, 5: bottom end</summary>
       <description>Notification Banner Position</description>
     </key>
     
@@ -285,6 +297,37 @@
       <default>false</default>
       <summary>Workspace Wrap Around</summary>
       <description>Workspace Wrap Around Status</description>
+    </key>
+    
+    <key type="b" name="ripple-box">
+      <default>true</default>
+      <summary>Ripple Box</summary>
+      <description>Ripple Box Status</description>
+    </key>
+    
+    <key type="b" name="double-super-to-appgrid">
+      <default>true</default>
+      <summary>Double Supper To App Grid</summary>
+      <description>Double Supper To App Grid Status</description>
+    </key>
+
+    <key type="b" name="world-clock">
+      <default>true</default>
+      <summary>World Clock Visibility in Clock Menu</summary>
+      <description>World Clock Visibility Status</description>
+    </key>
+
+    <key type="b" name="weather">
+      <default>true</default>
+      <summary>Weather Visibility in Clock Menu</summary>
+      <description>Weather Visibility Status</description>
+    </key>
+
+    <key type="i" name="panel-icon-size">
+      <default>0</default>
+      <range min="0" max="60"/>
+      <summary>0 means use Shell theme, 1 - 60 means panel icon size</summary>
+      <description>Panel Icon Size</description>
     </key>
     
   </schema>

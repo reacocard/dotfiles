@@ -112,6 +112,34 @@
     spacing: 4px;
 }
 
+.just-perfection.just-perfection-gnome4x-2nd-gen .workspace-switcher
+{
+    background: rgba(0, 0, 0, .7);
+    box-shadow: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0;
+    spacing: 4px;
+}
+
+.just-perfection .ws-switcher-indicator,
+.just-perfection .ws-switcher-indicator:active
+{
+    background: transparent;
+    background-color: rgba(255, 255, 255, .02);
+    height: 8px;
+    width: 20px;
+    border: 0;
+    border-radius: 2px;
+    padding: 2px;
+    margin: 5px;
+}
+
+.just-perfection .ws-switcher-indicator:active
+{
+    background-color: rgba(255, 255, 255, .8);
+}
+
 .just-perfection .ws-switcher-box
 {
     background: transparent;
@@ -142,6 +170,11 @@
     box-shadow: none;
 }
 
+.just-perfection.just-perfection-gnome4x-2nd-gen .osd-window StIcon
+{
+    width: 22px;
+    height: 22px;
+}
 
 .just-perfection .search-entry
 {
@@ -246,7 +279,11 @@
 }
 
 .just-perfection-api-gnome40.just-perfection-api-no-workspace .workspace-thumbnails,
-.just-perfection-api-gnome40.just-perfection-api-no-workspace .workspace-thumbnail-indicator
+.just-perfection-api-gnome41.just-perfection-api-no-workspace .workspace-thumbnails,
+.just-perfection-api-gnome42.just-perfection-api-no-workspace .workspace-thumbnails,
+.just-perfection-api-gnome40.just-perfection-api-no-workspace .workspace-thumbnail-indicator,
+.just-perfection-api-gnome41.just-perfection-api-no-workspace .workspace-thumbnail-indicator,
+.just-perfection-api-gnome42.just-perfection-api-no-workspace .workspace-thumbnail-indicator
 {
     /* we use scale=0 which is giving us the same width and height as 0 */
     /* spacing: 0; */
@@ -263,10 +300,11 @@
     margin-bottom: 10px;
 }
 
-.just-perfection-api-gnome40.just-perfection-api-no-panel .search-entry
+.just-perfection-api-gnome40.just-perfection-api-no-panel .search-entry,
+.just-perfection-api-gnome41.just-perfection-api-no-panel .search-entry,
+.just-perfection-api-gnome42.just-perfection-api-no-panel .search-entry
 {
     margin-top: 30px;
-    margin-bottom: 10px;
 }
 
 /* commented because the icon will be shown when the window is getting dragged */
@@ -525,6 +563,7 @@
     border-radius: 0;
     border: 0;
     padding: 0;
+    font-size: 0;
 }
 
 .just-perfection-api-workspace-background-radius-size0 .workspace-background { border-radius: 0; }
@@ -662,3 +701,98 @@
     spacing: 0;
     box-shadow: none;
 }
+
+.just-perfection-api-no-ripple-box .ripple-box
+{
+    background-color: transparent;
+}
+
+/**
+ * This can refresh other styles that is not inculding any standard css styles.
+ * values are not important here. Just do something that can change the look
+ */
+.just-perfection-api-refresh-styles .panel-button,
+.just-perfection-api-refresh-styles .panel-status-indicators-box,
+.just-perfection-api-refresh-styles .panel-button StIcon,
+.just-perfection-api-refresh-styles .system-status-icon
+{
+    background-color: gold;
+    color: gold;
+    border-radius: 100px;
+}
+
+.just-perfection-api-no-weather .weather-button,
+.just-perfection-api-no-weather .weather-button *,
+.just-perfection-api-no-world-clocks .world-clocks-button,
+.just-perfection-api-no-world-clocks .world-clocks-button *
+{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    height: 0;
+    width: 0;
+}
+
+.just-perfection-api-panel-icon-size1 .system-status-icon, .just-perfection-api-panel-icon-size1 .panel-button StIcon { icon-size: 1px; }
+.just-perfection-api-panel-icon-size2 .system-status-icon, .just-perfection-api-panel-icon-size2 .panel-button StIcon { icon-size: 2px; }
+.just-perfection-api-panel-icon-size3 .system-status-icon, .just-perfection-api-panel-icon-size3 .panel-button StIcon { icon-size: 3px; }
+.just-perfection-api-panel-icon-size4 .system-status-icon, .just-perfection-api-panel-icon-size4 .panel-button StIcon { icon-size: 4px; }
+.just-perfection-api-panel-icon-size5 .system-status-icon, .just-perfection-api-panel-icon-size5 .panel-button StIcon { icon-size: 5px; }
+.just-perfection-api-panel-icon-size6 .system-status-icon, .just-perfection-api-panel-icon-size6 .panel-button StIcon { icon-size: 6px; }
+.just-perfection-api-panel-icon-size7 .system-status-icon, .just-perfection-api-panel-icon-size7 .panel-button StIcon { icon-size: 7px; }
+.just-perfection-api-panel-icon-size8 .system-status-icon, .just-perfection-api-panel-icon-size8 .panel-button StIcon { icon-size: 8px; }
+.just-perfection-api-panel-icon-size9 .system-status-icon, .just-perfection-api-panel-icon-size9 .panel-button StIcon { icon-size: 9px; }
+.just-perfection-api-panel-icon-size10 .system-status-icon, .just-perfection-api-panel-icon-size10 .panel-button StIcon { icon-size: 10px; }
+.just-perfection-api-panel-icon-size11 .system-status-icon, .just-perfection-api-panel-icon-size11 .panel-button StIcon { icon-size: 11px; }
+.just-perfection-api-panel-icon-size12 .system-status-icon, .just-perfection-api-panel-icon-size12 .panel-button StIcon { icon-size: 12px; }
+.just-perfection-api-panel-icon-size13 .system-status-icon, .just-perfection-api-panel-icon-size13 .panel-button StIcon { icon-size: 13px; }
+.just-perfection-api-panel-icon-size14 .system-status-icon, .just-perfection-api-panel-icon-size14 .panel-button StIcon { icon-size: 14px; }
+.just-perfection-api-panel-icon-size15 .system-status-icon, .just-perfection-api-panel-icon-size15 .panel-button StIcon { icon-size: 15px; }
+.just-perfection-api-panel-icon-size16 .system-status-icon, .just-perfection-api-panel-icon-size16 .panel-button StIcon { icon-size: 16px; }
+.just-perfection-api-panel-icon-size17 .system-status-icon, .just-perfection-api-panel-icon-size17 .panel-button StIcon { icon-size: 17px; }
+.just-perfection-api-panel-icon-size18 .system-status-icon, .just-perfection-api-panel-icon-size18 .panel-button StIcon { icon-size: 18px; }
+.just-perfection-api-panel-icon-size19 .system-status-icon, .just-perfection-api-panel-icon-size19 .panel-button StIcon { icon-size: 19px; }
+.just-perfection-api-panel-icon-size20 .system-status-icon, .just-perfection-api-panel-icon-size20 .panel-button StIcon { icon-size: 20px; }
+.just-perfection-api-panel-icon-size21 .system-status-icon, .just-perfection-api-panel-icon-size21 .panel-button StIcon { icon-size: 21px; }
+.just-perfection-api-panel-icon-size22 .system-status-icon, .just-perfection-api-panel-icon-size22 .panel-button StIcon { icon-size: 22px; }
+.just-perfection-api-panel-icon-size23 .system-status-icon, .just-perfection-api-panel-icon-size23 .panel-button StIcon { icon-size: 23px; }
+.just-perfection-api-panel-icon-size24 .system-status-icon, .just-perfection-api-panel-icon-size24 .panel-button StIcon { icon-size: 24px; }
+.just-perfection-api-panel-icon-size25 .system-status-icon, .just-perfection-api-panel-icon-size25 .panel-button StIcon { icon-size: 25px; }
+.just-perfection-api-panel-icon-size26 .system-status-icon, .just-perfection-api-panel-icon-size26 .panel-button StIcon { icon-size: 26px; }
+.just-perfection-api-panel-icon-size27 .system-status-icon, .just-perfection-api-panel-icon-size27 .panel-button StIcon { icon-size: 27px; }
+.just-perfection-api-panel-icon-size28 .system-status-icon, .just-perfection-api-panel-icon-size28 .panel-button StIcon { icon-size: 28px; }
+.just-perfection-api-panel-icon-size29 .system-status-icon, .just-perfection-api-panel-icon-size29 .panel-button StIcon { icon-size: 29px; }
+.just-perfection-api-panel-icon-size30 .system-status-icon, .just-perfection-api-panel-icon-size30 .panel-button StIcon { icon-size: 30px; }
+.just-perfection-api-panel-icon-size31 .system-status-icon, .just-perfection-api-panel-icon-size31 .panel-button StIcon { icon-size: 31px; }
+.just-perfection-api-panel-icon-size32 .system-status-icon, .just-perfection-api-panel-icon-size32 .panel-button StIcon { icon-size: 32px; }
+.just-perfection-api-panel-icon-size33 .system-status-icon, .just-perfection-api-panel-icon-size33 .panel-button StIcon { icon-size: 33px; }
+.just-perfection-api-panel-icon-size34 .system-status-icon, .just-perfection-api-panel-icon-size34 .panel-button StIcon { icon-size: 34px; }
+.just-perfection-api-panel-icon-size35 .system-status-icon, .just-perfection-api-panel-icon-size35 .panel-button StIcon { icon-size: 35px; }
+.just-perfection-api-panel-icon-size36 .system-status-icon, .just-perfection-api-panel-icon-size36 .panel-button StIcon { icon-size: 36px; }
+.just-perfection-api-panel-icon-size37 .system-status-icon, .just-perfection-api-panel-icon-size37 .panel-button StIcon { icon-size: 37px; }
+.just-perfection-api-panel-icon-size38 .system-status-icon, .just-perfection-api-panel-icon-size38 .panel-button StIcon { icon-size: 38px; }
+.just-perfection-api-panel-icon-size39 .system-status-icon, .just-perfection-api-panel-icon-size39 .panel-button StIcon { icon-size: 39px; }
+.just-perfection-api-panel-icon-size40 .system-status-icon, .just-perfection-api-panel-icon-size40 .panel-button StIcon { icon-size: 40px; }
+.just-perfection-api-panel-icon-size41 .system-status-icon, .just-perfection-api-panel-icon-size41 .panel-button StIcon { icon-size: 41px; }
+.just-perfection-api-panel-icon-size42 .system-status-icon, .just-perfection-api-panel-icon-size42 .panel-button StIcon { icon-size: 42px; }
+.just-perfection-api-panel-icon-size43 .system-status-icon, .just-perfection-api-panel-icon-size43 .panel-button StIcon { icon-size: 43px; }
+.just-perfection-api-panel-icon-size44 .system-status-icon, .just-perfection-api-panel-icon-size44 .panel-button StIcon { icon-size: 44px; }
+.just-perfection-api-panel-icon-size45 .system-status-icon, .just-perfection-api-panel-icon-size45 .panel-button StIcon { icon-size: 45px; }
+.just-perfection-api-panel-icon-size46 .system-status-icon, .just-perfection-api-panel-icon-size46 .panel-button StIcon { icon-size: 46px; }
+.just-perfection-api-panel-icon-size47 .system-status-icon, .just-perfection-api-panel-icon-size47 .panel-button StIcon { icon-size: 47px; }
+.just-perfection-api-panel-icon-size48 .system-status-icon, .just-perfection-api-panel-icon-size48 .panel-button StIcon { icon-size: 48px; }
+.just-perfection-api-panel-icon-size49 .system-status-icon, .just-perfection-api-panel-icon-size49 .panel-button StIcon { icon-size: 49px; }
+.just-perfection-api-panel-icon-size50 .system-status-icon, .just-perfection-api-panel-icon-size50 .panel-button StIcon { icon-size: 50px; }
+.just-perfection-api-panel-icon-size51 .system-status-icon, .just-perfection-api-panel-icon-size51 .panel-button StIcon { icon-size: 51px; }
+.just-perfection-api-panel-icon-size52 .system-status-icon, .just-perfection-api-panel-icon-size52 .panel-button StIcon { icon-size: 52px; }
+.just-perfection-api-panel-icon-size53 .system-status-icon, .just-perfection-api-panel-icon-size53 .panel-button StIcon { icon-size: 53px; }
+.just-perfection-api-panel-icon-size54 .system-status-icon, .just-perfection-api-panel-icon-size54 .panel-button StIcon { icon-size: 54px; }
+.just-perfection-api-panel-icon-size55 .system-status-icon, .just-perfection-api-panel-icon-size55 .panel-button StIcon { icon-size: 55px; }
+.just-perfection-api-panel-icon-size56 .system-status-icon, .just-perfection-api-panel-icon-size56 .panel-button StIcon { icon-size: 56px; }
+.just-perfection-api-panel-icon-size57 .system-status-icon, .just-perfection-api-panel-icon-size57 .panel-button StIcon { icon-size: 57px; }
+.just-perfection-api-panel-icon-size58 .system-status-icon, .just-perfection-api-panel-icon-size58 .panel-button StIcon { icon-size: 58px; }
+.just-perfection-api-panel-icon-size59 .system-status-icon, .just-perfection-api-panel-icon-size59 .panel-button StIcon { icon-size: 59px; }
+.just-perfection-api-panel-icon-size60 .system-status-icon, .just-perfection-api-panel-icon-size60 .panel-button StIcon { icon-size: 60px; }
+
+
+

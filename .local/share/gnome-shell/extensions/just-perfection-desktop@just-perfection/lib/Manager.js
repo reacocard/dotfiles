@@ -2,8 +2,8 @@
  * Manager Library
  *
  * @author     Javad Rahmatzadeh <j.rahmatzadeh@gmail.com>
- * @copyright  2020-2021
- * @license    GNU General Public License v3.0
+ * @copyright  2020-2022
+ * @license    GPL-3.0-only
  */
 
 /**
@@ -14,19 +14,15 @@ var Manager = class
     /**
      * Class Constructor
      *
-     * @param {Object} dependecies
+     * @param {Object} dependencies
      *   'API' instance of lib::API
-     *   'HotCorner' instance of lib::HotCorner
      *   'Settings' instance of Gio::Settings
-     *   'InterfaceSettings' reference to Gio::Settings for 'org.gnome.desktop.interface'
      * @param {number} shellVersion float in major.minor format
      */
-    constructor(dependecies, shellVersion)
+    constructor(dependencies, shellVersion)
     {
-        this._api = dependecies['API'] || null;
-        this._hotCorner = dependecies['HotCorner'] || null;
-        this._settings = dependecies['Settings'] || null;
-        this._interfaceSettings = dependecies['InterfaceSettings'] || null;
+        this._api = dependencies['API'] || null;
+        this._settings = dependencies['Settings'] || null;
 
         this._shellVersion = shellVersion;
     }
@@ -39,6 +35,10 @@ var Manager = class
     registerSettingsSignals()
     {
         this._settings.connect('changed::panel', () => {
+            this._applyPanel(false);
+        });
+
+        this._settings.connect('changed::panel-in-overview', () => {
             this._applyPanel(false);
         });
 
@@ -217,6 +217,26 @@ var Manager = class
         this._settings.connect('changed::workspace-wrap-around', () => {
             this._applyWorkspaceWrapAround(false);
         });
+
+        this._settings.connect('changed::ripple-box', () => {
+            this._applyRippleBox(false);
+        });
+
+        this._settings.connect('changed::double-super-to-appgrid', () => {
+            this._applyDoubleSuperToAppgrid(false);
+        });
+
+        this._settings.connect('changed::world-clock', () => {
+            this._applyWorldClock(false);
+        });
+
+        this._settings.connect('changed::weather', () => {
+            this._applyWeather(false);
+        });
+
+        this._settings.connect('changed::panel-icon-size', () => {
+            this._applyPanelIconSize(false);
+        });
     }
 
     /**
@@ -268,6 +288,11 @@ var Manager = class
         this._applyWindowPreviewCloseButton(false);
         this._applyWorkspaceBackgroundCornerSize(false);
         this._applyWorkspaceWrapAround(false);
+        this._applyRippleBox(false);
+        this._applyDoubleSuperToAppgrid(false);
+        this._applyWorldClock(false);
+        this._applyWeather(false);
+        this._applyPanelIconSize(false);
     }
 
     /**
@@ -319,6 +344,11 @@ var Manager = class
         this._applyWindowPreviewCloseButton(true);
         this._applyWorkspaceBackgroundCornerSize(true);
         this._applyWorkspaceWrapAround(true);
+        this._applyRippleBox(true);
+        this._applyDoubleSuperToAppgrid(true);
+        this._applyWorldClock(true);
+        this._applyWeather(true);
+        this._applyPanelIconSize(true);
     }
 
     /**
@@ -330,14 +360,15 @@ var Manager = class
      */
     _applyPanel(forceOriginal)
     {
-        if (forceOriginal || this._settings.get_boolean('panel')) {
+        let panel = this._settings.get_boolean('panel');
+        let panelInOverview = this._settings.get_boolean('panel-in-overview');
+
+        if (forceOriginal || panel) {
             this._api.panelShow();
         } else {
-            this._api.panelHide();
+            let mode = (panelInOverview) ? 1 : 0;
+            this._api.panelHide(mode, 0);
         }
-        // since we use lib::HotCorner on hidden panel we need to
-        // apply hot corner on each call of this metod
-        this._applyHotCorner(false);
     }
 
     /**
@@ -477,21 +508,16 @@ var Manager = class
      */
     _applyHotCorner(forceOriginal)
     {
+        if (this._shellVersion >= 41) {
+            return;
+        }
+    
         if (forceOriginal) {
             this._api.hotCornersDefault();
-            this._hotCorner.removeOveriewButton();
         } else if (!this._settings.get_boolean('hot-corner')) {
             this._api.hotCornersDisable();
-            this._hotCorner.removeOveriewButton();
         } else {
             this._api.hotCornersEnable();
-            // gnome hot corner won't work when the panel is hidden
-            // so we use lib::HotCorner instead
-            if (!this._api.isPanelVisible()) {
-                this._hotCorner.addOveriewButton();
-            } else {
-                this._hotCorner.removeOveriewButton();
-            }
         }
     }
 
@@ -506,14 +532,19 @@ var Manager = class
     {
         let className = 'just-perfection';
         let fallbackClassName = 'just-perfection-gnome3';
+        let fourtySecondGenClassName = 'just-perfection-gnome4x-2nd-gen';
 
         if (forceOriginal || !this._settings.get_boolean('theme')) {
             this._api.UIStyleClassRemove(className);
             this._api.UIStyleClassRemove(fallbackClassName);
+            this._api.UIStyleClassRemove(fourtySecondGenClassName);
         } else {
-            this._api.UIstyleClassAdd(className);
+            this._api.UIStyleClassAdd(className);
             if (this._shellVersion < 40) {
-                this._api.UIstyleClassAdd(fallbackClassName);
+                this._api.UIStyleClassAdd(fallbackClassName);
+            }
+            if (this._shellVersion >= 42) {
+                this._api.UIStyleClassAdd(fourtySecondGenClassName);
             }
         }
     }
@@ -802,19 +833,19 @@ var Manager = class
 
         if (forceOriginal) {
             this._api.animationSpeedSetDefault();
-            this._api.enablenAimationsSetDefault();
+            this._api.enableAnimationsSetDefault();
         } else if (animation === 0) {
             // disabled
             this._api.animationSpeedSetDefault();
-            this._api.enablenAimationsSet(false);
+            this._api.enableAnimationsSet(false);
         } else if (animation === 1) {
             // default speed
             this._api.animationSpeedSetDefault();
-            this._api.enablenAimationsSet(true);
+            this._api.enableAnimationsSet(true);
         } else if (factors[animation - 2] !== undefined) {
             // custom speed
             this._api.animationSpeedSet(factors[animation - 2]);
-            this._api.enablenAimationsSet(true);
+            this._api.enableAnimationsSet(true);
         }
     }
 
@@ -832,9 +863,9 @@ var Manager = class
         let label = this._settings.get_boolean('activities-button-label');
 
         if (forceOriginal) {
-            this._api.ativitiesButtonRemoveIcon();
+            this._api.activitiesButtonRemoveIcon();
         } else {
-            this._api.ativitiesButtonAddIcon(1, iconPath, monochrome, label);
+            this._api.activitiesButtonAddIcon(1, iconPath, monochrome, label);
         }
     }
 
@@ -1069,6 +1100,96 @@ var Manager = class
             this._api.workspaceWraparoundDisable();
         } else {
             this._api.workspaceWraparoundEnable();
+        }
+    }
+    
+    /**
+     * apply ripple box settings
+     *
+     * @param {boolean} forceOriginal force original shell setting
+     *
+     * @returns {void}
+     */
+    _applyRippleBox(forceOriginal)
+    {
+        let status = this._settings.get_boolean('ripple-box');
+
+        if (forceOriginal || status) {
+            this._api.rippleBoxEnable();
+        } else {
+            this._api.rippleBoxDisable();
+        }
+    }
+
+    /**
+     * apply double super to appgrid settings
+     *
+     * @param {boolean} forceOriginal force original shell setting
+     *
+     * @returns {void}
+     */
+    _applyDoubleSuperToAppgrid(forceOriginal)
+    {
+        let status = this._settings.get_boolean('double-super-to-appgrid');
+
+        if (forceOriginal || status) {
+            this._api.doubleSuperToAppGridEnable();
+        } else {
+            this._api.doubleSuperToAppGridDisable();
+        }
+    }
+
+    /**
+     * apply world clock settings
+     *
+     * @param {boolean} forceOriginal force original shell setting
+     *
+     * @returns {void}
+     */
+    _applyWorldClock(forceOriginal)
+    {
+        let status = this._settings.get_boolean('world-clock');
+
+        if (forceOriginal || status) {
+            this._api.worldClocksShow();
+        } else {
+            this._api.worldClocksHide();
+        }
+    }
+
+    /**
+     * apply weather settings
+     *
+     * @param {boolean} forceOriginal force original shell setting
+     *
+     * @returns {void}
+     */
+    _applyWeather(forceOriginal)
+    {
+        let status = this._settings.get_boolean('weather');
+
+        if (forceOriginal || status) {
+            this._api.weatherShow();
+        } else {
+            this._api.weatherHide();
+        }
+    }
+
+    /**
+     * apply panel icon size settings
+     *
+     * @param {boolean} forceOriginal force original shell setting
+     *
+     * @returns {void}
+     */
+    _applyPanelIconSize(forceOriginal)
+    {
+        let size = this._settings.get_int('panel-icon-size');
+
+        if (forceOriginal || size === 0) {
+            this._api.panelIconSetDefaultSize();
+        } else {
+            this._api.panelIconSetSize(size);
         }
     }
 }
