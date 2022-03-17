@@ -265,15 +265,18 @@ if `/bin/tar --force-local -c /dev/null > /dev/null 2>&1`; then
     alias tar='tar --force-local'
 fi
 
+# pretty colors
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias mtr='mtr -t'  # NO GUI
+# no gui
+alias mtr='mtr -t'
 
 # allow root shell to detect ssh
 alias sudo='sudo --preserve-env=SSH_CLIENT'
 
+# vim is a hard habit to break
 alias :q='exit'
 
 # set operations for sorted files
