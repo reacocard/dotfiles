@@ -251,7 +251,7 @@ add-zsh-hook precmd cmd_timer_precmd
 ### ALIASES ###
 
 # These options are newish but make copies nicer.
-if `/bin/cp --reflink=auto 2>&1 | head -n1 | grep -v '\-\-' > /dev/null 2>&1`; then
+if `/bin/cp --reflink=auto /dev/null /dev/zero 2>&1 | head -n1 | grep -v '\-\-' > /dev/null 2>&1`; then
     alias cp='cp --reflink=auto'
 fi
 
