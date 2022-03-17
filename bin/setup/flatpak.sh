@@ -12,21 +12,14 @@ setup () {
 
 always () {
 	flatpak install --noninteractive flathub \
-		com.spotify.Client \
 		org.gimp.GIMP \
 		org.gnome.NetworkDisplays \
 		org.mozilla.firefox
 
-	flatpak override --user com.spotify.Client \
-			 --socket wayland
 	flatpak override --user org.gimp.GIMP \
 			 --socket wayland 
 	flatpak override --user org.mozilla.firefox \
-		         --socket wayland \
-			 --own-name=org.mpris.MediaPlayer2.firefox.'*' \
-			 --own-name=org.mpris.MediaPlayer2.firefox \
-			 --filesystem=~/downloads:rw \
-			 --env=MOZ_SANDBOX_ALLOW_SYSV=1 
+			 --env MESA_GLSL_CACHE_DISABLE=1
 }
 
 
@@ -43,8 +36,6 @@ machinetype_personal () {
 		fr.handbrake.ghb \
 		io.github.quodlibet.ExFalso \
 		org.blender.Blender \
-		org.libretro.RetroArch \
-		org.signal.Signal \
 		org.telegram.desktop \
 		org.videolan.VLC \
 		org.videolan.VLC.Plugin.bdj \
@@ -67,11 +58,6 @@ machinetype_personal () {
 # wayland only
 
 sessiontype_wayland () {
-	flatpak override --user org.mozilla.firefox \
-			 --env=MOZ_USE_XINPUT2=1 \
-			 --env=MOZ_ENABLE_WAYLAND=1
-	flatpak override --user org.glimpse_editor.Glimpse \
-			 --env=GDK_BACKEND=wayland
 }
 
 
