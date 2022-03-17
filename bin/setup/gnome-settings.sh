@@ -13,6 +13,13 @@ dconf write /org/gnome/desktop/wm/preferences/audible-bell false
 dconf write /org/gnome/desktop/wm/preferences/button-layout "':'"
 dconf write /org/gnome/desktop/wm/preferences/resize-with-right-button true
 
+dconf write /org/gnome/desktop/interface/document-font-name "'Andika 13'"
+dconf write /org/gnome/desktop/interface/font-name "'Andika 13'"
+dconf write /org/gnome/desktop/interface/monospace-font-name "'DejaVu Sans Mono 13'"
+dconf write /org/gnome/desktop/wm/preferences/titlebar-font "'Andika Bold 13'"
+dconf write /org/gnome/settings-daemon/plugins/xsettings/antialiasing "'grayscale'"
+dconf write /org/gnome/settings-daemon/plugins/xsettings/hinting "'slight'"
+
 
 dconf write /org/gnome/desktop/interface/clock-show-weekday true
 dconf write /org/gnome/desktop/interface/locate-pointer true
