@@ -276,6 +276,11 @@ alias sudo='sudo --preserve-env=SSH_CLIENT'
 
 alias :q='exit'
 
+# set operations for sorted files
+alias fsetdiff='comm -23'
+alias fsetintersection='comm -12'
+alias fsetunion='comm --output-delimiter=""'
+
 # Launch, background, disown, and ignore output of a command
 # TODO: Add zsh completion
 l() { $* >&! /dev/null &! }
