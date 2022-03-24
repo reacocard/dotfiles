@@ -47,9 +47,6 @@ autoload -U compinit
 compinit
 setopt complete_in_word
 
-
-setopt completealiases
-
 if [ -f $HOME/.ssh/known_hosts ]; then
     local knownhosts
     knownhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
@@ -249,6 +246,9 @@ add-zsh-hook precmd cmd_timer_precmd
 
 
 ### ALIASES ###
+
+# Typing --user every time is boring
+alias userctl='systemctl --user'
 
 # These options are newish but make copies nicer.
 if `/bin/cp --reflink=auto /dev/null /dev/zero >/dev/null 2>&1`; then
