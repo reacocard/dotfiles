@@ -19,7 +19,7 @@ always () {
 	flatpak override --user org.gimp.GIMP \
 			 --socket wayland 
 	flatpak override --user org.mozilla.firefox \
-			 --env MESA_GLSL_CACHE_DISABLE=1
+		         --env MOZ_DISABLE_RDD_SANDBOX=1  # for VA-API
 }
 
 
