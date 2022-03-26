@@ -25,6 +25,7 @@ __pycache__
 !/.config/gtk-3.0
 /.config/gtk-3.0/bookmarks
 !/.config/systemd
+/.config/systemd/user/*.d/override.conf
 !/.config/Trolltech.conf
 !/.config/compton.conf
 !/.config/user-dirs.dirs
