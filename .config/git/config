@@ -11,3 +11,8 @@
 	conflictstyle = diff3
 [init]
 	templateDir = ~/.config/git/templates/default
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
