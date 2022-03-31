@@ -58,4 +58,6 @@ fi
 
 export KR_SKIP_SSH_CONFIG=1
 
+export RSYNC_PROTECT_ARGS=1
+
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
