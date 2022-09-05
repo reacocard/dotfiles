@@ -32,7 +32,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 if [ x"$XDG_SESSION_TYPE" = x"wayland" ]; then
-    QT_QPA_PLATFORM=wayland
+    QT_QPA_PLATFORM="wayland;xcb"
     GDK_BACKEND=wayland
     MOZ_ENABLE_WAYLAND=1
 fi
@@ -41,6 +41,7 @@ fi
 if [[ $TERM == screen* ]] || [[ $TERM == tmux* ]]; then
     unset DESKTOP_SESSION
     unset DISPLAY
+    unset GDMSESSION
     unset MOZ_ENABLE_WAYLAND
     unset SESSION_MANAGER
     unset WAYLAND_DISPLAY
@@ -48,10 +49,12 @@ if [[ $TERM == screen* ]] || [[ $TERM == tmux* ]]; then
     unset XDG_CURRENT_DESKTOP
     unset XDG_MENU_PREFIX
     unset XMODIFIERS
-    unset -m 'GDM*'
-    unset -m 'GNOME*'
-    unset -m 'GTK*'
-    unset -m 'QT*'
+    unset -m 'GDK_*'
+    unset -m 'GDM_*'
+    unset -m 'GNOME_*'
+    unset -m 'GSM_*'
+    unset -m 'GTK_*'
+    unset -m 'QT_*'
     unset -m 'VTE_*'
     unset -m 'XDG_SESSION_*'
 fi
