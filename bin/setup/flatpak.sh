@@ -5,6 +5,10 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+fo () {
+	flatpak override --user --reset $1
+	flatpak override --user "$@"
+}
 
 setup () {
 	flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -16,10 +20,8 @@ always () {
 		org.gnome.NetworkDisplays \
 		org.mozilla.firefox
 
-	flatpak override --user org.gimp.GIMP \
-			 --socket wayland 
-	flatpak override --user org.mozilla.firefox \
-		         --env MOZ_DISABLE_RDD_SANDBOX=1  # for VA-API
+	fo org.gimp.GIMP --socket wayland
+	fo org.mozilla.firefox --env MOZ_DISABLE_RDD_SANDBOX=1  # for VA-API
 }
 
 
@@ -28,38 +30,31 @@ always () {
 machinetype_personal () {
 	flatpak install --noninteractive flathub \
 		com.bitwarden.desktop \
-		com.calibre_ebook.calibre \
 		com.discordapp.Discord \
 		com.makemkv.MakeMKV \
 		com.slack.Slack \
 		com.valvesoftware.Steam \
+		com.valvesoftware.Steam.Utility.gamescope \
 		fr.handbrake.ghb \
 		io.github.quodlibet.ExFalso \
-		org.blender.Blender \
 		org.telegram.desktop \
 		org.videolan.VLC \
 		org.videolan.VLC.Plugin.bdj \
-		org.videolan.VLC.Plugin.makemkv
+		org.videolan.VLC.Plugin.makemkv \
+		com.github.iwalton3.jellyfin-media-player
 
-	flatpak override --user com.valvesoftware.Steam \
-			 --filesystem=~/media:ro \
-		         --filesystem=~/syncthing/Media:ro \
-		         --filesystem=~/syncthing/Archives/Music:ro
-	flatpak override --user com.discordapp.Discord \
-		         --socket wayland
-	flatpak override --user com.makemkv.MakeMKV \
-		         --socket wayland
-	flatpak override --user com.slack.Slack \
-		         --socket wayland
-	flatpak override --user org.videolan.VLC \
-		         --socket wayland
+	fo com.valvesoftware.Steam \
+		--filesystem=home/media:ro \
+		--filesystem=home/syncthing/Media:ro \
+		--filesystem=home/syncthing/Archives/Music:ro \
+		--filesystem=home/media/pictures/syncthing/Screenshots/Steam \
+		--filesystem=home/syncthing/Media/Pictures/Screenshots/Steam
+	fo com.makemkv.MakeMKV --socket wayland
+	fo org.videolan.VLC --socket wayland
+	fo com.github.iwalton3.jellyfin-media-player \
+		--socket wayland \
+		--env QT_QPA_PLATFORM="wayland;xcb"
 }
-
-# wayland only
-
-sessiontype_wayland () {
-}
-
 
 setup 
 always
@@ -72,7 +67,3 @@ while true; do
 		* ) echo "Please answer y or n.";;
 	esac
 done
-
-if [ x"$XDG_SESSION_TYPE" = x"wayland" ]; then
-	sessiontype_wayland
-fi
