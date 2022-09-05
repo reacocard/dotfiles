@@ -267,8 +267,9 @@ fi
 
 # pretty colors
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+# https://lists.gnu.org/archive/html/info-gnu/2022-09/msg00001.html
+alias fgrep='grep -F'
+alias egrep='grep -E'
 
 # no gui
 alias mtr='mtr -t'
