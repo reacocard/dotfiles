@@ -22,6 +22,8 @@ const Me = ExtensionUtils.getCurrentExtension();
 const Base = Me.imports.base;
 const Lib = Me.imports.convenience;
 const _d = Lib._log;
+const _dump = Lib.dump;
+const getActor = Lib.getActor;
 const SignalManager = Lib.SignalManager;
 const Prefs = Me.imports.prefs;
 const Main = imports.ui.main;
@@ -75,7 +77,7 @@ var VolumeMenuInstance = class VolumeMenuInstance {
         this._overrideFunctions();
         this._setSliderVisiblity();
 
-		this._signalManager = new SignalManager();
+        this._signalManager = new SignalManager();
         this._signalManager.addSignal(this._settings, "changed::"
             + Prefs.SHOW_INPUT_SLIDER, this._setSliderVisiblity.bind(this));
     }
@@ -87,16 +89,16 @@ var VolumeMenuInstance = class VolumeMenuInstance {
             return this._input._stream != null && this._input._showInput;
         };
         this._volumeMenu.getInputVisible = this._volumeMenu._getInputVisibleCustom;
-        
+
         this._input._updateVisibilityOriginal = this._input._updateVisibility;
         this._input._updateVisibilityCustom = function() {
-            let old_state_visible = this.item.visible;
+            let old_state_visible = getActor(this.item).visible;
             let visible = this._shouldBeVisible();
 
-            if(old_state_visible != visible){
-                this.item.visible = visible;
+            if (old_state_visible != visible) {
+                getActor(this.item).visible = visible;
             } else {
-                this.item.notify('visible');
+                getActor(this.item).notify('visible');
             }
         };
         this._input._updateVisibility = this._input._updateVisibilityCustom;
@@ -114,8 +116,8 @@ var VolumeMenuInstance = class VolumeMenuInstance {
         this._input._maybeShowInput();
     }
     destroy() {
-		this._signalManager.disconnectAll();
-		delete this._signalManager;
+        this._signalManager.disconnectAll();
+        delete this._signalManager;
         this._volumeMenu.getInputVisible = this._volumeMenu._getInputVisibleOriginal;
         this._input._updateVisibility = this._input._updateVisibilityOriginal;
         this._input._shouldBeVisible = this._input._shouldBeVisibleOriginal;
@@ -138,7 +140,7 @@ var SDCInstance = class SDCInstance {
 
     enable() {
         this._settings = ExtensionUtils.getSettings();
-		this._signalManager = new SignalManager();
+        this._signalManager = new SignalManager();
         this._aggregateMenu = Main.panel.statusArea.aggregateMenu;
         this._volume = this._aggregateMenu._volume;
         this._volumeMenu = this._volume._volumeMenu;
@@ -164,13 +166,18 @@ var SDCInstance = class SDCInstance {
 
         this._addMenuItem(this._volumeMenu, this._volumeMenu._output.item, this._outputInstance.menuItem);
         this._addMenuItem(this._volumeMenu, this._volumeMenu._input.item, this._inputInstance.menuItem);
-		this._expandVolMenu();
-        
-		this._signalManager.addSignal(this._settings, "changed::" + Prefs.EXPAND_VOL_MENU, this._expandVolMenu.bind(this));
-		this._signalManager.addSignal(this._settings, "changed::" + Prefs.INTEGRATE_WITH_SLIDER, this._switchSubmenuMenu.bind(this));
-		this._signalManager.addSignal(this._outputInstance, "update-visibility", this._updateMenuVisibility.bind(this));
-		this._signalManager.addSignal(this._inputInstance, "update-visibility", this._updateMenuVisibility.bind(this));	
-	    
+        this._expandVolMenu();
+
+        this._signalManager.addSignal(this._settings, "changed::" + Prefs.EXPAND_VOL_MENU, this._expandVolMenu.bind(this));
+        this._signalManager.addSignal(this._settings, "changed::" + Prefs.INTEGRATE_WITH_SLIDER, this._switchSubmenuMenu.bind(this));
+        this._signalManager.addSignal(this._outputInstance, "update-visibility", this._updateMenuVisibility.bind(this));
+        this._signalManager.addSignal(this._inputInstance, "update-visibility", this._updateMenuVisibility.bind(this));
+
+        //If slider disappears remove menu integration, getting complicated!!
+        this._signalManager.addSignal(getActor(this._volumeMenu._output.item),
+            "notify::visible", () => { this._updateMenuVisibility(this._outputInstance, false) });
+        this._signalManager.addSignal(getActor(this._volumeMenu._input.item),
+            "notify::visible", () => { this._updateMenuVisibility(this._inputInstance, false) });
     }
 
     _addMenuItem(_volumeMenu, checkItem, menuItem) {
@@ -179,85 +186,101 @@ var SDCInstance = class SDCInstance {
         if (i < 0) {
             i = menuItems.length;
         }
-		_volumeMenu.addMenuItem(menuItem, ++i);
-		this._integrateMenu(_volumeMenu, checkItem, menuItem, this._canIntegrateMenuItem(menuItem));			
-    }
-
-    _canIntegrateMenuItem(menuItem) {
-        return menuItem.visible && this._settings.get_boolean(Prefs.INTEGRATE_WITH_SLIDER);
+        _volumeMenu.addMenuItem(menuItem, ++i);
+        this._integrateMenu(_volumeMenu, getActor(checkItem), getActor(menuItem));
     }
 
     _expandVolMenu() {
         if (this._settings.get_boolean(Prefs.EXPAND_VOL_MENU)) {
-            this._aggregateLayout.addSizeChild(this._volumeMenu.actor);
+            this._aggregateLayout.addSizeChild(getActor(this._volumeMenu));
         } else {
             this._revertVolMenuChanges();
         }
     }
 
     _revertVolMenuChanges() {
-        this._aggregateLayout._sizeChildren = this._aggregateLayout._sizeChildren.filter(item => item !== this._volumeMenu.actor);
+        this._aggregateLayout._sizeChildren = this._aggregateLayout._sizeChildren.filter(item => item !== getActor(this._volumeMenu));
         this._aggregateLayout.layout_changed();
     }
 
-	_updateMenuVisibility(menuInstance) {
-        let canIntegrate = this._canIntegrateMenuItem(menuInstance.menuItem);
-		if(menuInstance instanceof SoundOutputDeviceChooser) {
-			this._integrateMenu(this._volumeMenu, this._volumeMenu._output.item, menuInstance.menuItem, canIntegrate);
-		} else {
-			this._integrateMenu(this._volumeMenu, this._volumeMenu._input.item, menuInstance.menuItem, canIntegrate);
-		} 
+    _updateMenuVisibility(menuInstance, visible) {
+        if (menuInstance instanceof SoundOutputDeviceChooser) {
+            this._integrateMenu(this._volumeMenu, getActor(this._volumeMenu._output.item), getActor(menuInstance.menuItem), visible);
+        } else {
+            this._integrateMenu(this._volumeMenu, getActor(this._volumeMenu._input.item), getActor(menuInstance.menuItem), visible);
+        }
     }
 
-	_switchSubmenuMenu() {		
-		this._updateMenuVisibility(this._outputInstance, this._outputInstance.menuItem.visibile);
-		this._updateMenuVisibility(this._inputInstance, this._inputInstance.menuItem.visibile);
-		
+    _switchSubmenuMenu() {
+        _d("Output Device visibility");
+        this._updateMenuVisibility(this._outputInstance, getActor(this._outputInstance.menuItem).visible);
+        _d("Input Device visibility");
+        this._updateMenuVisibility(this._inputInstance, getActor(this._inputInstance.menuItem).visible);
     }
 
-	_integrateMenu(_volumeMenu, _sliderItem, selectorItem, canIntegrate) {
-		if(canIntegrate == true) {
-			_d("Integrating with Volume menu");
-			if(_volumeMenu.box.contains(_sliderItem)  == true){
-				_volumeMenu.box.remove_child(_sliderItem);
+    _integrateMenu(_volumeMenu, sliderItem, selectorItem, visible) {
+        let canIntegrate = sliderItem.visible && (visible || selectorItem.visible) && this._settings.get_boolean(Prefs.INTEGRATE_WITH_SLIDER);
+        if (canIntegrate == true) {
+            _d("Integrating with Volume menu ");
+            if (_volumeMenu.box.contains(sliderItem) == true) {
+                _volumeMenu.box.remove_child(sliderItem);
+            }
+            sliderItem.set_x_expand(true);
+            sliderItem.set_style('padding-right: 0px;');
+            if(sliderItem._ornamentLabel)
+            {
+            	sliderItem._ornamentLabel.hide();
+            }
+            sliderItem.set_track_hover(false);
+            selectorItem.insert_child_above(sliderItem, selectorItem.label);
+            selectorItem.label.hide();
+            sliderItem.get_next_sibling().hide(); //expander
+            selectorItem.icon.hide();
+            selectorItem.set_style('padding-left: 0px;padding-top: 0px; padding-bottom: 0px');
+        } else {
+            _d("Not integrating with Volume menu")
+            if (selectorItem.contains(sliderItem) == true) {
+                selectorItem.remove_child(sliderItem);
+            }
+            sliderItem.set_x_expand(false);
+            sliderItem.set_style('');
+            if(sliderItem._ornamentLabel)
+            {
+				sliderItem._ornamentLabel.show();
 			}
-			_sliderItem.set_x_expand(true);
-			selectorItem.insert_child_above(_sliderItem, selectorItem.label);
-			selectorItem.label.hide();
-			_sliderItem.get_next_sibling().hide(); //expander
-			selectorItem.icon.hide();
-		} else {
-			_d("Not integrating with Volume menu")
-			if(selectorItem.contains(_sliderItem) == true) {
-				selectorItem.remove_child(_sliderItem);
-			}
-			_sliderItem.set_x_expand(false);
-			selectorItem.label.show();
-			selectorItem.label.get_next_sibling().show(); //expander
-			selectorItem.icon.show();
-			if(_volumeMenu.box.contains(_sliderItem) == false){
-				_volumeMenu.box.insert_child_below(_sliderItem, selectorItem);
-			}
-		}
-	}
+            sliderItem.set_track_hover(true);
+            selectorItem.label.show();
+            selectorItem.label.get_next_sibling().show(); //expander
+            selectorItem.icon.show();
+            selectorItem.set_style('');
+            if (_volumeMenu.box.contains(sliderItem) == false) {
+                let oriVisible = sliderItem.visible;
+                _volumeMenu.box.insert_child_below(sliderItem, selectorItem);
+                sliderItem.visible = oriVisible;
+            }
+        }
+    }
 
     disable() {
-		this._settings = null;
-		this._signalManager.disconnectAll();
-		this._signalManager = null;
+        //this._switchSubmenuMenu();
         this._revertVolMenuChanges();
         if (this._outputInstance) {
+            this._outputInstance.setVisible(false);
             this._outputInstance.destroy();
             this._outputInstance = null;
         }
         if (this._inputInstance) {
+            this._inputInstance.setVisible(false);
             this._inputInstance.destroy();
             this._inputInstance = null;
         }
         if (this._volumeMenuInstance) {
             this._volumeMenuInstance.destroy();
             this._volumeMenuInstance = null;
-        }        
+        }
+        this._settings = null;
+        this._signalManager.disconnectAll();
+        this._signalManager = null;
     }
 };
 

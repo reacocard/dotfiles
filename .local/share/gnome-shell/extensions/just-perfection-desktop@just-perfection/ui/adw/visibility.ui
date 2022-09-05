@@ -138,7 +138,33 @@
             </child>
           </object>
         </child>
+        
+        <child>
+          <object class="AdwActionRow" id="calendar_row">
+            <property name="title" translatable="yes">Calendar</property>
+            <property name="subtitle" translatable="yes">Calendar in clock menu</property>
+            <property name="activatable-widget">calendar_switch</property>
+            <child>
+              <object class="GtkSwitch" id="calendar_switch">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
 
+        <child>
+          <object class="AdwActionRow" id="events_button_row">
+            <property name="title" translatable="yes">Events</property>
+            <property name="subtitle" translatable="yes">Events button in clock menu</property>
+            <property name="activatable-widget">events_button_switch</property>
+            <child>
+              <object class="GtkSwitch" id="events_button_switch">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        
         <child>
           <object class="AdwActionRow" id="search_row">
             <property name="title" translatable="yes">Search</property>
@@ -165,6 +191,19 @@
           </object>
         </child>
 
+        <child>
+          <object class="AdwActionRow" id="dash_separator_row">
+            <property name="title" translatable="yes">Dash Separator</property>
+            <property name="subtitle" translatable="yes">Dash separator line that separates pin apps from unpin apps</property>
+            <property name="activatable-widget">dash_separator_switch</property>
+            <child>
+              <object class="GtkSwitch" id="dash_separator_switch">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        
         <child>
           <object class="AdwActionRow" id="show_apps_button_row">
             <property name="title" translatable="yes">Show Applications Button</property>
@@ -276,6 +315,19 @@
             <property name="activatable-widget">ripple_box_switch</property>
             <child>
               <object class="GtkSwitch" id="ripple_box_switch">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        
+        <child>
+          <object class="AdwActionRow" id="window_menu_take_screenshot_button_row">
+            <property name="title" translatable="yes">Take Screenshot button in Window Menu</property>
+            <property name="subtitle" translatable="yes">Take screenshot button in title bar right click menu</property>
+            <property name="activatable-widget">window_menu_take_screenshot_button_switch</property>
+            <child>
+              <object class="GtkSwitch" id="window_menu_take_screenshot_button_switch">
                 <property name="valign">center</property>
               </object>
             </child>
