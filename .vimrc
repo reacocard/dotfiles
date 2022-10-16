@@ -1,7 +1,3 @@
-" Pathogen
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-
 " Don't bother being compatible with Vi. It sucks.
 set nocompatible
 
