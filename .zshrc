@@ -55,7 +55,7 @@ fi
 
 if [[ -x `which dircolors` ]]; then
     # Make ls have pretty colors, but skip the file-extension-specific ones.
-    eval $(dircolors <(dircolors --print-database | egrep -v '^\.[^ ]+'))
+    eval $(dircolors <(dircolors --print-database | grep -E -v '^\.[^ ]+'))
 fi
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
