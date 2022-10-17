@@ -14,7 +14,7 @@ set noundofile
 set noswapfile
 
 " pretty colors!
-syntax on
+syntax enable
 colorscheme relaxedgreen
 
 " The PC is fast enough, do syntax highlight syncing from start
@@ -24,9 +24,7 @@ syntax sync fromstart
 set hidden
 
 " Enable filetype plugins and indention
-filetype on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 " show position always
 set ruler
@@ -42,6 +40,7 @@ set ttyfast
 
 " try to be smart about indenting
 set autoindent smartindent
+set smarttab
 
 " use multiple of shiftwidth when indenting with '<' and '>'
 set shiftround
@@ -60,7 +59,15 @@ set enc=utf-8
 " Prefer unix over windows over os9 formats
 set fileformats=unix,dos,mac
 
-" Don't bell or blink(Courtesy: Cream Editor).
+" Don't interpret leading 0 as octal
+set nrformats-=octal
+
+" Delete comment character when joining commented lines (from sensible.vim)
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j
+endif
+
+" Don't bell or blink (Courtesy: Cream Editor).
 if has('autocmd')
   autocmd GUIEnter * set vb t_vb=
 endif
@@ -116,10 +123,17 @@ let g:suda_smart_edit = 1
 autocmd BufReadPost,BufNewFile .ssh/config.d/* set filetype=sshconfig
 
 " Python file options
-autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with formatoptions+=croq textwidth=0
-let python_highlight_all=1
-let python_highlight_exceptions=0
-let python_highlight_builtins=0
+function s:SetupPythonFiletype()
+    let python_highlight_all=1
+    let python_highlight_exceptions=0
+    let python_highlight_builtins=0
+    setlocal formatoptions+=croq formatoptions-=t
+    " keywords for smartindent
+    setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+    " default to pep-8 style
+    setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4 textwidth=79
+endfunction
+autocmd FileType python call s:SetupPythonFiletype()
 
 " vim file options
 autocmd FileType vim setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
@@ -127,5 +141,5 @@ autocmd FileType vim setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
 
 let file = expand("~/.vimrc.local")
 if filereadable(file)
-    source ~/.vimrc.local
+    execute 'source '.fnameescape(file)
 endif
