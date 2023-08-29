@@ -19,6 +19,11 @@ export EDITOR=vim
 export PAGER=less
 export LANG=en_US.UTF-8
 
+# makes groff output the formatting instructions less expects, to get color.
+# arguably groff should be outputting ANSI codes and less passing them through,
+# but idk how to do that properly.
+export MANROFFOPT=-c
+
 # give sudo prompt matching colors to zsh prompt
 export SUDO_PROMPT=$'\e[31m[sudo]\e[0m password for \e[32m\e[1m%p\e[0m@\e[1m\e[35m%H\e[0m: '
 
