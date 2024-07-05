@@ -172,6 +172,12 @@ setprompt () {
     setopt prompt_subst
 
     PR_PREFIX=""
+
+    netns=`ip netns identify $$`
+    if [[ -n "$netns" ]]; then
+        PR_PREFIX="${PR_PREFIX}[net:${netns}] "
+    fi
+
     ###
     # Decide whether to set a screen title
     if [[ $TERM == screen* ]]; then
