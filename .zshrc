@@ -143,7 +143,7 @@ _PR_RUNNING=0
 _PR_CUR_CMD=""
 
 running_cmd_preexec () {
-   _PR_CUR_CMD="$(echo $1 | sed -E 's/(^|.*[[:space:]])([^=[:space:]]+)([[:space:]].*|$)/\2/')"
+   _PR_CUR_CMD="$(echo ${1/\\n/} | sed -E 's/(^|.*[[:space:]])([^=[:space:]]+)([[:space:]].*|$)/\2/')"
    _PR_RUNNING=1
    update_titlebar
 }
