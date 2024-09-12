@@ -7,6 +7,8 @@ source $HOME/.zsh/mouse.zsh
 
 source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+source $HOME/.transfer.sh
+
 autoload -U add-zsh-hook
 
 ### BASICS ###
