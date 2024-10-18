@@ -1,0 +1,6 @@
+scrollbar.vertical:hover slider {
+    min-width: 10px;
+}
+scrollbar.horizontal:hover slider {
+    min-height: 10px;
+}
