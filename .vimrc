@@ -31,9 +31,9 @@ set ruler
 
 " hilight current line/column
 set cursorline
-hi CursorLine term=NONE cterm=NONE ctermbg=236 guibg=Grey20
+hi CursorLine term=NONE cterm=NONE ctermbg=236 guibg=#242424
 set cursorcolumn
-hi CursorColumn term=NONE cterm=NONE ctermbg=236 guibg=Grey20
+hi CursorColumn term=NONE cterm=NONE ctermbg=236 guibg=#242424
 
 " improve drawing speed
 set ttyfast
