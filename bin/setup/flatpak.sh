@@ -18,7 +18,17 @@ always () {
 	flatpak install --noninteractive flathub \
 		org.gimp.GIMP \
 		org.gnome.NetworkDisplays \
-		org.mozilla.firefox
+		org.mozilla.firefox \
+		org.gtk.Gtk3theme.adw-gtk3 \
+		org.gtk.Gtk3theme.adw-gtk3-dark \
+		org.gtk.Gtk3theme.Adwaita-dark \
+		org.kde.KStyle.Adwaita \
+		org.kde.PlatformTheme.QGnomePlatform \
+		org.kde.WaylandDecoration.QAdwaitaDecorations \
+		org.kde.WaylandDecoration.QGnomePlatform-decoration \
+		org.freedesktop.Platform.openh264
+
+	flatpak override --user --filesystem xdg-config/gtk-2.0:ro --filesystem xdg-config/gtk-3.0:ro
 
 	fo org.gimp.GIMP --socket wayland
 	fo org.mozilla.firefox --env MOZ_DISABLE_RDD_SANDBOX=1  # for VA-API
@@ -31,17 +41,26 @@ machinetype_personal () {
 	flatpak install --noninteractive flathub \
 		com.bitwarden.desktop \
 		com.discordapp.Discord \
+		com.github.iwalton3.jellyfin-media-player \
+		com.github.tchx84.Flatseal \
 		com.makemkv.MakeMKV \
 		com.slack.Slack \
 		com.valvesoftware.Steam \
 		com.valvesoftware.Steam.Utility.gamescope \
 		fr.handbrake.ghb \
 		io.github.quodlibet.ExFalso \
+		org.inkscape.Inkscape \
+		org.kde.krita \
+		org.kde.krita.Codecs \
+		org.localsend.localsend_app \
+		org.pipewire.Helvum \
+		org.signal.Signal \
 		org.telegram.desktop \
 		org.videolan.VLC \
 		org.videolan.VLC.Plugin.bdj \
+		org.videolan.VLC.Plugin.fdkaac \
 		org.videolan.VLC.Plugin.makemkv \
-		com.github.iwalton3.jellyfin-media-player
+		org.freedesktop.Platform.ffmpeg-full \
 
 	fo com.valvesoftware.Steam \
 		--filesystem=home/media:ro \
