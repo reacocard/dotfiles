@@ -187,7 +187,7 @@ setprompt () {
         if [[ -n "$TMUX" ]]; then
             PR_PREFIX="${PR_PREFIX}[tmux] "
         else
-            PR_PREFIX="${PR_PREFIX}[screen] "
+            PR_PREFIX="${PR_PREFIX}[📺:${${STY#*.}%.*}] "
         fi
     else
 	    PR_STITLE=''
