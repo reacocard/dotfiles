@@ -221,6 +221,9 @@ setprompt () {
 
     if [[ -n "$CONTAINER_ID" ]]; then
         PR_CONTAINER="[🫙:$CONTAINER_ID] "
+        # screen has permissions issues sharing a socket dir with the host as
+        # happens with distrobox
+        export SCREENDIR="/run/screen/S-$USER-C-$CONTAINER_ID"
     fi
 
     update_titlebar
