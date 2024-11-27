@@ -175,7 +175,7 @@ setprompt () {
 
     PR_PREFIX=""
 
-    netns=`ip netns identify $$`
+    netns=`ip netns identify $$ 2>/dev/null`
     if [[ -n "$netns" ]]; then
         PR_PREFIX="${PR_PREFIX}[net:${netns}] "
     fi
