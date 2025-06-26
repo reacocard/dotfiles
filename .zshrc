@@ -144,6 +144,9 @@ _PR_CUR_CMD=""
 
 running_cmd_preexec () {
    _PR_CUR_CMD="$(echo ${1/\\n/} | sed -E 's/(^|.*[[:space:]])([^=[:space:]]+)([[:space:]].*|$)/\2/')"
+   if [[ "$_PR_CUR_CMD" =~ (man|info).* ]]; then
+      _PR_CUR_CMD="$1"
+   fi
    _PR_RUNNING=1
    update_titlebar
 }
