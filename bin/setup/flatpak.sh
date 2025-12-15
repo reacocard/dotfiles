@@ -46,7 +46,7 @@ machinetype_personal () {
 		com.makemkv.MakeMKV \
 		com.slack.Slack \
 		com.valvesoftware.Steam \
-		com.valvesoftware.Steam.Utility.gamescope \
+		org.freedesktop.Platform.VulkanLayer.gamescope \
 		fr.handbrake.ghb \
 		io.github.quodlibet.ExFalso \
 		org.inkscape.Inkscape \
